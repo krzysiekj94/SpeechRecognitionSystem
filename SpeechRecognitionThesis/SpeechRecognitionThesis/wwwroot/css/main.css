@@ -3,3 +3,17 @@
     width: 100%;
     align-items: stretch;
 }
+
+.menu-news-content{
+	background-color: red;
+	margin: 5px;
+}
+
+.newest-news-body{
+	padding: 10px;
+}
+
+.news-see-more-button{
+	float: right;
+	margin-bottom: 5px;
+}
