@@ -5,15 +5,16 @@
 }
 
 .menu-news-content{
-	background-color: red;
 	margin: 5px;
 }
 
-.newest-news-body{
+.newest-news-body, 
+.top-news-body{
 	padding: 10px;
 }
 
 .news-see-more-button{
 	float: right;
 	margin-bottom: 5px;
+	margin-right: 5%;
 }

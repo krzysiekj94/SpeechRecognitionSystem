@@ -54,6 +54,11 @@ namespace SpeechRecognitionThesis
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                /*
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Article}/{action=Index}/{id?}");
+                    */
             });
         }
     }
