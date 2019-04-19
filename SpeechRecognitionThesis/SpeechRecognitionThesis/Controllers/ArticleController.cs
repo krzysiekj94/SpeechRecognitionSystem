@@ -8,7 +8,7 @@ namespace SpeechRecognitionThesis.Controllers
 {
     public class ArticleController : Controller
     {
-        public IActionResult ArticleView()
+        public IActionResult Index()
         {
             return View();
         }
