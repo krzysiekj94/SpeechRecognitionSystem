@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SpeechRecognitionThesis.Controllers
 {
+    [Route("Article")]
     public class ArticleController : Controller
     {
+        [Route("Index")]
         public IActionResult Index()
         {
             return View();
-        }
+        } 
     }
 }

@@ -5,7 +5,7 @@
 }
 
 .menu-news-content{
-	margin: 5px;
+	margin-top: 20px;
 }
 
 .newest-news-body, 
@@ -17,4 +17,18 @@
 	float: right;
 	margin-bottom: 5px;
 	margin-right: 5%;
+}
+
+.most-popular-article-image{
+	width: 75%;
+	height: 75%;
+}
+
+.most-popular-article{
+	background-color: coral;
+	text-align: center;
+}
+
+.most-popular-article-content{
+	text-align: center;
 }
