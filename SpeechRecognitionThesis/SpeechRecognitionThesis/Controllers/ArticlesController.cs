@@ -12,13 +12,19 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("Newest")]
         public IActionResult GetNewestArticlesContent()
         {
-            return View("Index");
+            return View("Newest");
         }
 
         [Route("Top-5")]
         public IActionResult GetTopArticlesContent()
         {
-            return View("Article");
+            return View("Top");
+        }
+
+        [Route("Recommended")]
+        public IActionResult GetRecommendedArticlesContent()
+        {
+            return View("Recommended");
         }
     }
 }

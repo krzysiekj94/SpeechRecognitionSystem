@@ -50,3 +50,8 @@
 /SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Article/Index.g.cshtml.cs
 /SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Article.g.cshtml.cs
 /SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Index.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Add.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Edit.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Newest.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Recommended.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.1/Razor/Views/Articles/Top.g.cshtml.cs
