@@ -2,7 +2,7 @@ $.getScript("/js/speech_engine.js", function(){
 
     artyom.addCommands([
         {
-            indexes: ["pisz artykuł"],
+            indexes: ["napisz artykuł"],
             action: function(){
                 console.log("piszę artykuł");
             }
