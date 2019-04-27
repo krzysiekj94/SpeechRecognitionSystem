@@ -1,5 +1,3 @@
-using System;
-
 namespace SpeechRecognitionThesis.Models
 {
     public class ErrorViewModel
