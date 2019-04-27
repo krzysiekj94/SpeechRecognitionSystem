@@ -1,29 +1,37 @@
 const artyom = new Artyom();
 
-artyom.initialize({
-    lang:"pl-PL",
-    continuous:true,
-    listen:true,
-    debug:true,
-    mode: "quick",
-}).then(() => {
-    console.log("Artyom succesfully initialized");
-}).catch((err) => {
-    console.log("Artyom couldn't be initialized, please check the console for errors");
-    console.log(err);
-});
+setTimeout(function(){// if you use artyom.fatality , wait 250 ms to initialize again.
+    artyom.initialize({
+        lang:"pl-PL",
+        continuous:true,
+        listen:true,
+        debug:true,
+        mode: "quick",
+    }).then(() => {
+        console.log("Artyom succesfully initialized");
+    }).catch((err) => {
+        console.log("Artyom couldn't be initialized, please check the console for errors");
+        console.log(err);
+    });
+},250);
 
 artyom.addCommands([
     {
-        indexes: ["najnowsze"],
+        indexes: ["strona główna"],
         action: function(){
-            artyom.say("Przekierowuję na stronę najnowszych artykułów.");
+            window.open("/","_self");
         }
     },
     {
-        indexes: ["top"],
+        indexes: ["najnowsze"],
         action: function(){
-            artyom.say("Przekierowuję na stronę top 10 artykułów.");
+            window.open("/articles/newest","_self");
+        }
+    },
+    {
+        indexes: ["top", "rekomendowane", "polecane"],
+        action: function(){
+            window.open("/articles/top-5","_self");
         }
     },
     {
@@ -45,9 +53,9 @@ artyom.addCommands([
         }
     },
     {
-        indexes: ["dane konta", "dane mojego konta"],
+        indexes: ["dane konta"],
         action: function(){
-            artyom.say("Przekierowuję do strony edycji Twojego konta!");
+            window.open("/articles/newest","_self");
         }
     },
 ]);
