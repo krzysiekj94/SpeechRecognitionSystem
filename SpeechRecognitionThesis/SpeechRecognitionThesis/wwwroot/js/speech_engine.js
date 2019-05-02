@@ -1,19 +1,25 @@
 const artyom = new Artyom();
 
-setTimeout(function(){// if you use artyom.fatality , wait 250 ms to initialize again.
-    artyom.initialize({
-        lang:"pl-PL",
-        continuous:true,
-        listen:true,
-        debug:true,
-        mode: "quick",
-    }).then(() => {
-        console.log("Artyom succesfully initialized");
-    }).catch((err) => {
-        console.log("Artyom couldn't be initialized, please check the console for errors");
-        console.log(err);
-    });
-},250);
+
+function initializeArtyom()
+{
+    setTimeout(function(){// if you use artyom.fatality , wait 250 ms to initialize again.
+        artyom.initialize({
+            lang:"pl-PL",
+            continuous:true,
+            listen:true,
+            debug:true,
+            mode: "quick",
+        }).then(() => {
+            console.log("Artyom succesfully initialized");
+        }).catch((err) => {
+            console.log("Artyom couldn't be initialized, please check the console for errors");
+            console.log(err);
+        });
+    },250);
+}
+
+initializeArtyom();
 
 artyom.addCommands([
     {
