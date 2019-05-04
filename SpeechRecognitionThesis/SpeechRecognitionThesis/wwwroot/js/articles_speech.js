@@ -1,20 +1,57 @@
 var articleRecognizer = null;
 
+//article textarea handlers
+$(window).on('load', function () {
+  var articleContent = localStorage.getItem("articleContent");
+  $(".article-content").val(articleContent);
+});
+
+$(document).ready(function(){ 
+  $(".article-content").change(function(){
+    
+    var contentArticle = $(".article-content").val();
+    
+    if(contentArticle !== "")
+    {
+      localStorage.setItem("articleContent", contentArticle);
+    }
+  }); 
+});
+
+$(".article-content").keyup(function(){
+  var contentArticle = $(".article-content").val();
+    
+  if(contentArticle !== "" 
+    && articleRecognizer != null)
+  {
+    articleRecognizer.finalTranscript = contentArticle;
+  }
+});
+
+//article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
     artyom.addCommands([
         {
-            indexes: ["napisz artykuł"],
+            indexes: ["napisz"],
             action: function(){
                 artyom.fatality();
+                $(".article-content").focus(); 
                 StartRecognition();
             }
         },
         {
-          indexes: ["zapisz artykuł"],
+            indexes: ["zapisz"],
+            action: function(){
+              artyom.say("zapisuję dane do bazy danych!");
+            },
+        },
+        {
+          indexes: ["wyczyść"],
           action: function(){
-              //TODO save into database
-          }
+            localStorage.setItem("articleContent", "");
+            $(".article-content").val(localStorage.getItem("articleContent"));
+          },
       },
     ]);
  
@@ -23,8 +60,9 @@ $.getScript("/js/speech_engine.js", function(){
 class ArticleSpeechRecognizer {
     constructor() {
         window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-        this.finalTranscript = '';
+        this.finalTranscript = localStorage.articleContent;
         this.recognition = new SpeechRecognition();
+        this.letRecognize = true;
         this.InitVariables();
         this.SetCallback();
     }
@@ -62,17 +100,38 @@ class ArticleSpeechRecognizer {
                 interimTranscript += transcript;
               }
             }
-            
-            console.log(this.finalTranscript+interimTranscript);
-            $(".article-content").val(this.finalTranscript+interimTranscript);   
 
-            if( interimTranscript.toLowerCase().includes("teraz")
-             && interimTranscript.toLowerCase().includes("zakończ") 
+            if( this.letRecognize 
+              && interimTranscript.toLowerCase().includes("zakończ") 
              && interimTranscript.toLowerCase().includes("artykuł") )
             {
+                this.letRecognize = false;
+                this.FixContentTextAfterEndCommand();
+                this.SaveArticleContentToLocalStorage();
                 this.EndRecognition();
             }
+            else
+            {
+              if( this.letRecognize )
+              {
+                console.log(this.finalTranscript+interimTranscript);
+                $(".article-content").val(this.finalTranscript+interimTranscript);    
+              }
+            }
         }
+    }
+
+    FixContentTextAfterEndCommand()
+    {
+      var textAreaString = $(".article-content").val().toLowerCase();   
+      var lastIndex = textAreaString.lastIndexOf("zakończ");
+      textAreaString = textAreaString.substring(0, lastIndex);
+      $(".article-content").val(textAreaString);
+    }
+
+    SaveArticleContentToLocalStorage()
+    {
+      localStorage.setItem("articleContent", this.finalTranscript);
     }
 }
 
