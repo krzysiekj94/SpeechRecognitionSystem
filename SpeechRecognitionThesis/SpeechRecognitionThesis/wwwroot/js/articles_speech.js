@@ -10,6 +10,12 @@ $.getScript("/js/speech_engine.js", function(){
                 StartRecognition();
             }
         },
+        {
+          indexes: ["zapisz artykuł"],
+          action: function(){
+              //TODO save into database
+          }
+      },
     ]);
  
  });
@@ -50,36 +56,6 @@ class ArticleSpeechRecognizer {
              
               let transcript = event.results[i][0].transcript;
              
-              if( transcript.includes("czerwony"))
-              {
-                style = '<i style="color:red;">';
-                document.querySelector("body").style.backgroundColor = "red";
-              }
-       
-              if( transcript.includes("niebieski"))
-              {
-                style = '<i style="color:blue;">';
-                document.querySelector("body").style.backgroundColor = "blue";
-              }
-       
-              if( transcript.includes("zielony"))
-              {
-                style = '<i style="color:green;">';
-                document.querySelector("body").style.backgroundColor = "green";
-              }
-       
-              if( transcript.includes("żółty"))
-              {
-                style = '<i style="color:yellow;">';
-                document.querySelector("body").style.backgroundColor = "yellow";
-              }
-       
-              if( transcript.includes("pomarańczowy"))
-              {
-                style = '<i style="color:orange;">';
-                document.querySelector("body").style.backgroundColor = "orange";
-              }
-             
               if (event.results[i].isFinal) {
                 this.finalTranscript += transcript;       
               } else {
@@ -88,8 +64,7 @@ class ArticleSpeechRecognizer {
             }
             
             console.log(this.finalTranscript+interimTranscript);
-            $(".article-content").val(this.finalTranscript+interimTranscript);     
-            
+            $(".article-content").val(this.finalTranscript+interimTranscript);   
 
             if( interimTranscript.toLowerCase().includes("teraz")
              && interimTranscript.toLowerCase().includes("zakończ") 
