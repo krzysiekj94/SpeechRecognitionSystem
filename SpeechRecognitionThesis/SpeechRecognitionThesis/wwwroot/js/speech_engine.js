@@ -41,6 +41,12 @@ artyom.addCommands([
         }
     },
     {
+        indexes: ["dodaj nowy artykuł"],
+        action: function(){
+            window.open("/articles/add","_self");
+        }
+    },
+    {
         indexes: ["wyszukiwarka"],
         action: function(){
             artyom.say("Przekierowuję na stronę wyszukiwarki artykułów.");
@@ -50,12 +56,6 @@ artyom.addCommands([
         indexes: ["moje artykuły"],
         action: function(){
             artyom.say("Przekierowuję na stronę Twoich artykułów.");
-        }
-    },
-    {
-        indexes: ["dodaj nowy artykuł"],
-        action: function(){
-            artyom.say("Przekierowuję na stronę dodawania nowego artykułu");
         }
     },
     {

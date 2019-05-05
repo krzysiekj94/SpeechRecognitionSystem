@@ -9,7 +9,7 @@ namespace SpeechRecognitionThesis.Models.Scripts
     {
         const string SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING          = "/js/speech_engine.js";
         const string SPEECH_ARTICLES_PAGE_RELATIVE_PATH_STRING      = "/js/articles_speech.js";
-        const string NEWEST_ARTICLES_RELATIVE_PATH_STRING           = "/articles/newest";
+        const string ADD_ARTICLES_RELATIVE_PATH_STRING              = "/articles/add";
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
@@ -17,7 +17,7 @@ namespace SpeechRecognitionThesis.Models.Scripts
 
             switch( urlRelativePathString )
             {
-                case NEWEST_ARTICLES_RELATIVE_PATH_STRING:
+                case ADD_ARTICLES_RELATIVE_PATH_STRING:
                     urlPathString = SPEECH_ARTICLES_PAGE_RELATIVE_PATH_STRING;
                     break;
                 default:

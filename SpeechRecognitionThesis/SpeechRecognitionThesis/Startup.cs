@@ -9,7 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.Database;
+using SpeechRecognitionThesis.Models.DataManager;
+using SpeechRecognitionThesis.Models.Repository;
 
 namespace SpeechRecognitionThesis
 {
@@ -42,6 +45,7 @@ namespace SpeechRecognitionThesis
             });
 
             services.AddDbContext<SpeechRecognitonDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SpeechRecognitionDb"]));
+            services.AddScoped<IDataRepository<Article>, ArticlesDbManager>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

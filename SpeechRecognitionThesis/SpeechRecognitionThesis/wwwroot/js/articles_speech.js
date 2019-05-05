@@ -25,6 +25,7 @@ $(".article-content").keyup(function(){
     && articleRecognizer != null)
   {
     articleRecognizer.finalTranscript = contentArticle;
+    localStorage.setItem("articleContent", contentArticle);
   }
 });
 
@@ -43,7 +44,7 @@ $.getScript("/js/speech_engine.js", function(){
         {
             indexes: ["zapisz"],
             action: function(){
-              artyom.say("zapisuję dane do bazy danych!");
+              SaveArticleContentToDatabase(); 
             },
         },
         {
@@ -81,6 +82,13 @@ class ArticleSpeechRecognizer {
     EndRecognition(){
         this.recognition.stop();    
         initializeArtyom();
+        
+        var contentArticle = $(".article-content").val();
+    
+        if(contentArticle !== "")
+        {
+          localStorage.setItem("articleContent", contentArticle);
+        }
     }
 
     SetCallback(){
@@ -88,7 +96,6 @@ class ArticleSpeechRecognizer {
 
             let interimTranscript = '';
             let eventLength = event.results.length;
-            let style = '<i style="color:#ddd;">';
        
             for (let i = event.resultIndex; i < eventLength; i++) {
              
@@ -143,4 +150,51 @@ function StartRecognition()
     {
         articleRecognizer.StartRecognition();
     }
+}
+
+
+function SaveArticleContentToDatabase()
+{
+  var articleContentString = $(".article-content").val();
+
+  var insertionDateTime   = GetCurrentDateTimeString();
+  var lastUpdateDateTime  = GetCurrentDateTimeString();
+
+  var articleObject = 
+  { "AuthorId"        :   1,
+    "Content"         :   articleContentString,
+    "AuthorName"      :   "Krystian B.",
+    "InsertionDate"   :   insertionDateTime,
+    "LastUpdateDate"  :   lastUpdateDateTime
+  };
+
+  $.ajax({
+    url           : '/articles/add',
+    type          : 'POST',
+    contentType   : 'application/json; charset=utf-8',
+    headers       : 
+    {
+        RequestVerificationToken: 
+            $('input:hidden[name="__RequestVerificationToken"]').val()
+    },
+    data: JSON.stringify(articleObject)
+  })
+  .done(function(result) 
+  {
+    console.log("/articles/add success");
+    console.log("Article ID: " + result);
+  });
+}
+
+function GetCurrentDateTimeString()
+{
+  var date = new Date();
+  var day = date.getDate();       
+  var month = date.getMonth() + 1;    
+  var year = date.getFullYear();  
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+
+  return ( day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second );
 }
