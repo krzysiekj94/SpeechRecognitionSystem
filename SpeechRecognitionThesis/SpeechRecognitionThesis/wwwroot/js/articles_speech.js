@@ -29,6 +29,10 @@ $(".article-content").keyup(function(){
   }
 });
 
+$( ".save-article-button" ).click(function() {
+  SaveArticleContentToDatabase();
+});
+
 //article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
