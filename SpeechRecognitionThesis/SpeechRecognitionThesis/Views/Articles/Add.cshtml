@@ -8,8 +8,9 @@
 <div class="row menu-news-content">
     <div class="form-group">
         <label for="comment">Treść artykułu:</label>
-            @Html.AntiForgeryToken()
-            <textarea class="article-content form-control" rows="5" id="comment"></textarea>
-            <button name="save-article-button" class="save-article-button alert-success" type="submit">Zapisz artykuł</button>
-        </div>
+        @Html.AntiForgeryToken()
+        <textarea class="article-content form-control" rows="5" id="comment"></textarea>
+        <button name="save-article-button" class="save-article-button alert-success" type="submit">Zapisz artykuł</button>
+        <button class="clear-article-button alert-danger" type="submit">Wyczyść artykuł</button>
+    </div>
 </div>

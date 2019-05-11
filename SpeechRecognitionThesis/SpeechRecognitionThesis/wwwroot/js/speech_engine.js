@@ -50,6 +50,7 @@ artyom.addCommands([
         indexes: ["wyszukiwarka"],
         action: function(){
             artyom.say("Przekierowuję na stronę wyszukiwarki artykułów.");
+            window.open("/search","_self");
         }
     },
     {

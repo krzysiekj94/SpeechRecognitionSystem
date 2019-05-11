@@ -33,6 +33,16 @@ $( ".save-article-button" ).click(function() {
   SaveArticleContentToDatabase();
 });
 
+$( ".clear-article-button" ).click(function() {
+  localStorage.setItem("articleContent", "");
+  $(".article-content").val(localStorage.getItem("articleContent"));
+
+  if(articleRecognizer != null )
+  {
+    articleRecognizer.finalTranscript = "";
+  }
+});
+
 //article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
