@@ -186,6 +186,7 @@ function SaveArticleContentToDatabase()
     url           : '/articles/add',
     type          : 'POST',
     contentType   : 'application/json; charset=utf-8',
+    dataType      : 'json',
     headers       : 
     {
         RequestVerificationToken: 
@@ -210,5 +211,5 @@ function GetCurrentDateTimeString()
   var minute = date.getMinutes();
   var second = date.getSeconds();
 
-  return ( day + "/" + month + "/" + year + " " + hour + ':' + minute + ':' + second );
+  return date;
 }
