@@ -46,6 +46,7 @@ namespace SpeechRecognitionThesis
 
             services.AddDbContext<SpeechRecognitonDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SpeechRecognitionDb"]));
             services.AddScoped<IDataRepository<Article>, ArticlesDbManager>();
+            services.AddScoped<IDataRepository<User>, UsersDbManager>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

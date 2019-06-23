@@ -16,9 +16,16 @@ namespace SpeechRecognitionThesis.Models.DataManager
             _speechRecognitionDbContext = context;
         }
 
-        public IEnumerable<Article> GetAll()
+        public void Add(Article entity)
         {
-            return _speechRecognitionDbContext.Articles.ToList();
+            _speechRecognitionDbContext.Articles.Add(entity);
+            _speechRecognitionDbContext.SaveChanges();
+        }
+
+        public void Delete(Article article)
+        {
+            _speechRecognitionDbContext.Articles.Remove(article);
+            _speechRecognitionDbContext.SaveChanges();
         }
 
         public Article Get(long id)
@@ -27,10 +34,9 @@ namespace SpeechRecognitionThesis.Models.DataManager
                   .FirstOrDefault(e => e.ArticleId == id);
         }
 
-        public void Add(Article entity)
+        public IEnumerable<Article> GetAll()
         {
-            _speechRecognitionDbContext.Articles.Add(entity);
-            _speechRecognitionDbContext.SaveChanges();
+            return _speechRecognitionDbContext.Articles.ToList();
         }
 
         public void Update(Article article, Article entity)
@@ -41,12 +47,6 @@ namespace SpeechRecognitionThesis.Models.DataManager
             article.InsertionDate = entity.InsertionDate;
             article.LastUpdateDate = entity.LastUpdateDate;
 
-            _speechRecognitionDbContext.SaveChanges();
-        }
-
-        public void Delete(Article article)
-        {
-            _speechRecognitionDbContext.Articles.Remove(article);
             _speechRecognitionDbContext.SaveChanges();
         }
     }

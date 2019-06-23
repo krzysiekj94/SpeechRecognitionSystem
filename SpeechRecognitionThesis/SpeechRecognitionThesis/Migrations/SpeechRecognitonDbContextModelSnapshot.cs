@@ -59,6 +59,48 @@ namespace SpeechRecognitionThesis.Migrations
                             LastUpdateDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
+
+            modelBuilder.Entity("SpeechRecognitionThesis.Models.User", b =>
+                {
+                    b.Property<long>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateAccountDate");
+
+                    b.Property<bool>("IsActiveAccount");
+
+                    b.Property<DateTime>("LastUpdateAccountDate");
+
+                    b.Property<string>("NickName")
+                        .IsRequired();
+
+                    b.Property<string>("PasswordHash");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1L,
+                            CreateAccountDate = new DateTime(2019, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActiveAccount = true,
+                            LastUpdateAccountDate = new DateTime(2019, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NickName = "SuperBass",
+                            PasswordHash = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
+                        },
+                        new
+                        {
+                            UserId = 2L,
+                            CreateAccountDate = new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActiveAccount = true,
+                            LastUpdateAccountDate = new DateTime(2019, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NickName = " RobertSon",
+                            PasswordHash = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }
