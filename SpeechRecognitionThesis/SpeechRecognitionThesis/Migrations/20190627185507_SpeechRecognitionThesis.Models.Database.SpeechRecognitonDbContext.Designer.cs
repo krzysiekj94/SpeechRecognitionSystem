@@ -10,8 +10,8 @@ using SpeechRecognitionThesis.Models.Database;
 namespace SpeechRecognitionThesis.Migrations
 {
     [DbContext(typeof(SpeechRecognitonDbContext))]
-    [Migration("20190623162425_EFCoreCodeFirstSample.Models.Database.SpeechRecognitonDbContext")]
-    partial class EFCoreCodeFirstSampleModelsDatabaseSpeechRecognitonDbContext
+    [Migration("20190627185507_SpeechRecognitionThesis.Models.Database.SpeechRecognitonDbContext")]
+    partial class SpeechRecognitionThesisModelsDatabaseSpeechRecognitonDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

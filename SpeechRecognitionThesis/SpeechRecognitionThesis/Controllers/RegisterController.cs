@@ -18,9 +18,22 @@ namespace SpeechRecognitionThesis.Controllers
             _dataRepository = dataRepository;
         }
 
-        public IActionResult RegisterUser()
+        public IActionResult Register()
         {
-            return View("../Home/Register");
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(User user)
+        {
+            if( user == null)
+            {
+                return BadRequest();
+            }
+
+            _dataRepository.Add(user);
+
+            return Ok();
         }
     }
 }
