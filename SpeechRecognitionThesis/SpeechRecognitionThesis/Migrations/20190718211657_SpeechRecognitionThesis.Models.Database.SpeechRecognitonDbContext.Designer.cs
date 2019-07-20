@@ -10,7 +10,7 @@ using SpeechRecognitionThesis.Models.Database;
 namespace SpeechRecognitionThesis.Migrations
 {
     [DbContext(typeof(SpeechRecognitonDbContext))]
-    [Migration("20190627185507_SpeechRecognitionThesis.Models.Database.SpeechRecognitonDbContext")]
+    [Migration("20190718211657_SpeechRecognitionThesis.Models.Database.SpeechRecognitonDbContext")]
     partial class SpeechRecognitionThesisModelsDatabaseSpeechRecognitonDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,16 +68,18 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreateAccountDate");
+                    b.Property<string>("CreateAccountDate");
+
+                    b.Property<string>("Email");
 
                     b.Property<bool>("IsActiveAccount");
 
-                    b.Property<DateTime>("LastUpdateAccountDate");
+                    b.Property<string>("LastUpdateAccountDate");
 
                     b.Property<string>("NickName")
                         .IsRequired();
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("Password");
 
                     b.HasKey("UserId");
 
@@ -87,20 +89,22 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             UserId = 1L,
-                            CreateAccountDate = new DateTime(2019, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreateAccountDate = "30.05.2019 00:00:00",
+                            Email = "bas@gmail.com",
                             IsActiveAccount = true,
-                            LastUpdateAccountDate = new DateTime(2019, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastUpdateAccountDate = "20.06.2019 00:00:00",
                             NickName = "SuperBass",
-                            PasswordHash = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
+                            Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
                         },
                         new
                         {
                             UserId = 2L,
-                            CreateAccountDate = new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreateAccountDate = "21.05.2019 00:00:00",
+                            Email = "robert@mail.com",
                             IsActiveAccount = true,
-                            LastUpdateAccountDate = new DateTime(2019, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastUpdateAccountDate = "23.06.2019 00:00:00",
                             NickName = " RobertSon",
-                            PasswordHash = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
+                            Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
                         });
                 });
 #pragma warning restore 612, 618

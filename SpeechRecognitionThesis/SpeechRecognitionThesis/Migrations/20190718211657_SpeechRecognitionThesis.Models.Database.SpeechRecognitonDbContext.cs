@@ -32,9 +32,10 @@ namespace SpeechRecognitionThesis.Migrations
                     UserId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NickName = table.Column<string>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    CreateAccountDate = table.Column<DateTime>(nullable: false),
-                    LastUpdateAccountDate = table.Column<DateTime>(nullable: false),
+                    Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    CreateAccountDate = table.Column<string>(nullable: true),
+                    LastUpdateAccountDate = table.Column<string>(nullable: true),
                     IsActiveAccount = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -53,11 +54,11 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "CreateAccountDate", "IsActiveAccount", "LastUpdateAccountDate", "NickName", "PasswordHash" },
+                columns: new[] { "UserId", "CreateAccountDate", "Email", "IsActiveAccount", "LastUpdateAccountDate", "NickName", "Password" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2019, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), true, new DateTime(2019, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "SuperBass", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" },
-                    { 2L, new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), true, new DateTime(2019, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), " RobertSon", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" }
+                    { 1L, "30.05.2019 00:00:00", "bas@gmail.com", true, "20.06.2019 00:00:00", "SuperBass", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" },
+                    { 2L, "21.05.2019 00:00:00", "robert@mail.com", true, "23.06.2019 00:00:00", " RobertSon", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" }
                 });
         }
 

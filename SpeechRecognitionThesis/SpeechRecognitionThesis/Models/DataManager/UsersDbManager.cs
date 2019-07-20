@@ -43,7 +43,7 @@ namespace SpeechRecognitionThesis.Models.DataManager
         {
             user.UserId = entity.UserId;
             user.NickName = entity.NickName;
-            user.PasswordHash = entity.PasswordHash;
+            user.Password = entity.Password;
             user.CreateAccountDate = entity.CreateAccountDate;
             user.LastUpdateAccountDate = entity.LastUpdateAccountDate;
             user.IsActiveAccount = entity.IsActiveAccount;

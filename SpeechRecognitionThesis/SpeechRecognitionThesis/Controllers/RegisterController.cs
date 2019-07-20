@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
@@ -24,14 +25,14 @@ namespace SpeechRecognitionThesis.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(User user)
+        public IActionResult Register(RegisterModel userRegisterModel)
         {
-            if( user == null)
+            if(userRegisterModel == null)
             {
                 return BadRequest();
             }
 
-            _dataRepository.Add(user);
+            _dataRepository.Add(userRegisterModel.User);
 
             return Ok();
         }
