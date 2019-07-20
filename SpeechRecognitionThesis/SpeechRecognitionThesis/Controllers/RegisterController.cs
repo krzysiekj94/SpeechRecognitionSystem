@@ -25,16 +25,38 @@ namespace SpeechRecognitionThesis.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel userRegisterModel)
+        public IActionResult Register(RegisterUserModel userRegisterModel)
         {
-            if(userRegisterModel == null)
+            if( !ModelState.IsValid )
             {
                 return BadRequest();
             }
 
+            ValidateRegisterUser(userRegisterModel);
+
             _dataRepository.Add(userRegisterModel.User);
 
             return Ok();
+        }
+
+        private bool ValidateRegisterUser(RegisterUserModel userRegisterModel)
+        {
+            bool bValidateRegisterUser = true;
+
+            User findUser = userRegisterModel.User;
+
+            if( IsFindUserByNickName(findUser) )
+            {
+                bValidateRegisterUser = false;
+            }
+
+            return bValidateRegisterUser;
+        }
+
+        private bool IsFindUserByNickName(User user)
+        {
+            return (_dataRepository.GetAll()
+                    .FirstOrDefault(findUser => findUser.NickName == user.NickName) != null);
         }
     }
 }
