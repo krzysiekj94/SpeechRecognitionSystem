@@ -28,6 +28,6 @@ namespace SpeechRecognitionThesis.Models
 
         public string LastUpdateAccountDate { get; set; }
 
-        public bool IsActiveAccount { get; set; }
+        public AccountActiveState ActiveAccountState { get; set; }
     }
 }

@@ -68,10 +68,19 @@
         <script src="~/js/artyom/artyom.window.js"></script>
         @{
             string pageRelativePathString = SpeechRecognitionThesis.Models.Scripts.ScriptManager
-                                            .getArtyomScriptPathString( Context.Request.Path.ToString() );
-         }
+                                            .getArtyomScriptPathString(Context.Request.Path.ToString());
+        }
         <script src="@pageRelativePathString"></script>
         <script src="~/js/search.js"></script>
+        @{
+            pageRelativePathString = SpeechRecognitionThesis.Models.Scripts.ScriptManager
+                                            .getRegisterScriptPathString(Context.Request.Path.ToString());
+
+            if (pageRelativePathString.Length > 0)
+            {
+                <script src="@pageRelativePathString"></script>
+            }
+        }
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"

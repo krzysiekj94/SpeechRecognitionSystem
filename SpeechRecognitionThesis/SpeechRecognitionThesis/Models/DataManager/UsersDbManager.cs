@@ -46,7 +46,7 @@ namespace SpeechRecognitionThesis.Models.DataManager
             user.Password = entity.Password;
             user.CreateAccountDate = entity.CreateAccountDate;
             user.LastUpdateAccountDate = entity.LastUpdateAccountDate;
-            user.IsActiveAccount = entity.IsActiveAccount;
+            user.ActiveAccountState = entity.ActiveAccountState;
 
             _speechRecognitionDbContext.SaveChanges();
         }

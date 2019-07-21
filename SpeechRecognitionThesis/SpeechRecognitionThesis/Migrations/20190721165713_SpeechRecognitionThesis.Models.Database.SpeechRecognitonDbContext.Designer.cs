@@ -10,7 +10,7 @@ using SpeechRecognitionThesis.Models.Database;
 namespace SpeechRecognitionThesis.Migrations
 {
     [DbContext(typeof(SpeechRecognitonDbContext))]
-    [Migration("20190718211657_SpeechRecognitionThesis.Models.Database.SpeechRecognitonDbContext")]
+    [Migration("20190721165713_SpeechRecognitionThesis.Models.Database.SpeechRecognitonDbContext")]
     partial class SpeechRecognitionThesisModelsDatabaseSpeechRecognitonDbContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,18 +68,20 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ActiveAccountState");
+
                     b.Property<string>("CreateAccountDate");
 
                     b.Property<string>("Email");
 
-                    b.Property<bool>("IsActiveAccount");
-
                     b.Property<string>("LastUpdateAccountDate");
 
                     b.Property<string>("NickName")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(20);
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .HasMaxLength(512);
 
                     b.HasKey("UserId");
 
@@ -89,9 +91,9 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             UserId = 1L,
+                            ActiveAccountState = 1,
                             CreateAccountDate = "30.05.2019 00:00:00",
                             Email = "bas@gmail.com",
-                            IsActiveAccount = true,
                             LastUpdateAccountDate = "20.06.2019 00:00:00",
                             NickName = "SuperBass",
                             Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
@@ -99,9 +101,9 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             UserId = 2L,
+                            ActiveAccountState = 1,
                             CreateAccountDate = "21.05.2019 00:00:00",
                             Email = "robert@mail.com",
-                            IsActiveAccount = true,
                             LastUpdateAccountDate = "23.06.2019 00:00:00",
                             NickName = " RobertSon",
                             Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"

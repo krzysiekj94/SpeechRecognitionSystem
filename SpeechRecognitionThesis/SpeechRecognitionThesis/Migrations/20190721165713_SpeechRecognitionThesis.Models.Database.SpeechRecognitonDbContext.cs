@@ -31,12 +31,12 @@ namespace SpeechRecognitionThesis.Migrations
                 {
                     UserId = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NickName = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: true),
+                    NickName = table.Column<string>(maxLength: 20, nullable: false),
+                    Password = table.Column<string>(maxLength: 512, nullable: true),
                     Email = table.Column<string>(nullable: true),
                     CreateAccountDate = table.Column<string>(nullable: true),
                     LastUpdateAccountDate = table.Column<string>(nullable: true),
-                    IsActiveAccount = table.Column<bool>(nullable: false)
+                    ActiveAccountState = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,11 +54,11 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "CreateAccountDate", "Email", "IsActiveAccount", "LastUpdateAccountDate", "NickName", "Password" },
+                columns: new[] { "UserId", "ActiveAccountState", "CreateAccountDate", "Email", "LastUpdateAccountDate", "NickName", "Password" },
                 values: new object[,]
                 {
-                    { 1L, "30.05.2019 00:00:00", "bas@gmail.com", true, "20.06.2019 00:00:00", "SuperBass", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" },
-                    { 2L, "21.05.2019 00:00:00", "robert@mail.com", true, "23.06.2019 00:00:00", " RobertSon", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" }
+                    { 1L, 1, "30.05.2019 00:00:00", "bas@gmail.com", "20.06.2019 00:00:00", "SuperBass", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" },
+                    { 2L, 1, "21.05.2019 00:00:00", "robert@mail.com", "23.06.2019 00:00:00", " RobertSon", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" }
                 });
         }
 
