@@ -12,6 +12,8 @@ namespace SpeechRecognitionThesis.Models.Scripts
         const string ADD_ARTICLES_RELATIVE_PATH_STRING                  = "/articles/add";
         const string REGISTER_NEW_USER_SCRIPT_RELATIVE_PATH_STRING      = "/js/register.js";
         const string REGISTER_NEW_USER_RELATIVE_PATH_STRING             = "/register";
+        const string LOGIN_USER_RELATIVE_PATH_STRING                    = "/login";
+        const string LOGIN_SCRIPT_RELATIVE_PATH_STRING                  = "/js/login.js";
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
@@ -37,6 +39,22 @@ namespace SpeechRecognitionThesis.Models.Scripts
             {
                 case REGISTER_NEW_USER_RELATIVE_PATH_STRING:
                     registerScriptPathString = REGISTER_NEW_USER_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
+                default:
+                    break;
+            }
+
+            return registerScriptPathString;
+        }
+
+        public static string getLoginScriptPathString(string urlRelativePathString)
+        {
+            string registerScriptPathString = string.Empty;
+
+            switch (urlRelativePathString.ToLower())
+            {
+                case LOGIN_USER_RELATIVE_PATH_STRING:
+                    registerScriptPathString = LOGIN_SCRIPT_RELATIVE_PATH_STRING;
                     break;
                 default:
                     break;

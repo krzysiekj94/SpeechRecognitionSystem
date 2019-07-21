@@ -1,0 +1,33 @@
+﻿@model SpeechRecognitionThesis.Models.ViewModels.LoginUserModel
+
+@{
+    ViewData["Title"] = "Strona logowania użytkownika";
+    ViewData["LoginHelpBlock"] = "Wpisz nazwę użytkownika podaną przy rejestracji";
+    ViewData["PasswordHelpBlock"] = "Wpisz hasło podane przy rejestracji";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form id="login-form" class="form-horizontal">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="username">Nazwa użytkownika</label>
+            <div class="login-controls">
+                <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge">
+                <p class="help-block">@ViewData["LoginHelpBlock"]</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Hasło</label>
+            <div class="login-controls">
+                <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
+                <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
+            </div>
+        </div>   
+        <div class="control-group">
+            <div class="login-controls">
+                <button class="btn btn-success" type="submit">Zaloguj się!</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
