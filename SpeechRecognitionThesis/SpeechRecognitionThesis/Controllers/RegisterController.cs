@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.Scripts;
 using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
@@ -49,7 +50,7 @@ namespace SpeechRecognitionThesis.Controllers
         private bool ProcessRegisterUserModelData(User registerUser)
         {
             return UpdateUserModelDates(registerUser) 
-                && ConvertPasswordToSha512(registerUser)
+                && UserTools.ConvertPasswordToSha512(registerUser)
                 && SetActiveFlagForRegisterUser(registerUser);
         }
 
@@ -64,30 +65,6 @@ namespace SpeechRecognitionThesis.Controllers
             }
 
             return bSetActiveFlag;
-        }
-
-        private bool ConvertPasswordToSha512(User registerUser)
-        {
-            bool bConvertPasswordResult = false;
-            byte[] sha512HashByteArray = null;
-            string sha512HashString = string.Empty;
-
-            if( registerUser != null )
-            {
-                using(var sha512 = SHA512.Create())
-                {
-                    sha512HashByteArray = sha512.ComputeHash(Encoding.UTF8.GetBytes(registerUser.Password));
-                    sha512HashString = BitConverter.ToString(sha512HashByteArray).Replace("-", "").ToLower();
-
-                    if(sha512HashString.Length > 0)
-                    {
-                        registerUser.Password = sha512HashString;
-                        bConvertPasswordResult = true;
-                    }
-                }
-            }
-
-            return bConvertPasswordResult;
         }
 
         private bool UpdateUserModelDates(User registerUser)
