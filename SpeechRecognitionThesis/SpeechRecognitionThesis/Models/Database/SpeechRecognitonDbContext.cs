@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognitionThesis.Models.Database
 {
-    public class SpeechRecognitonDbContext : DbContext
+    public class RepositoryContext : DbContext
     {
-        public SpeechRecognitonDbContext( DbContextOptions articleDbContextOptions )
+        public RepositoryContext( DbContextOptions articleDbContextOptions )
             : base(articleDbContextOptions)
         {
         }

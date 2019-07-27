@@ -8,7 +8,7 @@ using SpeechRecognitionThesis.Models.Database;
 
 namespace SpeechRecognitionThesis.Migrations
 {
-    [DbContext(typeof(SpeechRecognitonDbContext))]
+    [DbContext(typeof(RepositoryContext))]
     partial class SpeechRecognitonDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -40,10 +40,11 @@ namespace SpeechRecognitionThesis
                     .AllowCredentials());
             });
 
-            services.AddAuthentication("Basic")
-                .AddScheme<BasicAuthenticationOptions, BasicAuthenticationHandler>("Basic", null);
+            services.AddAuthentication("BasicAuthentication")
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
             services.AddSingleton<IPostConfigureOptions<BasicAuthenticationOptions>, BasicAuthenticationPostConfigureOptions>();
-            services.AddDbContext<SpeechRecognitonDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SpeechRecognitionDb"]));
+            services.AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SpeechRecognitionDb"]));
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDataRepository<Article>, ArticlesDbManager>();
             services.AddScoped<IDataRepository<User>, UsersDbManager>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -65,7 +66,7 @@ namespace SpeechRecognitionThesis
             app.UseHttpsRedirection();
             app.UseCors("CorsPolicy");
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

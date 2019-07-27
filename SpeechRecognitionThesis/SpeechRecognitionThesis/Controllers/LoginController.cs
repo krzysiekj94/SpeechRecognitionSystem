@@ -14,8 +14,8 @@ using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
-    [Authorize]
-    [Route("Login")]
+    //[Authorize]
+    //[Route("Login")]
     public class LoginController : Controller
     {
         private readonly IDataRepository<User> _dataRepository;

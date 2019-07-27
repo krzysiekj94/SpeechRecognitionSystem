@@ -9,9 +9,9 @@ namespace SpeechRecognitionThesis.Models.DataManager
 {
     public class ArticlesDbManager : IDataRepository<Article>
     {
-        readonly SpeechRecognitonDbContext _speechRecognitionDbContext;
+        readonly RepositoryContext _speechRecognitionDbContext;
 
-        public ArticlesDbManager(SpeechRecognitonDbContext context)
+        public ArticlesDbManager(RepositoryContext context)
         {
             _speechRecognitionDbContext = context;
         }
