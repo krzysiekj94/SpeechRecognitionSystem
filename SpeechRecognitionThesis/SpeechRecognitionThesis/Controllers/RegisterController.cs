@@ -110,7 +110,7 @@ namespace SpeechRecognitionThesis.Controllers
 
         private bool IsFindUserByNickName( RegisterUserModel userModel )
         {
-            return (_dataRepository.GetAll()
+            return (_dataRepository.FindAll()
                     .FirstOrDefault(findUser => findUser.NickName == userModel.User.NickName) != null);
         }
     }

@@ -12,11 +12,11 @@ namespace SpeechRecognitionThesis.Controllers
     [ApiController]
     public class SearchEngineController : Controller
     {
-        private readonly IDataRepository<Article> _dataRepository;
+        private readonly IRespositoryWrapper _repositoryWrapper;
 
-        public SearchEngineController(IDataRepository<Article> dataRepository)
+        public SearchEngineController(IRespositoryWrapper repositoryWrapper)
         {
-            _dataRepository = dataRepository;
+            _repositoryWrapper = repositoryWrapper;
         }
 
         [HttpGet]
@@ -29,13 +29,13 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("Results")]
         public IActionResult GetAllArticles()
         {
-            return Json( _dataRepository.GetAll().ToList() );
+            return Json(_repositoryWrapper.Articles.FindAll().ToList() );
         }
 
         [HttpGet("{name}")]
         public IActionResult GetArticle( string searchString )
         {
-            return Json( _dataRepository.GetAll().ToList()
+            return Json(_repositoryWrapper.Articles.FindAll().ToList()
                 .Where( articleNameString => articleNameString.ToString().Contains( searchString ) ) );
         }
     }

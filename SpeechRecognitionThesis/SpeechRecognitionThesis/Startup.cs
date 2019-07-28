@@ -40,13 +40,13 @@ namespace SpeechRecognitionThesis
                     .AllowCredentials());
             });
 
-            services.AddAuthentication("BasicAuthentication")
-               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-            services.AddSingleton<IPostConfigureOptions<BasicAuthenticationOptions>, BasicAuthenticationPostConfigureOptions>();
+            //services.AddAuthentication("BasicAuthentication")
+            //   .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+           // services.AddSingleton<IPostConfigureOptions<BasicAuthenticationOptions>, BasicAuthenticationPostConfigureOptions>();
             services.AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SpeechRecognitionDb"]));
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IDataRepository<Article>, ArticlesDbManager>();
-            services.AddScoped<IDataRepository<User>, UsersDbManager>();
+            //services.AddScoped<IDataRepository<Article>, ArticlesDbManager>();
+            //services.AddScoped<IDataRepository<User>, UsersDbManager>();
+            services.AddScoped<IRespositoryWrapper, RepositoryWrapper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -66,7 +66,7 @@ namespace SpeechRecognitionThesis
             app.UseHttpsRedirection();
             app.UseCors("CorsPolicy");
             app.UseStaticFiles();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

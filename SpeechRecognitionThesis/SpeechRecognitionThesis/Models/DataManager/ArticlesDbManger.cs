@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognitionThesis.Models.DataManager
 {
-    public class ArticlesDbManager : IDataRepository<Article>
+    public class ArticlesDbManager //: IDataRepository<Article>
     {
         readonly RepositoryContext _speechRecognitionDbContext;
 

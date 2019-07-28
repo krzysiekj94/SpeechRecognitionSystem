@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognitionThesis.Models.Repository
 {
-    public interface IRespositoryWrapper
+    public interface IArticleRepository : IDataRepository<Article>
     {
-        IAccountRepository Account  { get; }
-        IArticleRepository Articles { get; }
-        void Save();
+
     }
 }

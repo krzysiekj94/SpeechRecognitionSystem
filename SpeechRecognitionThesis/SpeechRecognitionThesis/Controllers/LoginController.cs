@@ -15,14 +15,14 @@ using SpeechRecognitionThesis.Models.ViewModels;
 namespace SpeechRecognitionThesis.Controllers
 {
     //[Authorize]
-    //[Route("Login")]
+    [Route("Login")]
     public class LoginController : Controller
     {
-        private readonly IDataRepository<User> _dataRepository;
+        private readonly IRespositoryWrapper _repositoryWrapper;
 
-        public LoginController(IDataRepository<User> dataRepository)
+        public LoginController(IRespositoryWrapper repositoryWrapper)
         {
-            _dataRepository = dataRepository;
+            _repositoryWrapper = repositoryWrapper;
         }
 
         public IActionResult Login()
@@ -30,9 +30,8 @@ namespace SpeechRecognitionThesis.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] LoginUserModel userLoginModel)
+        public IActionResult Login([FromForm] LoginUserModel userLoginModel)
         {
             if (!ModelState.IsValid
                 || !ValidateLoginUser(userLoginModel))
@@ -71,7 +70,7 @@ namespace SpeechRecognitionThesis.Controllers
 
         private bool IsFindUserByNickName(LoginUserModel userLoginModel)
         {
-            return (_dataRepository.GetAll()
+            return (_repositoryWrapper.Account.FindAll()
                 .FirstOrDefault(findUser => findUser.NickName == userLoginModel.User.NickName) != null);
         }
 

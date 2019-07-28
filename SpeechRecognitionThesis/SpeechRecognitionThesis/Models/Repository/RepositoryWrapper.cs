@@ -10,6 +10,7 @@ namespace SpeechRecognitionThesis.Models.Repository
     {
         private RepositoryContext   _repositoryContext;
         private IAccountRepository  _accountRepository;
+        private IArticleRepository  _articleRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext )
         {
@@ -26,6 +27,19 @@ namespace SpeechRecognitionThesis.Models.Repository
                 }
 
                 return _accountRepository;
+            }
+        }
+
+        public IArticleRepository Articles
+        {
+            get
+            {
+                if( _articleRepository == null)
+                {
+                    _articleRepository = new ArticleRepository(_repositoryContext);
+                }
+
+                return _articleRepository;
             }
         }
 
