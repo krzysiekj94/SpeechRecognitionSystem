@@ -28,7 +28,7 @@ namespace SpeechRecognitionThesis.Models.Repository
 
         public IQueryable<T> FindAll()
         {
-            return this.RepositoryContext.Set<T>().AsNoTracking();
+            return this.RepositoryContext.Set<T>();
         }
 
         public void Update(T entity)

@@ -14,7 +14,8 @@ using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
-    //[Authorize]
+    [Authorize]
+    [ApiController]
     [Route("Login")]
     public class LoginController : Controller
     {
@@ -25,11 +26,13 @@ namespace SpeechRecognitionThesis.Controllers
             _repositoryWrapper = repositoryWrapper;
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromForm] LoginUserModel userLoginModel)
         {
@@ -40,10 +43,20 @@ namespace SpeechRecognitionThesis.Controllers
             }
 
             User loginUser = userLoginModel.User;
+            User loggedUser = null;
 
             if( ProcessLoginUserModelData(loginUser) )
             {
-                //#TODO
+                loggedUser = _repositoryWrapper.Account.Authenticate( loginUser.NickName, loginUser.Password );
+
+                if (loggedUser == null)
+                {
+                    return BadRequest(new { message = "Username or password is incorrect" });
+                }
+                else
+                {
+                    return Ok(loggedUser);
+                }
             }
 
             return Ok();

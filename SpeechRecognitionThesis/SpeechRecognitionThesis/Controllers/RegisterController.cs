@@ -16,11 +16,11 @@ namespace SpeechRecognitionThesis.Controllers
     [Route("Register")]
     public class RegisterController : Controller
     {
-        private readonly IDataRepository<User> _dataRepository;
+        private readonly IRespositoryWrapper _repositoryWrapper;
 
-        public RegisterController(IDataRepository<User> dataRepository)
+        public RegisterController( IRespositoryWrapper repositoryWrapper )
         {
-            _dataRepository = dataRepository;
+            _repositoryWrapper = repositoryWrapper;
         }
 
         public IActionResult Register()
@@ -41,7 +41,7 @@ namespace SpeechRecognitionThesis.Controllers
 
             if( ProcessRegisterUserModelData(registerUser) )
             {
-                _dataRepository.Add(registerUser);
+                _repositoryWrapper.Account.Add(registerUser);
             }
 
             return Ok();
@@ -110,7 +110,7 @@ namespace SpeechRecognitionThesis.Controllers
 
         private bool IsFindUserByNickName( RegisterUserModel userModel )
         {
-            return (_dataRepository.FindAll()
+            return (_repositoryWrapper.Account.FindAll()
                     .FirstOrDefault(findUser => findUser.NickName == userModel.User.NickName) != null);
         }
     }
