@@ -36,11 +36,26 @@ namespace SpeechRecognitionThesis.Migrations
                     Email = table.Column<string>(nullable: true),
                     CreateAccountDate = table.Column<string>(nullable: true),
                     LastUpdateAccountDate = table.Column<string>(nullable: true),
-                    ActiveAccountState = table.Column<int>(nullable: false)
+                    ActiveAccountState = table.Column<int>(nullable: false),
+                    IsLogged = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSessions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<long>(nullable: false),
+                    SessionData = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSessions", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
@@ -54,11 +69,11 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "ActiveAccountState", "CreateAccountDate", "Email", "LastUpdateAccountDate", "NickName", "Password" },
+                columns: new[] { "UserId", "ActiveAccountState", "CreateAccountDate", "Email", "IsLogged", "LastUpdateAccountDate", "NickName", "Password" },
                 values: new object[,]
                 {
-                    { 1L, 1, "30.05.2019 00:00:00", "bas@gmail.com", "20.06.2019 00:00:00", "SuperBass", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" },
-                    { 2L, 1, "21.05.2019 00:00:00", "robert@mail.com", "23.06.2019 00:00:00", " RobertSon", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" }
+                    { 1L, 1, "30.05.2019 00:00:00", "bas@gmail.com", false, "20.06.2019 00:00:00", "SuperBass", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" },
+                    { 2L, 1, "21.05.2019 00:00:00", "robert@mail.com", false, "23.06.2019 00:00:00", " RobertSon", "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6" }
                 });
         }
 
@@ -69,6 +84,9 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "UserSessions");
         }
     }
 }

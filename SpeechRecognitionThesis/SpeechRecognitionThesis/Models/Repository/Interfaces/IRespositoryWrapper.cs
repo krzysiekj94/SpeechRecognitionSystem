@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SpeechRecognitionThesis.Models.Repository.Interfaces;
 
 namespace SpeechRecognitionThesis.Models.Repository
 {
@@ -9,6 +6,8 @@ namespace SpeechRecognitionThesis.Models.Repository
     {
         IAccountRepository Account  { get; }
         IArticleRepository Articles { get; }
+        IUserSessionRepository UserSessions { get; }
+
         void Save();
     }
 }

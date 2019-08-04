@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SpeechRecognitionThesis.Models.DatabaseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SpeechRecognitionThesis.Models.Database
 {
     public class RepositoryContext : DbContext
     {
-        public RepositoryContext( DbContextOptions articleDbContextOptions )
+        public RepositoryContext(DbContextOptions articleDbContextOptions)
             : base(articleDbContextOptions)
         {
         }
@@ -26,20 +27,22 @@ namespace SpeechRecognitionThesis.Models.Database
                 UserId = 1,
                 NickName = "SuperBass",
                 Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6",
-                Email="bas@gmail.com",
+                Email = "bas@gmail.com",
                 CreateAccountDate = new DateTime(2019, 05, 30).ToString(),
                 LastUpdateAccountDate = new DateTime(2019, 06, 20).ToString(),
-                ActiveAccountState = AccountActiveState.Active
+                ActiveAccountState = AccountActiveState.Active,
+                IsLogged = false
             },
            new User
            {
                UserId = 2,
                NickName = " RobertSon",
                Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6",
-               Email="robert@mail.com",
+               Email = "robert@mail.com",
                CreateAccountDate = new DateTime(2019, 05, 21).ToString(),
                LastUpdateAccountDate = new DateTime(2019, 06, 23).ToString(),
-               ActiveAccountState = AccountActiveState.Active
+               ActiveAccountState = AccountActiveState.Active,
+               IsLogged = false
            });
         }
 
@@ -69,5 +72,6 @@ namespace SpeechRecognitionThesis.Models.Database
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<User> Users { get; set; }
-    }
+        public DbSet<UserSession> UserSessions { get; set; }
+}
 }

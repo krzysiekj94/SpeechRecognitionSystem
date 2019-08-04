@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
@@ -13,6 +14,8 @@ using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
+    [Authorize]
+    [ApiController]
     [Route("Register")]
     public class RegisterController : Controller
     {
@@ -23,11 +26,13 @@ namespace SpeechRecognitionThesis.Controllers
             _repositoryWrapper = repositoryWrapper;
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Register(RegisterUserModel userRegisterModel)
         {

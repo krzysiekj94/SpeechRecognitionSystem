@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
+using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Repository;
 using SpeechRecognitionThesis.Models.Scripts;
 using SpeechRecognitionThesis.Models.ViewModels;
@@ -34,7 +35,7 @@ namespace SpeechRecognitionThesis.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromForm] LoginUserModel userLoginModel)
+        public async Task<IActionResult> Login( [FromForm] LoginUserModel userLoginModel )
         {
             if (!ModelState.IsValid
                 || !ValidateLoginUser(userLoginModel))
@@ -44,10 +45,11 @@ namespace SpeechRecognitionThesis.Controllers
 
             User loginUser = userLoginModel.User;
             User loggedUser = null;
+            string userSessionDataString = string.Empty;
 
             if( ProcessLoginUserModelData(loginUser) )
             {
-                loggedUser = _repositoryWrapper.Account.Authenticate( loginUser.NickName, loginUser.Password );
+                loggedUser = await _repositoryWrapper.Account.Authenticate( loginUser.NickName, loginUser.Password );
 
                 if (loggedUser == null)
                 {
@@ -55,6 +57,16 @@ namespace SpeechRecognitionThesis.Controllers
                 }
                 else
                 {
+                    userSessionDataString = Guid.NewGuid().ToString();
+
+                    if( SaveUserSessionInfoInDB(loginUser.NickName, userSessionDataString ) )
+                    {
+                        await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                         new ClaimsPrincipal(PrepareClaimsIdentity(userSessionDataString)),
+                        new AuthenticationProperties());
+                    }
+
                     return Ok(loggedUser);
                 }
             }
@@ -62,10 +74,44 @@ namespace SpeechRecognitionThesis.Controllers
             return Ok();
         }
 
+        private bool SaveUserSessionInfoInDB( string nickNameString, string userSessionDataString )
+        {
+            User findUser = _repositoryWrapper.Account.FindAll()
+                        .FirstOrDefault(resultUser=> resultUser.NickName == nickNameString);
+
+            bool bSaveUserSessionData = false;
+
+            if(findUser != null)
+            {
+                _repositoryWrapper.UserSessions
+                    .Add(new UserSession()
+                    {
+                        UserId = findUser.UserId,
+                        SessionData = userSessionDataString,
+                    });
+
+                bSaveUserSessionData = true;
+            }
+
+            return bSaveUserSessionData;
+        }
+
+        private ClaimsIdentity PrepareClaimsIdentity( string userSessionDataString )
+        {
+            List<Claim> claimList = new List<Claim>
+            {
+                new Claim( ClaimTypes.Name, userSessionDataString )
+            };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claimList, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return claimsIdentity;
+        }
+
         private bool ProcessLoginUserModelData(User loginUser)
         {
-            return (loginUser != null) 
-                 && UserTools.ConvertPasswordToSha512(loginUser);
+            return (loginUser != null);
         }
 
         private bool ValidateLoginUser(LoginUserModel userLoginModel)

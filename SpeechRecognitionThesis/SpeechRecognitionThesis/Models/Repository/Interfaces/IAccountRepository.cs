@@ -7,6 +7,6 @@ namespace SpeechRecognitionThesis.Models.Repository
 {
     public interface IAccountRepository : IDataRepository<User>
     {
-        User Authenticate( string usernameString, string passwordString );
+        Task<User> Authenticate( string usernameString, string passwordString );
     }
 }

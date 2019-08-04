@@ -27,6 +27,11 @@ namespace SpeechRecognitionThesis.Models.Scripts
             return bConvertPasswordResult;
         }
 
+        static public string ConvertInputTextToSha512(string inputTextString )
+        {
+            return Sha512Manager.ComputeHashString(inputTextString);
+        }
+
         static bool AuthenticateUserProcess(User loginUser)
         {
             return (loginUser != null)

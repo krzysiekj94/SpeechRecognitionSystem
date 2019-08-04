@@ -1,4 +1,5 @@
 ﻿using SpeechRecognitionThesis.Models.Database;
+using SpeechRecognitionThesis.Models.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,10 @@ namespace SpeechRecognitionThesis.Models.Repository
 {
     public class RepositoryWrapper : IRespositoryWrapper
     {
-        private RepositoryContext   _repositoryContext;
-        private IAccountRepository  _accountRepository;
-        private IArticleRepository  _articleRepository;
+        private RepositoryContext       _repositoryContext;
+        private IAccountRepository      _accountRepository;
+        private IArticleRepository      _articleRepository;
+        private IUserSessionRepository  _userSessionRepository;
 
         public RepositoryWrapper(RepositoryContext repositoryContext )
         {
@@ -40,6 +42,19 @@ namespace SpeechRecognitionThesis.Models.Repository
                 }
 
                 return _articleRepository;
+            }
+        }
+
+        public IUserSessionRepository UserSessions
+        {
+            get
+            {
+                if( _userSessionRepository == null )
+                {
+                    _userSessionRepository = new UserSessionRepository(_repositoryContext);
+                }
+
+                return _userSessionRepository;
             }
         }
 

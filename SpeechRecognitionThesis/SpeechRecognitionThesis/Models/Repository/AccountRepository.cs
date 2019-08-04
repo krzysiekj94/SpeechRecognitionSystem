@@ -1,4 +1,6 @@
 ﻿using SpeechRecognitionThesis.Models.Database;
+using SpeechRecognitionThesis.Models.DatabaseModels;
+using SpeechRecognitionThesis.Models.Scripts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +18,15 @@ namespace SpeechRecognitionThesis.Models.Repository
             _repositoryContext = repositoryContext;
         }
 
-        public User Authenticate(string username, string password)
+        public async Task<User> Authenticate(string usernameString, string passwordString)
         {
-            User user = _repositoryContext.Users.SingleOrDefault(x => x.NickName == username && x.Password == password);
-            //#TODO
+            string encodedPassword = UserTools.ConvertInputTextToSha512( passwordString );
+            User user = await Task.Run( () => _repositoryContext.Users.SingleOrDefault( x => x.NickName == usernameString && x.Password == encodedPassword) );
 
+            if( user != null )
+            {
+                user.Password = string.Empty;
+            }
 
             return user;
         }
