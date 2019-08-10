@@ -67,6 +67,8 @@ namespace SpeechRecognitionThesis.Controllers
                         new AuthenticationProperties());
                     }
 
+                    loggedUser.Password = string.Empty;
+
                     return Ok(loggedUser);
                 }
             }
@@ -90,6 +92,7 @@ namespace SpeechRecognitionThesis.Controllers
                         SessionData = userSessionDataString,
                     });
 
+                _repositoryWrapper.Save();
                 bSaveUserSessionData = true;
             }
 

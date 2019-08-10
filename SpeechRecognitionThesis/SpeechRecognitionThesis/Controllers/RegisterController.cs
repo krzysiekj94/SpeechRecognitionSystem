@@ -34,7 +34,7 @@ namespace SpeechRecognitionThesis.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Register(RegisterUserModel userRegisterModel)
+        public IActionResult Register([FromForm] RegisterUserModel userRegisterModel)
         {
             if( !ModelState.IsValid 
                 || !ValidateRegisterUser(userRegisterModel) )
@@ -47,6 +47,7 @@ namespace SpeechRecognitionThesis.Controllers
             if( ProcessRegisterUserModelData(registerUser) )
             {
                 _repositoryWrapper.Account.Add(registerUser);
+                _repositoryWrapper.Save();
             }
 
             return Ok();

@@ -23,11 +23,6 @@ namespace SpeechRecognitionThesis.Models.Repository
             string encodedPassword = UserTools.ConvertInputTextToSha512( passwordString );
             User user = await Task.Run( () => _repositoryContext.Users.SingleOrDefault( x => x.NickName == usernameString && x.Password == encodedPassword) );
 
-            if( user != null )
-            {
-                user.Password = string.Empty;
-            }
-
             return user;
         }
     }
