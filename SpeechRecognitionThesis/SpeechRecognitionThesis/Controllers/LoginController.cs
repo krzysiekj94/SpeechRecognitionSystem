@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
-using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Repository;
 using SpeechRecognitionThesis.Models.Scripts;
 using SpeechRecognitionThesis.Models.ViewModels;

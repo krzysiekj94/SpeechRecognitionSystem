@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Scripts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SpeechRecognitionThesis.Models.Database
 {
@@ -73,6 +69,5 @@ namespace SpeechRecognitionThesis.Models.Database
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserSession> UserSessions { get; set; }
-}
+    }
 }

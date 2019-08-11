@@ -1,5 +1,4 @@
 ﻿using SpeechRecognitionThesis.Models.Database;
-using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Scripts;
 using System;
 using System.Collections.Generic;

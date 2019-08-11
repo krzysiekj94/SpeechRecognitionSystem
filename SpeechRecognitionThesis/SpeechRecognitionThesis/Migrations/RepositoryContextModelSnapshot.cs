@@ -60,21 +60,6 @@ namespace SpeechRecognitionThesis.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SpeechRecognitionThesis.Models.DatabaseModels.UserSession", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SessionData");
-
-                    b.Property<long>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserSessions");
-                });
-
             modelBuilder.Entity("SpeechRecognitionThesis.Models.User", b =>
                 {
                     b.Property<long>("UserId")
@@ -112,7 +97,7 @@ namespace SpeechRecognitionThesis.Migrations
                             IsLogged = false,
                             LastUpdateAccountDate = "20.06.2019 00:00:00",
                             NickName = "SuperBass",
-                            Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
+                            Password = "3c54ae8854fd40631cdaabba9b9df836bb5cace38cafcfad7e9a89477300a1cbf5fb7937ee188ace530d1a27aedd4e90e69e27c60d888e6136d326e24cff1699"
                         },
                         new
                         {
@@ -123,7 +108,7 @@ namespace SpeechRecognitionThesis.Migrations
                             IsLogged = false,
                             LastUpdateAccountDate = "23.06.2019 00:00:00",
                             NickName = " RobertSon",
-                            Password = "0x07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6"
+                            Password = "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828"
                         });
                 });
 #pragma warning restore 612, 618
