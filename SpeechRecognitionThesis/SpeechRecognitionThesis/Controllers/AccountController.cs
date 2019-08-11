@@ -39,13 +39,5 @@ namespace SpeechRecognitionThesis.Controllers
         {
             return View( "AccountArticles" );
         }
-
-        [HttpPost]
-        [Route("Logout")]
-        public IActionResult UserLogout()
-        {
-            //#TOOD
-            return Ok();
-        }
     }
 }

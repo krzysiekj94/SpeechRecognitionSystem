@@ -8,7 +8,10 @@
 
 <h2>@ViewData["Title"]</h2>
 
+@if (!User.Identity.IsAuthenticated)
+{
 <form id="login-form" class="form-horizontal">
+    @Html.AntiForgeryToken()
     <fieldset>
         <div class="control-group">
             <label class="control-label" for="username">Nazwa użytkownika</label>
@@ -23,7 +26,7 @@
                 <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
                 <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
             </div>
-        </div>   
+        </div>
         <div class="control-group">
             <div class="login-controls">
                 <button class="btn btn-success" type="submit">Zaloguj się!</button>
@@ -31,3 +34,17 @@
         </div>
     </fieldset>
 </form>
+}
+else
+{
+    <div class="row">
+        You are Logged in as
+        <span style="font-size:large;color:forestgreen;">
+            @User.Identity.Name
+        </span>
+    </div>
+    <div class="row" style="padding-top:50px;">
+        @Html.ActionLink("Log Off", "Logoff",
+        "Home", null, new { @class = "btn btn-primary btn-lg rph-login-button" })
+    </div>
+}

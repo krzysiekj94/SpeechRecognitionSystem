@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.DatabaseModels;
@@ -51,65 +52,28 @@ namespace SpeechRecognitionThesis.Controllers
             {
                 loggedUser = await _repositoryWrapper.Account.Authenticate( loginUser.NickName, loginUser.Password );
 
-                if (loggedUser == null)
+                if( loggedUser == null )
                 {
                     return BadRequest(new { message = "Username or password is incorrect" });
                 }
                 else
                 {
-                    userSessionDataString = Guid.NewGuid().ToString();
-
-                    if( SaveUserSessionInfoInDB(loginUser.NickName, userSessionDataString ) )
-                    {
-                        await HttpContext.SignInAsync(
-                            CookieAuthenticationDefaults.AuthenticationScheme,
-                         new ClaimsPrincipal(PrepareClaimsIdentity(userSessionDataString)),
-                        new AuthenticationProperties());
-                    }
-
                     loggedUser.Password = string.Empty;
 
-                    return Ok(loggedUser);
+                    TokenProvider tokenProvider = new TokenProvider();
+                    string userTokenString = tokenProvider.CreateUserTokenString( loggedUser );
+                    
+                    if( userTokenString != null
+                        && userTokenString.Length > 0 )
+                    {
+                        HttpContext.Session.SetString( TokenProvider.GetTokenSessionKeyString(), userTokenString );
+                    }
+
+                    return Ok( loggedUser );
                 }
             }
 
             return Ok();
-        }
-
-        private bool SaveUserSessionInfoInDB( string nickNameString, string userSessionDataString )
-        {
-            User findUser = _repositoryWrapper.Account.FindAll()
-                        .FirstOrDefault(resultUser=> resultUser.NickName == nickNameString);
-
-            bool bSaveUserSessionData = false;
-
-            if(findUser != null)
-            {
-                _repositoryWrapper.UserSessions
-                    .Add(new UserSession()
-                    {
-                        UserId = findUser.UserId,
-                        SessionData = userSessionDataString,
-                    });
-
-                _repositoryWrapper.Save();
-                bSaveUserSessionData = true;
-            }
-
-            return bSaveUserSessionData;
-        }
-
-        private ClaimsIdentity PrepareClaimsIdentity( string userSessionDataString )
-        {
-            List<Claim> claimList = new List<Claim>
-            {
-                new Claim( ClaimTypes.Name, userSessionDataString )
-            };
-
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
-                claimList, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            return claimsIdentity;
         }
 
         private bool ProcessLoginUserModelData(User loginUser)
