@@ -38,13 +38,13 @@
 else
 {
     <div class="row">
-        You are Logged in as
+        Jesteś już zalogowany jako
         <span style="font-size:large;color:forestgreen;">
             @User.Identity.Name
         </span>
     </div>
     <div class="row" style="padding-top:50px;">
-        @Html.ActionLink("Log Off", "Logoff",
-        "Home", null, new { @class = "btn btn-primary btn-lg rph-login-button" })
+        @Html.ActionLink("Wyloguj się!", "logout",
+        "Logout", null, new { @class = "btn btn-primary btn-lg rph-login-button" })
     </div>
 }
