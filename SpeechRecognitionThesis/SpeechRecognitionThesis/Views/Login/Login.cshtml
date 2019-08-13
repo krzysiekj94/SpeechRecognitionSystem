@@ -37,14 +37,5 @@
 }
 else
 {
-    <div class="row">
-        Jesteś już zalogowany jako
-        <span style="font-size:large;color:forestgreen;">
-            @User.Identity.Name
-        </span>
-    </div>
-    <div class="row" style="padding-top:50px;">
-        @Html.ActionLink("Wyloguj się!", "logout",
-        "Logout", null, new { @class = "btn btn-primary btn-lg rph-login-button" })
-    </div>
+    <partial name="/Views/Shared/_LoggedUserInfoView.cshtml" />
 }
