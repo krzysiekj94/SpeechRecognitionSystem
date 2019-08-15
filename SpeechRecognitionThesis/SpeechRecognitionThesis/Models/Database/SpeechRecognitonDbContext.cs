@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Scripts;
 using System;
 
@@ -15,6 +16,7 @@ namespace SpeechRecognitionThesis.Models.Database
         {
             InitArticles(modelBuilder);
             InitUsers(modelBuilder);
+            InitUserArticles(modelBuilder);
         }
 
         private void InitUsers(ModelBuilder modelBuilder)
@@ -66,8 +68,30 @@ namespace SpeechRecognitionThesis.Models.Database
             });
         }
 
+        private void InitUserArticles(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserArticles>().HasData(new UserArticles
+            {
+                UserRefId = 1,
+                ArticleRefId = 1,
+                AddArticleToUserDate = DateTime.Now.ToString()
+            },
+            new UserArticles
+            {
+                UserRefId = 1,
+                ArticleRefId = 2,
+                AddArticleToUserDate = DateTime.Now.ToString()
+            },
+            new UserArticles
+            {
+                UserRefId = 2,
+                ArticleRefId = 1,
+                AddArticleToUserDate = DateTime.Now.ToString()
+            });
+        }
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserArticles> UserArticles { get; set; }
     }
 }
