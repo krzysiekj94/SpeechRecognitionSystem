@@ -8,7 +8,7 @@ namespace SpeechRecognitionThesis.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long ArticleId { get; set; }
+        public long Id { get; set; }
         public long AuthorId { get; set; }
         public string Content { get; set; }
         public string AuthorName { get; set; }

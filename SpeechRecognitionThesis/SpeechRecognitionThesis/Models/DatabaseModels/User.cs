@@ -8,7 +8,7 @@ namespace SpeechRecognitionThesis.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long UserId { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [StringLength(20)]

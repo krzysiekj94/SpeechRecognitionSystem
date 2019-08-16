@@ -41,7 +41,7 @@ namespace SpeechRecognitionThesis
             IEnumerable<Claim> claims = new Claim[]
             {
                 new Claim( ClaimTypes.Name, user.NickName ),
-                new Claim( "UserId", user.UserId.ToString() ),
+                new Claim( "UserId", user.Id.ToString() ),
                 new Claim( "Email", user.Email ),
             };
 

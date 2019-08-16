@@ -23,7 +23,7 @@ namespace SpeechRecognitionThesis.Models.Database
         {
             modelBuilder.Entity<User>().HasData(new User
             {
-                UserId = 1,
+                Id = 1,
                 NickName = "SuperBass",
                 Password = UserTools.ConvertInputTextToSha512("SuperPasswor123"),
                 Email = "bas@gmail.com",
@@ -34,7 +34,7 @@ namespace SpeechRecognitionThesis.Models.Database
             },
            new User
            {
-               UserId = 2,
+               Id = 2,
                NickName = " RobertSon",
                Password = UserTools.ConvertInputTextToSha512("passwordTest231"),
                Email = "robert@mail.com",
@@ -49,7 +49,7 @@ namespace SpeechRecognitionThesis.Models.Database
         {
             modelBuilder.Entity<Article>().HasData(new Article
             {
-                ArticleId = 1,
+                Id = 1,
                 AuthorId = 1,
                 Content = "To jest artykuł 1",
                 AuthorName = "Krystian B.",
@@ -59,7 +59,7 @@ namespace SpeechRecognitionThesis.Models.Database
             },
             new Article
             {
-                ArticleId = 2,
+                Id = 2,
                 AuthorId = 1,
                 Content = "To jest artykuł 2",
                 AuthorName = "Roman Z.",
@@ -72,21 +72,24 @@ namespace SpeechRecognitionThesis.Models.Database
         {
             modelBuilder.Entity<UserArticles>().HasData(new UserArticles
             {
+                Id = 1,
                 UserRefId = 1,
                 ArticleRefId = 1,
                 AddArticleToUserDate = DateTime.Now.ToString()
             },
             new UserArticles
             {
+                Id = 2,
                 UserRefId = 1,
                 ArticleRefId = 2,
                 AddArticleToUserDate = DateTime.Now.ToString()
             },
             new UserArticles
             {
+                Id = 3,
                 UserRefId = 2,
                 ArticleRefId = 1,
-                AddArticleToUserDate = DateTime.Now.ToString()
+                AddArticleToUserDate = DateTime.Now.ToString(),
             });
         }
 

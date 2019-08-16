@@ -21,7 +21,7 @@ namespace SpeechRecognitionThesis.Migrations
 
             modelBuilder.Entity("SpeechRecognitionThesis.Models.Article", b =>
                 {
-                    b.Property<long>("ArticleId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,14 +35,14 @@ namespace SpeechRecognitionThesis.Migrations
 
                     b.Property<DateTime>("LastUpdateDate");
 
-                    b.HasKey("ArticleId");
+                    b.HasKey("Id");
 
                     b.ToTable("Articles");
 
                     b.HasData(
                         new
                         {
-                            ArticleId = 1L,
+                            Id = 1L,
                             AuthorId = 1L,
                             AuthorName = "Krystian B.",
                             Content = "To jest artykuł 1",
@@ -51,7 +51,7 @@ namespace SpeechRecognitionThesis.Migrations
                         },
                         new
                         {
-                            ArticleId = 2L,
+                            Id = 2L,
                             AuthorId = 1L,
                             AuthorName = "Roman Z.",
                             Content = "To jest artykuł 2",
@@ -60,9 +60,53 @@ namespace SpeechRecognitionThesis.Migrations
                         });
                 });
 
+            modelBuilder.Entity("SpeechRecognitionThesis.Models.DatabaseModels.UserArticles", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddArticleToUserDate");
+
+                    b.Property<long>("ArticleRefId");
+
+                    b.Property<long>("UserRefId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleRefId");
+
+                    b.HasIndex("UserRefId");
+
+                    b.ToTable("UserArticles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            AddArticleToUserDate = "15.08.2019 20:50:08",
+                            ArticleRefId = 1L,
+                            UserRefId = 1L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            AddArticleToUserDate = "15.08.2019 20:50:08",
+                            ArticleRefId = 2L,
+                            UserRefId = 1L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            AddArticleToUserDate = "15.08.2019 20:50:08",
+                            ArticleRefId = 1L,
+                            UserRefId = 2L
+                        });
+                });
+
             modelBuilder.Entity("SpeechRecognitionThesis.Models.User", b =>
                 {
-                    b.Property<long>("UserId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -83,14 +127,14 @@ namespace SpeechRecognitionThesis.Migrations
                     b.Property<string>("Password")
                         .HasMaxLength(512);
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            UserId = 1L,
+                            Id = 1L,
                             ActiveAccountState = 1,
                             CreateAccountDate = "30.05.2019 00:00:00",
                             Email = "bas@gmail.com",
@@ -101,7 +145,7 @@ namespace SpeechRecognitionThesis.Migrations
                         },
                         new
                         {
-                            UserId = 2L,
+                            Id = 2L,
                             ActiveAccountState = 1,
                             CreateAccountDate = "21.05.2019 00:00:00",
                             Email = "robert@mail.com",
@@ -110,6 +154,19 @@ namespace SpeechRecognitionThesis.Migrations
                             NickName = " RobertSon",
                             Password = "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828"
                         });
+                });
+
+            modelBuilder.Entity("SpeechRecognitionThesis.Models.DatabaseModels.UserArticles", b =>
+                {
+                    b.HasOne("SpeechRecognitionThesis.Models.Article", "Article")
+                        .WithMany()
+                        .HasForeignKey("ArticleRefId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SpeechRecognitionThesis.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserRefId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

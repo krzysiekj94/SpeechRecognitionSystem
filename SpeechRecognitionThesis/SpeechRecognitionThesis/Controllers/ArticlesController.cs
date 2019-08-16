@@ -59,7 +59,7 @@ namespace SpeechRecognitionThesis.Controllers
 
             _dataRepository.Add( article );
 
-            return Ok( article.ArticleId );
+            return Ok( article.Id );
         }
     }
 }
