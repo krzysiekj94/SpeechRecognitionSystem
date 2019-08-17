@@ -24,6 +24,7 @@ namespace SpeechRecognitionThesis.Controllers
             _repositoryWrapper = respositoryWrapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Newest")]
         public IActionResult GetNewestArticlesContent()
@@ -31,6 +32,7 @@ namespace SpeechRecognitionThesis.Controllers
             return View("Newest");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Top-5")]
         public IActionResult GetTopArticlesContent()
@@ -38,6 +40,7 @@ namespace SpeechRecognitionThesis.Controllers
             return View("Top");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Recommended")]
         public IActionResult GetRecommendedArticlesContent()
@@ -83,6 +86,13 @@ namespace SpeechRecognitionThesis.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("My")]
+        public IActionResult GetMyArticleView()
+        {
+            return View("My");
+        }
+
         private void SaveNewGuestArticle( Article article )
         {
             User anonymousUser = _repositoryWrapper.Account.GetAnonymousUser();
@@ -125,7 +135,7 @@ namespace SpeechRecognitionThesis.Controllers
 
             userArticles.ArticleRefId = article.Id;
             userArticles.UserRefId = user.Id;
-            userArticles.ArticleModificationDate = DateTime.Now.ToString();
+            userArticles.ArticleModificationDate = DateTime.Now.ToString(); 
 
             return userArticles;
         }

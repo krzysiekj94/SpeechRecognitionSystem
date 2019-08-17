@@ -30,10 +30,10 @@ function LoadArticleView(filterValue)
             {
                 $articlesResultElement.append(
                     '<li class="list-group-item article-result">'
-                            + 'Artykuł ID: '            + article.articleId 
-                            + '<br/>Content: '          + article.content 
-                            + '<br/>Autor: '            + article.authorName
+                            + 'Artykuł ID: '            + article.id 
+                            + '<br/>Content: '          + article.content
                             + '<br/>Data utworzenia: '  + article.insertionDate
+                            + '<br/>Data modyfikacji: ' + article.lastUpdateDate
                     +  '</li>'); 
 
                     iCounterAddedArticles++;
@@ -56,8 +56,7 @@ function IsCompatibilityWithFilter(article, filterValue)
     {
         
         bIsCompability = ( filterValue == "" 
-                        || article.content.toLowerCase().includes(filterValueLowerCase)
-                        || article.authorName.toLowerCase().includes(filterValueLowerCase) );
+                        || article.content.toLowerCase().includes(filterValueLowerCase) );
     }
 
     return bIsCompability;

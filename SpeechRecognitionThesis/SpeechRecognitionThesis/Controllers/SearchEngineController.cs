@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.Repository;
 
 namespace SpeechRecognitionThesis.Controllers
 {
+    [Authorize]
     [Route("Search")]
     [ApiController]
     public class SearchEngineController : Controller
@@ -19,19 +21,22 @@ namespace SpeechRecognitionThesis.Controllers
             _repositoryWrapper = repositoryWrapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetSearchEngineView()
         {
             return View("Search");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("Results")]
         public IActionResult GetAllArticles()
         {
-            return Json(_repositoryWrapper.Articles.FindAll().ToList() );
+            return Json( _repositoryWrapper.Articles.FindAll().ToList() );
         }
 
+        [AllowAnonymous]
         [HttpGet("{name}")]
         public IActionResult GetArticle( string searchString )
         {

@@ -9,8 +9,16 @@
     <a href="/articles/newest" class="list-group-item sidebar-element">Najnowsze artykuły</a>
     <a href="/articles/top-5" class="list-group-item sidebar-element">Top 10 artykułów</a>
     <a href="/search" class="list-group-item sidebar-element">Wyszukiwarka artykułów</a>
-    <a href="#" class="list-group-item sidebar-element">Twoje artykuły</a>
     <a href="/articles/add" class="list-group-item sidebar-element">Dodaj nowy</a>
-    <a href="#" class="list-group-item sidebar-element">Dane konta</a>
-    <a href="#" class="list-group-item sidebar-element">Wyloguj</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="/articles/my" class="list-group-item sidebar-element">Twoje artykuły</a>
+        <a href="/account" class="list-group-item sidebar-element">Dane konta</a>
+        <a href="/logout" class="list-group-item sidebar-element">Wyloguj</a>
+    }
+    else
+    {
+        <a href="/login" class="list-group-item sidebar-element">Zaloguj się!</a>
+        <a href="/register" class="list-group-item sidebar-element">Rejestracja</a>
+    }
 </ul>
