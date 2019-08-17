@@ -22,6 +22,6 @@ namespace SpeechRecognitionThesis.Models.DatabaseModels
         public Article Article { get; set; }
 
         [DataType(DataType.DateTime)]
-        public string AddArticleToUserDate { get; set; }
+        public string ArticleModificationDate { get; set; }
     }
 }

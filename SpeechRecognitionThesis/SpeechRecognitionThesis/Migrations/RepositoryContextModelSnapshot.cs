@@ -25,9 +25,7 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("AuthorId");
-
-                    b.Property<string>("AuthorName");
+                    b.Property<bool>("AvailabilityStatus");
 
                     b.Property<string>("Content");
 
@@ -43,8 +41,7 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
-                            AuthorId = 1L,
-                            AuthorName = "Krystian B.",
+                            AvailabilityStatus = false,
                             Content = "To jest artykuł 1",
                             InsertionDate = new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastUpdateDate = new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -52,8 +49,7 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 2L,
-                            AuthorId = 1L,
-                            AuthorName = "Roman Z.",
+                            AvailabilityStatus = false,
                             Content = "To jest artykuł 2",
                             InsertionDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LastUpdateDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -66,7 +62,7 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddArticleToUserDate");
+                    b.Property<string>("ArticleModificationDate");
 
                     b.Property<long>("ArticleRefId");
 
@@ -84,21 +80,21 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
-                            AddArticleToUserDate = "15.08.2019 20:50:08",
+                            ArticleModificationDate = "17.08.2019 18:32:32",
                             ArticleRefId = 1L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            AddArticleToUserDate = "15.08.2019 20:50:08",
+                            ArticleModificationDate = "17.08.2019 18:32:32",
                             ArticleRefId = 2L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 3L,
-                            AddArticleToUserDate = "15.08.2019 20:50:08",
+                            ArticleModificationDate = "17.08.2019 18:32:32",
                             ArticleRefId = 1L,
                             UserRefId = 2L
                         });
@@ -137,11 +133,11 @@ namespace SpeechRecognitionThesis.Migrations
                             Id = 1L,
                             ActiveAccountState = 1,
                             CreateAccountDate = "30.05.2019 00:00:00",
-                            Email = "bas@gmail.com",
-                            IsLogged = false,
+                            Email = "guest@speechrecognition.com",
+                            IsLogged = true,
                             LastUpdateAccountDate = "20.06.2019 00:00:00",
-                            NickName = "SuperBass",
-                            Password = "3c54ae8854fd40631cdaabba9b9df836bb5cace38cafcfad7e9a89477300a1cbf5fb7937ee188ace530d1a27aedd4e90e69e27c60d888e6136d326e24cff1699"
+                            NickName = "Guest",
+                            Password = "cc5ec2b61fbbdd18d85dd14ab60db397b21b5548999a6afd3ce9557b19c300494a5fd29987e03a6f06677c209b88de47684388de8250671cdd778799eecd018a"
                         },
                         new
                         {

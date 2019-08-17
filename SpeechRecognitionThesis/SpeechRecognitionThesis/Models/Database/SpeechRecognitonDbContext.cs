@@ -24,13 +24,13 @@ namespace SpeechRecognitionThesis.Models.Database
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = 1,
-                NickName = "SuperBass",
-                Password = UserTools.ConvertInputTextToSha512("SuperPasswor123"),
-                Email = "bas@gmail.com",
+                NickName = UserTools.ANONYMOUS_USER_NICKNAME,
+                Password = UserTools.ConvertInputTextToSha512( UserTools.ANONYMOUS_USER_NICKNAME ),
+                Email = "guest@speechrecognition.com",
                 CreateAccountDate = new DateTime(2019, 05, 30).ToString(),
                 LastUpdateAccountDate = new DateTime(2019, 06, 20).ToString(),
                 ActiveAccountState = AccountActiveState.Active,
-                IsLogged = false
+                IsLogged = true
             },
            new User
            {
@@ -50,9 +50,7 @@ namespace SpeechRecognitionThesis.Models.Database
             modelBuilder.Entity<Article>().HasData(new Article
             {
                 Id = 1,
-                AuthorId = 1,
                 Content = "To jest artykuł 1",
-                AuthorName = "Krystian B.",
                 InsertionDate = new DateTime(2017, 04, 25),
                 LastUpdateDate = new DateTime(2018, 05, 11),
 
@@ -60,9 +58,7 @@ namespace SpeechRecognitionThesis.Models.Database
             new Article
             {
                 Id = 2,
-                AuthorId = 1,
                 Content = "To jest artykuł 2",
-                AuthorName = "Roman Z.",
                 InsertionDate = new DateTime(2019, 05, 05),
                 LastUpdateDate = new DateTime(2019, 05, 05),
             });
@@ -75,21 +71,21 @@ namespace SpeechRecognitionThesis.Models.Database
                 Id = 1,
                 UserRefId = 1,
                 ArticleRefId = 1,
-                AddArticleToUserDate = DateTime.Now.ToString()
+                ArticleModificationDate = DateTime.Now.ToString()
             },
             new UserArticles
             {
                 Id = 2,
                 UserRefId = 1,
                 ArticleRefId = 2,
-                AddArticleToUserDate = DateTime.Now.ToString()
+                ArticleModificationDate = DateTime.Now.ToString()
             },
             new UserArticles
             {
                 Id = 3,
                 UserRefId = 2,
                 ArticleRefId = 1,
-                AddArticleToUserDate = DateTime.Now.ToString(),
+                ArticleModificationDate = DateTime.Now.ToString(),
             });
         }
 

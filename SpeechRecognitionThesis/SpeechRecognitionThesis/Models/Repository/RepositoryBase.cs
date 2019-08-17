@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SpeechRecognitionThesis.Models.Database;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace SpeechRecognitionThesis.Models.Repository
             this.RepositoryContext = repositoryContext;
         }
 
-        public void Add(T entity)
+        public EntityEntry Add(T entity)
         {
-            this.RepositoryContext.Set<T>().Add(entity);
+            return this.RepositoryContext.Set<T>().Add(entity);
         }
 
         public void Delete(T entity)

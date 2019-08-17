@@ -175,11 +175,11 @@ function SaveArticleContentToDatabase()
   var lastUpdateDateTime  = GetCurrentDateTimeString();
 
   var articleObject = 
-  { "AuthorId"        :   1,
+  { 
     "Content"         :   articleContentString,
-    "AuthorName"      :   "Krystian B.",
     "InsertionDate"   :   insertionDateTime,
-    "LastUpdateDate"  :   lastUpdateDateTime
+    "LastUpdateDate"  :   lastUpdateDateTime,
+    "AvailabilityStatus" : true
   };
 
   $.ajax({

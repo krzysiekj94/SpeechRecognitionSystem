@@ -24,5 +24,15 @@ namespace SpeechRecognitionThesis.Models.Repository
 
             return user;
         }
+
+        public User GetAnonymousUser()
+        {
+            return FindAll().FirstOrDefault( user => user.NickName == UserTools.ANONYMOUS_USER_NICKNAME );
+        }
+
+        public User GetUser( long lUserId )
+        {
+            return FindAll().FirstOrDefault(user => user.Id == lUserId);
+        }
     }
 }

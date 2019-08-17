@@ -7,6 +7,8 @@ namespace SpeechRecognitionThesis.Models.Scripts
 {
     public class UserTools
     {
+        public const string ANONYMOUS_USER_NICKNAME = "Guest";
+
         static public bool ConvertPasswordToSha512(User registerUser)
         {
             bool bConvertPasswordResult = false;
