@@ -80,21 +80,21 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
-                            ArticleModificationDate = "17.08.2019 18:32:32",
+                            ArticleModificationDate = "24.08.2019 20:43:38",
                             ArticleRefId = 1L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            ArticleModificationDate = "17.08.2019 18:32:32",
+                            ArticleModificationDate = "24.08.2019 20:43:38",
                             ArticleRefId = 2L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 3L,
-                            ArticleModificationDate = "17.08.2019 18:32:32",
+                            ArticleModificationDate = "24.08.2019 20:43:38",
                             ArticleRefId = 1L,
                             UserRefId = 2L
                         });
@@ -113,6 +113,8 @@ namespace SpeechRecognitionThesis.Migrations
                     b.Property<string>("Email");
 
                     b.Property<bool>("IsLogged");
+
+                    b.Property<string>("LastLoggedAccountDate");
 
                     b.Property<string>("LastUpdateAccountDate");
 
@@ -135,6 +137,7 @@ namespace SpeechRecognitionThesis.Migrations
                             CreateAccountDate = "30.05.2019 00:00:00",
                             Email = "guest@speechrecognition.com",
                             IsLogged = true,
+                            LastLoggedAccountDate = "24.08.2019 00:00:00",
                             LastUpdateAccountDate = "20.06.2019 00:00:00",
                             NickName = "Guest",
                             Password = "cc5ec2b61fbbdd18d85dd14ab60db397b21b5548999a6afd3ce9557b19c300494a5fd29987e03a6f06677c209b88de47684388de8250671cdd778799eecd018a"
@@ -146,6 +149,7 @@ namespace SpeechRecognitionThesis.Migrations
                             CreateAccountDate = "21.05.2019 00:00:00",
                             Email = "robert@mail.com",
                             IsLogged = false,
+                            LastLoggedAccountDate = "23.08.2019 00:00:00",
                             LastUpdateAccountDate = "23.06.2019 00:00:00",
                             NickName = " RobertSon",
                             Password = "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828"

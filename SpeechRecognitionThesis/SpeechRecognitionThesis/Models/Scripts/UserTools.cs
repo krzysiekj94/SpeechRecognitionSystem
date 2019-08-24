@@ -7,7 +7,12 @@ namespace SpeechRecognitionThesis.Models.Scripts
 {
     public class UserTools
     {
-        public const string ANONYMOUS_USER_NICKNAME = "Guest";
+        public static readonly string ANONYMOUS_USER_NICKNAME = "Guest";
+        public static readonly string REGISTER_DATE_PROPERTY_STRING = "RegisterDateString";
+        public static readonly string USER_LAST_LOGGED_DATE_PROPERTY_STRING = "LastLoggedDateString";
+        public static readonly string USER_ID_PROPERTY_STRING = "UserId";
+        public static readonly string USER_EMAIL_PROPERTY_STRING = "Email";
+        public static readonly string URL_WEBSITE_STRING = "http://localhost:8080/";
 
         static public bool ConvertPasswordToSha512(User registerUser)
         {

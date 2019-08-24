@@ -29,6 +29,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Email = "guest@speechrecognition.com",
                 CreateAccountDate = new DateTime(2019, 05, 30).ToString(),
                 LastUpdateAccountDate = new DateTime(2019, 06, 20).ToString(),
+                LastLoggedAccountDate = new DateTime(2019, 08, 24).ToString(),
                 ActiveAccountState = AccountActiveState.Active,
                 IsLogged = true
             },
@@ -40,6 +41,7 @@ namespace SpeechRecognitionThesis.Models.Database
                Email = "robert@mail.com",
                CreateAccountDate = new DateTime(2019, 05, 21).ToString(),
                LastUpdateAccountDate = new DateTime(2019, 06, 23).ToString(),
+               LastLoggedAccountDate = new DateTime(2019, 08, 23).ToString(),
                ActiveAccountState = AccountActiveState.Active,
                IsLogged = false
            });

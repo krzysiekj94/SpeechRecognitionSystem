@@ -35,6 +35,7 @@ namespace SpeechRecognitionThesis.Migrations
                     Email = table.Column<string>(nullable: true),
                     CreateAccountDate = table.Column<string>(nullable: true),
                     LastUpdateAccountDate = table.Column<string>(nullable: true),
+                    LastLoggedAccountDate = table.Column<string>(nullable: true),
                     ActiveAccountState = table.Column<int>(nullable: false),
                     IsLogged = table.Column<bool>(nullable: false)
                 },
@@ -81,27 +82,27 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "ActiveAccountState", "CreateAccountDate", "Email", "IsLogged", "LastUpdateAccountDate", "NickName", "Password" },
+                columns: new[] { "Id", "ActiveAccountState", "CreateAccountDate", "Email", "IsLogged", "LastLoggedAccountDate", "LastUpdateAccountDate", "NickName", "Password" },
                 values: new object[,]
                 {
-                    { 1L, 1, "30.05.2019 00:00:00", "guest@speechrecognition.com", true, "20.06.2019 00:00:00", "Guest", "cc5ec2b61fbbdd18d85dd14ab60db397b21b5548999a6afd3ce9557b19c300494a5fd29987e03a6f06677c209b88de47684388de8250671cdd778799eecd018a" },
-                    { 2L, 1, "21.05.2019 00:00:00", "robert@mail.com", false, "23.06.2019 00:00:00", " RobertSon", "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828" }
+                    { 1L, 1, "30.05.2019 00:00:00", "guest@speechrecognition.com", true, "24.08.2019 00:00:00", "20.06.2019 00:00:00", "Guest", "cc5ec2b61fbbdd18d85dd14ab60db397b21b5548999a6afd3ce9557b19c300494a5fd29987e03a6f06677c209b88de47684388de8250671cdd778799eecd018a" },
+                    { 2L, 1, "21.05.2019 00:00:00", "robert@mail.com", false, "23.08.2019 00:00:00", "23.06.2019 00:00:00", " RobertSon", "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828" }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
                 columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 1L, "17.08.2019 18:32:32", 1L, 1L });
+                values: new object[] { 1L, "24.08.2019 20:43:38", 1L, 1L });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
                 columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 2L, "17.08.2019 18:32:32", 2L, 1L });
+                values: new object[] { 2L, "24.08.2019 20:43:38", 2L, 1L });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
                 columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 3L, "17.08.2019 18:32:32", 1L, 2L });
+                values: new object[] { 3L, "24.08.2019 20:43:38", 1L, 2L });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserArticles_ArticleRefId",

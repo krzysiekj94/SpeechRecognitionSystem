@@ -57,7 +57,11 @@ namespace SpeechRecognitionThesis.Controllers
                 }
                 else
                 {
-                    loggedUser.Password = string.Empty;
+                    if (_repositoryWrapper.Account.UpdateLoggedUserData(loggedUser))
+                    {
+                        _repositoryWrapper.Save();
+                        loggedUser.Password = string.Empty;
+                    }
 
                     TokenProvider tokenProvider = new TokenProvider();
                     string userTokenString = tokenProvider.CreateUserTokenString( loggedUser );
@@ -66,13 +70,12 @@ namespace SpeechRecognitionThesis.Controllers
                         && userTokenString.Length > 0 )
                     {
                         HttpContext.Session.SetString( TokenProvider.GetTokenSessionKeyString(), userTokenString );
+                        return Ok(loggedUser);
                     }
-
-                    return Ok( loggedUser );
                 }
             }
 
-            return Ok();
+            return BadRequest();
         }
 
         private bool ProcessLoginUserModelData(User loginUser)

@@ -1,28 +1,65 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.RegisterUserModel
+
 @{
     ViewData["Title"] = "Moje konto";
     ViewData["AccountMainDescription"] = "Witaj " + User.Identity.Name + " w zakładce 'Moje konto'";
+
+    string userRegisterDateString = TokenProvider.GetRegisterUserPropertyString( User.Identity, 
+        SpeechRecognitionThesis.Models.Scripts.UserTools.REGISTER_DATE_PROPERTY_STRING );
 }
 
 <h2>@ViewData["AccountMainDescription"]</h2>
 
 <div class="row">
     <div class="col-md-6">
-        1 of 2
-        <!-- IMG -->
-        <!-- change img -->
-        <!-- display nick -->
-        <!-- Register since: -->
-        <!-- Dodałeś 2 artykuły -->
-        <!-- Ostatnio zalgowany -->
+        <img class="user-icon" />
+        <button class="change-icon">Zmień obrazek</button>
+        <p class="user-nick">@User.Identity.Name</p>
+        <p class="register-date">Zarejestrowany: @userRegisterDateString</p>
+        <p class="add-articles-info">Dodał: 5 artykułów</p>
+        <p class="last-logged-date">Ostatnio zalogowany: 2019-05-06 10:05</p>
     </div>
     <div class="col-md-6">
-        <!-- Zmień dnae label -->
-        <!-- nick + email control -->
-        <!-- Zmień dnae button -->
-        <!-- odstęp -->
-        <!-- twoje artykuły -->
-        <!-- usuń konto (ze wzgledu na rodo) -->
-        2 of 2
+        <h2>Zmień dane</h2>
+        <form id="change-data-form" class="form-horizontal">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="username">Nazwa użytkownika</label>
+                    <div class="register-controls">
+                        <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge">
+                        <p class="help-block">@ViewData["LoginHelpBlock"]</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password">Hasło</label>
+                    <div class="register-controls">
+                        <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
+                        <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password_confirm">Hasło (potwierdzenie)</label>
+                    <div class="register-controls">
+                        <input asp-for="ConfirmPassword" type="password" id="ConfirmPassword" placeholder="" class="input-xlarge">
+                        <p class="help-block">@ViewData["PasswordConfirmHelpBlock"]</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="email">E-mail</label>
+                    <div class="register-controls">
+                        <input asp-for="User.Email" type="email" id="Email" placeholder="" class="input-xlarge">
+                        <p class="help-block">Proszę wprowadzić swój adres E-mail</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="register-controls">
+                        <button class="btn btn-success" type="submit">Zmień dane!</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <button class="btn btn-danger" type="submit">Twoje artykuły</button>
+        <button class="btn btn-danger" type="submit">Usuń swoje konto!</button>
     </div>
 </div>

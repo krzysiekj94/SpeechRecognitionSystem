@@ -34,5 +34,20 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             return FindAll().FirstOrDefault(user => user.Id == lUserId);
         }
+
+        public bool UpdateLoggedUserData(User loggedUser)
+        {
+            if( loggedUser == null)
+            {
+                return false;
+            }
+
+            loggedUser.IsLogged = true;
+            loggedUser.LastLoggedAccountDate = DateTime.Now.ToString();
+            
+            _repositoryContext.Users.Update(loggedUser);
+
+            return true;
+        }
     }
 }

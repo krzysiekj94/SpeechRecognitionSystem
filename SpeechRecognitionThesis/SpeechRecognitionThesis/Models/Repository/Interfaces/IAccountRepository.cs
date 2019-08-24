@@ -10,5 +10,6 @@ namespace SpeechRecognitionThesis.Models.Repository
         Task<User> Authenticate( string usernameString, string passwordString );
         User GetUser( long lUserId );
         User GetAnonymousUser();
+        bool UpdateLoggedUserData( User loggedUser );
     }
 }

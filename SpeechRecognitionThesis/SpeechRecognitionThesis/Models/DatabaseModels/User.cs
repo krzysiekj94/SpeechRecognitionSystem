@@ -25,8 +25,10 @@ namespace SpeechRecognitionThesis.Models
         public string CreateAccountDate { get; set; }
 
         [DataType(DataType.DateTime)]
-
         public string LastUpdateAccountDate { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public string LastLoggedAccountDate { get; set; }
 
         public AccountActiveState ActiveAccountState { get; set; }
 
