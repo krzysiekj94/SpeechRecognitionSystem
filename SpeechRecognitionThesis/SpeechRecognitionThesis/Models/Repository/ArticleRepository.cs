@@ -29,5 +29,10 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             return _userArticlesRepository.FindAll().ToList();
         }
+
+        public List<UserArticles> GetUserArticles(long lUserId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -59,7 +59,8 @@ namespace SpeechRecognitionThesis
 
             if( identity.Name != UserTools.ANONYMOUS_USER_NICKNAME 
                 && ( userPropertyString.Equals( UserTools.REGISTER_DATE_PROPERTY_STRING )
-                    || userPropertyString.Equals( UserTools.USER_LAST_LOGGED_DATE_PROPERTY_STRING ) ) )
+                    || userPropertyString.Equals( UserTools.USER_LAST_LOGGED_DATE_PROPERTY_STRING )
+                    || userPropertyString.Equals( UserTools.USER_ID_PROPERTY_STRING ) ) )
             {
                 userClaim = ((ClaimsIdentity)identity).FindFirst( userPropertyString );
                 userPropertyValueString = ( userClaim != null ) ? userClaim.Value : string.Empty;

@@ -4,7 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SpeechRecognitionThesis.Models;
+using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.Scripts;
+using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
@@ -23,7 +27,41 @@ namespace SpeechRecognitionThesis.Controllers
         [HttpGet]
         public IActionResult GetMainAccountView()
         {
-            return View( "AccountGeneral" );
+            AccountUserModel userAccountModel = new AccountUserModel();
+
+            SetLoggedUserForAccountUserModel( userAccountModel );
+            SetLoggedUserInfoArticles(userAccountModel);
+
+            return View( "AccountGeneral", userAccountModel);
+        }
+
+        private void SetLoggedUserInfoArticles(AccountUserModel userAccountModel)
+        {
+            long lUserId = -1;
+            IEnumerable<UserArticles> userArticlesList = null;
+
+            if (userAccountModel != null
+                && long.TryParse(TokenProvider.GetRegisterUserPropertyString(User.Identity, UserTools.USER_ID_PROPERTY_STRING), out lUserId))
+            {
+                userArticlesList = _repositoryWrapper.UserArticles.GetUserArticles(lUserId);
+                userAccountModel.iAmountOfArticles = userArticlesList.Count();
+            }
+        }
+
+        private void SetLoggedUserForAccountUserModel(AccountUserModel userAccountModel)
+        {
+            long lUserId = -1;
+            User loggedUser = null;
+
+            if (userAccountModel != null 
+                && long.TryParse(TokenProvider.GetRegisterUserPropertyString(User.Identity, UserTools.USER_ID_PROPERTY_STRING), out lUserId))
+            {
+                loggedUser = _repositoryWrapper.Account.GetUser(lUserId);
+                loggedUser.Password = string.Empty;
+                loggedUser.Id = -1;
+
+                userAccountModel.User = loggedUser;
+            }
         }
 
         [HttpGet]

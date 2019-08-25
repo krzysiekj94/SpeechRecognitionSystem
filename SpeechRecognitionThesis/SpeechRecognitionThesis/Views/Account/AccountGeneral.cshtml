@@ -1,11 +1,13 @@
-﻿@model SpeechRecognitionThesis.Models.ViewModels.RegisterUserModel
+﻿@model SpeechRecognitionThesis.Models.ViewModels.AccountUserModel
 
 @{
     ViewData["Title"] = "Moje konto";
     ViewData["AccountMainDescription"] = "Witaj " + User.Identity.Name + " w zakładce 'Moje konto'";
 
-    string userRegisterDateString = TokenProvider.GetRegisterUserPropertyString( User.Identity, 
+    string userRegisterDateString = TokenProvider.GetRegisterUserPropertyString( User.Identity,
         SpeechRecognitionThesis.Models.Scripts.UserTools.REGISTER_DATE_PROPERTY_STRING );
+    string userLastLoggedDateString = TokenProvider.GetRegisterUserPropertyString(User.Identity,
+        SpeechRecognitionThesis.Models.Scripts.UserTools.USER_LAST_LOGGED_DATE_PROPERTY_STRING );
 }
 
 <h2>@ViewData["AccountMainDescription"]</h2>
@@ -14,10 +16,10 @@
     <div class="col-md-6">
         <img class="user-icon" />
         <button class="change-icon">Zmień obrazek</button>
-        <p class="user-nick">@User.Identity.Name</p>
-        <p class="register-date">Zarejestrowany: @userRegisterDateString</p>
-        <p class="add-articles-info">Dodał: 5 artykułów</p>
-        <p class="last-logged-date">Ostatnio zalogowany: 2019-05-06 10:05</p>
+        <p class="user-nick"> @Html.ValueFor(model => model.User.NickName)</p>
+        <p class="register-date">Zarejestrowany: @Html.DisplayFor(model => model.User.CreateAccountDate) </p>
+        <p class="add-articles-info">Dodał: @Html.DisplayFor(model => model.iAmountOfArticles) artykuły</p>
+        <p class="last-logged-date">Ostatnio zalogowany: @Html.DisplayFor(model => model.User.LastLoggedAccountDate)</p>
     </div>
     <div class="col-md-6">
         <h2>Zmień dane</h2>
@@ -26,7 +28,8 @@
                 <div class="control-group">
                     <label class="control-label" for="username">Nazwa użytkownika</label>
                     <div class="register-controls">
-                        <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge">
+                        <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge" 
+                            value="@Html.DisplayFor(model => model.User.LastLoggedAccountDate)">
                         <p class="help-block">@ViewData["LoginHelpBlock"]</p>
                     </div>
                 </div>
