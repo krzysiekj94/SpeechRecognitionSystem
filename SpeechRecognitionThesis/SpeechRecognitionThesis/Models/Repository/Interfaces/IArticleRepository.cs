@@ -9,6 +9,5 @@ namespace SpeechRecognitionThesis.Models.Repository
     public interface IArticleRepository : IDataRepository<Article>
     {
         Article GetLastAddedArticle();
-        List<UserArticles> GetUserArticles(long lUserId);
     }
 }

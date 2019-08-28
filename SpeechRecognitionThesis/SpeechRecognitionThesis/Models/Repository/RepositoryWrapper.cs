@@ -6,25 +6,19 @@ namespace SpeechRecognitionThesis.Models.Repository
     public class RepositoryWrapper : IRespositoryWrapper
     {
         private RepositoryContext                _repositoryContext;
-        private IAccountRepository               _accountRepository;
-        private IArticleRepository               _articleRepository;
-        private IUserArticlesRepository     _userArticlesRepository;
+        private RepositoryManager                _repositoryManager;
 
         public RepositoryWrapper(RepositoryContext repositoryContext )
         {
             _repositoryContext = repositoryContext;
+            _repositoryManager = new RepositoryManager(_repositoryContext);
         }
 
         public IAccountRepository Account
         {
             get
             {
-                if( _accountRepository == null )
-                {
-                    _accountRepository = new AccountRepository(_repositoryContext);
-                }
-
-                return _accountRepository;
+                return _repositoryManager.Account;
             }
         }
 
@@ -32,12 +26,7 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             get
             {
-                if( _articleRepository == null )
-                {
-                    _articleRepository = new ArticleRepository(_repositoryContext);
-                }
-
-                return _articleRepository;
+                return _repositoryManager.Articles;
             }
         }
 
@@ -45,12 +34,7 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             get
             {
-                if( _userArticlesRepository == null )
-                {
-                    _userArticlesRepository = new UserArticlesRepository(_repositoryContext);
-                }
-
-                return _userArticlesRepository;
+                return _repositoryManager.UserArticles;
             }
         }
 

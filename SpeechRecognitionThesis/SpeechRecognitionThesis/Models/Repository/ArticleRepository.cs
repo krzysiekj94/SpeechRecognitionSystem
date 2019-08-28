@@ -10,12 +10,12 @@ namespace SpeechRecognitionThesis.Models.Repository
 {
     public class ArticleRepository : RepositoryBase<Article>, IArticleRepository
     {
-        private IUserArticlesRepository _userArticlesRepository;
+        RepositoryContext _repositoryContext;
 
         public ArticleRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
-            _userArticlesRepository = new UserArticlesRepository( repositoryContext );
+            _repositoryContext = repositoryContext;
         }
 
         public Article GetLastAddedArticle()
@@ -25,14 +25,9 @@ namespace SpeechRecognitionThesis.Models.Repository
                 .FirstOrDefault();
         }
 
-        public List<UserArticles> GetUserArticles()
+        public List<Article> GetUserArticles()
         {
-            return _userArticlesRepository.FindAll().ToList();
-        }
-
-        public List<UserArticles> GetUserArticles(long lUserId)
-        {
-            throw new NotImplementedException();
+            return FindAll().ToList();
         }
     }
 }
