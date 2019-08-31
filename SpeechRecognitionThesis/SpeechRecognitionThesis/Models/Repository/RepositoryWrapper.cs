@@ -5,8 +5,8 @@ namespace SpeechRecognitionThesis.Models.Repository
 {
     public class RepositoryWrapper : IRespositoryWrapper
     {
-        private RepositoryContext                _repositoryContext;
-        private RepositoryManager                _repositoryManager;
+        private RepositoryContext   _repositoryContext;
+        private RepositoryManager   _repositoryManager;
 
         public RepositoryWrapper(RepositoryContext repositoryContext )
         {

@@ -12,14 +12,41 @@
 
 <h2>@ViewData["AccountMainDescription"]</h2>
 
+<div id="dialog" title="Contact form">
+    <p>appear now</p>
+</div>
 <div class="row">
     <div class="col-md-6">
-        <img class="user-icon" />
-        <button class="change-icon">Zmień obrazek</button>
-        <p class="user-nick"> @Html.ValueFor(model => model.User.NickName)</p>
-        <p class="register-date">Zarejestrowany: @Html.DisplayFor(model => model.User.CreateAccountDate) </p>
-        <p class="add-articles-info">Dodał: @Html.DisplayFor(model => model.iAmountOfArticles) artykuły</p>
-        <p class="last-logged-date">Ostatnio zalogowany: @Html.DisplayFor(model => model.User.LastLoggedAccountDate)</p>
+        <div class="control-group">
+            <div class="account-controls">
+                <img class="user-icon" src="~/images/1.png" />
+            </div>
+            <div class="account-controls">
+                <button class="change-icon">Zmień obrazek</button>
+            </div>
+            <div class="account-controls">
+                <div class="user-nick"> @Html.ValueFor(model => model.User.NickName)</div>
+            </div>
+            <div class="account-controls">
+                <div class="register-date">Zarejestrowany: @Html.DisplayFor(model => model.User.CreateAccountDate) </div>
+            </div>
+            <div class="account-controls">
+                <div class="add-articles-info">Dodał: @Html.DisplayFor(model => model.iAmountOfArticles) artykuły</div>
+            </div>
+            <div class="account-controls">
+                <div class="last-logged-date">Ostatnio zalogowany: @Html.DisplayFor(model => model.User.LastLoggedAccountDate)</div>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="account-controls">
+                <button class="your-articles-button btn btn-danger" type="submit">Twoje artykuły</button>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="account-controls">
+                <button class="delete-account btn btn-danger" type="submit">Usuń swoje konto!</button>
+            </div>
+        </div>
     </div>
     <div class="col-md-6">
         <h2>Zmień dane</h2>
@@ -27,7 +54,7 @@
             <fieldset>
                 <div class="control-group">
                     <label class="control-label" for="username">Nazwa użytkownika</label>
-                    <div class="register-controls">
+                    <div class="account-controls">
                         <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge" 
                             value="@Html.DisplayFor(model => model.User.LastLoggedAccountDate)">
                         <p class="help-block">@ViewData["LoginHelpBlock"]</p>
@@ -35,34 +62,31 @@
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="password">Hasło</label>
-                    <div class="register-controls">
+                    <div class="account-controls">
                         <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
                         <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="password_confirm">Hasło (potwierdzenie)</label>
-                    <div class="register-controls">
+                    <div class="account-controls">
                         <input asp-for="ConfirmPassword" type="password" id="ConfirmPassword" placeholder="" class="input-xlarge">
                         <p class="help-block">@ViewData["PasswordConfirmHelpBlock"]</p>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="email">E-mail</label>
-                    <div class="register-controls">
+                    <div class="account-controls">
                         <input asp-for="User.Email" type="email" id="Email" placeholder="" class="input-xlarge">
                         <p class="help-block">Proszę wprowadzić swój adres E-mail</p>
                     </div>
                 </div>
                 <div class="control-group">
-                    <div class="register-controls">
+                    <div class="account-controls">
                         <button class="btn btn-success" type="submit">Zmień dane!</button>
                     </div>
                 </div>
             </fieldset>
         </form>
-
-        <button class="btn btn-danger" type="submit">Twoje artykuły</button>
-        <button class="btn btn-danger" type="submit">Usuń swoje konto!</button>
     </div>
 </div>

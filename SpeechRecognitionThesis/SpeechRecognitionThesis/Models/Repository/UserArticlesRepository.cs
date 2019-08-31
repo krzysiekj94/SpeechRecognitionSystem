@@ -10,22 +10,22 @@ namespace SpeechRecognitionThesis.Models.Repository
 {
     public class UserArticlesRepository : RepositoryBase<UserArticles>, IUserArticlesRepository
     {
-        private IUserArticlesRepository _userArticlesRepository;
+        private RepositoryContext _userArticlesRepository;
 
         public UserArticlesRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
-            _userArticlesRepository = new UserArticlesRepository(repositoryContext);
+            _userArticlesRepository = repositoryContext;
         }
 
         public List<UserArticles> GetUserArticles()
         {
-            return _userArticlesRepository.FindAll().ToList();
+            return FindAll().ToList();
         }
 
         public IEnumerable<UserArticles> GetUserArticles(long lUserId)
         {
-            return _userArticlesRepository.FindAll()
+            return FindAll()
                 .Where(user => user.UserRefId == lUserId).ToList();
         }
     }
