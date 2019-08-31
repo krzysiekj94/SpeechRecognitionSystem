@@ -44,7 +44,7 @@
         </div>
         <div class="control-group">
             <div class="account-controls">
-                <button class="delete-account btn btn-danger" type="submit">Usuń swoje konto!</button>
+                <button id="delete-account" class="btn btn-danger" type="submit">Usuń swoje konto!</button>
             </div>
         </div>
     </div>
@@ -55,8 +55,7 @@
                 <div class="control-group">
                     <label class="control-label" for="username">Nazwa użytkownika</label>
                     <div class="account-controls">
-                        <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge" 
-                            value="@Html.DisplayFor(model => model.User.LastLoggedAccountDate)">
+                        <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge">
                         <p class="help-block">@ViewData["LoginHelpBlock"]</p>
                     </div>
                 </div>

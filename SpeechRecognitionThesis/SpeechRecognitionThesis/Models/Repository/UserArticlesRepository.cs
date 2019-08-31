@@ -18,6 +18,15 @@ namespace SpeechRecognitionThesis.Models.Repository
             _userArticlesRepository = repositoryContext;
         }
 
+        public IEnumerable<UserArticles> DeleteArticles( long lUserId )
+        {
+            IEnumerable<UserArticles> userArticlesEnumerable = GetUserArticles(lUserId);
+
+            Delete(userArticlesEnumerable);
+
+            return userArticlesEnumerable;
+        }
+
         public List<UserArticles> GetUserArticles()
         {
             return FindAll().ToList();

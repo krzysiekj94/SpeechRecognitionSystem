@@ -18,6 +18,13 @@ namespace SpeechRecognitionThesis.Models.Repository
             _repositoryContext = repositoryContext;
         }
 
+        public void DeleteArticles(IEnumerable<UserArticles> userArticlesEnumerable)
+        {
+            List<Article> articleEnumerable = new List<Article>();
+            userArticlesEnumerable.ToList().ForEach(element => articleEnumerable.Add(new Article { Id = element.ArticleRefId } ) );
+            Delete(articleEnumerable);
+        }
+
         public Article GetLastAddedArticle()
         {
             return FindAll()

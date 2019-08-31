@@ -77,5 +77,24 @@ namespace SpeechRecognitionThesis.Controllers
         {
             return View( "AccountArticles" );
         }
+
+        [HttpPost]
+        [Route("Delete")]
+        public IActionResult DeleteUserAccount()
+        {
+            long lUserId = TokenProvider.GetLoggedUserId(User.Identity);
+            IEnumerable<UserArticles> userArticlesEnumerable = null;
+
+            if( lUserId != -1 )
+            {
+                userArticlesEnumerable = _repositoryWrapper.UserArticles.DeleteArticles(lUserId);
+                _repositoryWrapper.Articles.DeleteArticles(userArticlesEnumerable);
+                _repositoryWrapper.Account.Delete(new User { Id = lUserId } );
+                _repositoryWrapper.Save();
+                HttpContext.Session.Clear();
+            }
+            
+            return Ok();
+        }
     }
 }

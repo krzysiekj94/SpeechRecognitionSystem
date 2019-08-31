@@ -69,6 +69,17 @@ namespace SpeechRecognitionThesis
             return userPropertyValueString;
         }
 
+        public static long GetLoggedUserId(IIdentity identity)
+        {
+            long lUserId = -1;
+            if( !long.TryParse(GetRegisterUserPropertyString(identity, UserTools.USER_ID_PROPERTY_STRING), out lUserId) )
+            {
+                lUserId = -1;
+            }
+
+            return lUserId;
+        }
+
         public static byte[] GetEncodedTokenString()
         {
             return Encoding.ASCII.GetBytes(TOKEN_VALUE_STRING);

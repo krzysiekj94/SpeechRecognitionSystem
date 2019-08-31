@@ -9,5 +9,6 @@ namespace SpeechRecognitionThesis.Models.Repository.Interfaces
     public interface IUserArticlesRepository : IDataRepository<UserArticles>
     {
         IEnumerable<UserArticles> GetUserArticles(long lUserId);
+        IEnumerable<UserArticles> DeleteArticles( long lUserId );
     }
 }

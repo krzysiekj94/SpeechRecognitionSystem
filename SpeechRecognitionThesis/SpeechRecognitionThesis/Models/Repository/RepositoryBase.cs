@@ -36,5 +36,10 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             this.RepositoryContext.Set<T>().Update(entity);
         }
+
+        public void Delete(IEnumerable<T> entities)
+        {
+            this.RepositoryContext.Set<T>().RemoveRange(entities);
+        }
     }
 }
