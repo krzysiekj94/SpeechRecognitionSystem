@@ -6,8 +6,6 @@ $(document).ready(function() {
     });
     
     $("#delete-account").click(function() {
-        var serializeData = $(this).serialize();
-
         $.ajax({
             type        : 'POST',
             url         : '/account/delete',
@@ -28,9 +26,35 @@ $(document).ready(function() {
         .done(function(data) {
             console.log("The process delete account was successful!"); 
         });
-        
+
         event.preventDefault();
     });
 
 
+    $("#change-account-data").click(function() {
+        var serializeData = $(this).serialize();
+
+        $.ajax({
+            type        : 'POST',
+            url         : '/account/change',
+            dataType    : 'json',
+            encode      : true,
+            statusCode: {
+                200: 
+                    function (data1) {
+                        alert('Dane twojego konta zostało zmienione! Zostaniesz przeniesiony do strony głównej');
+                        window.location.href = "/";
+                    },
+                400: 
+                    function (data1) {
+                        alert('Wystąpił błąd przy tworzeniu twojego konta! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz');
+                    }
+            }
+        })
+        .done(function(data) {
+            console.log("The process delete account was successful!"); 
+        });
+
+        event.preventDefault();
+    });
 });

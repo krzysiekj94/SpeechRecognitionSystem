@@ -45,9 +45,39 @@ namespace SpeechRecognitionThesis.Models.Repository
             loggedUser.IsLogged = true;
             loggedUser.LastLoggedAccountDate = DateTime.Now.ToString();
             
-            _repositoryContext.Users.Update(loggedUser);
+            Update( loggedUser );
 
             return true;
+        }
+
+        public bool UpdateUserData( long lUserId, User user )
+        {
+            User userFromDb = GetUser( lUserId );
+            string userNewPasswordString = UserTools.ConvertInputTextToSha512(user.Password);
+            string userEmailString = user.Email;
+            bool bUpdateUserDb = false;
+
+            if( userFromDb != null )
+            {
+                bUpdateUserDb = true;
+
+                if ( user.Password.Length > 0 
+                    && userNewPasswordString != userFromDb.Password )
+                {
+                    userFromDb.Password = userNewPasswordString;
+                    userFromDb.LastUpdateAccountDate = DateTime.Now.ToString();
+                }
+
+                if( userEmailString.Length > 0 
+                    && userEmailString != userFromDb.Email )
+                {
+                    userFromDb.Email = userEmailString;
+                }
+
+                Update( userFromDb );
+            }
+
+            return bUpdateUserDb;
         }
     }
 }

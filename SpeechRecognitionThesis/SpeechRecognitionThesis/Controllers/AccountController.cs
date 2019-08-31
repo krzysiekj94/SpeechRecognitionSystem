@@ -96,5 +96,29 @@ namespace SpeechRecognitionThesis.Controllers
             
             return Ok();
         }
+
+        [HttpPost]
+        [Route("Change")]
+        public IActionResult ChangeUserDataAccount( [FromForm] RegisterUserModel userChangeModel )
+        {
+            if( userChangeModel == null )
+            {
+                return BadRequest();
+            }
+            else if( userChangeModel.ConfirmPassword != userChangeModel.User.Password )
+            {
+                return BadRequest("Hasło i jego potwierdzenie nie są zgodne!");
+            }
+
+            long lUserId = TokenProvider.GetLoggedUserId( User.Identity );
+
+            if( lUserId != -1 
+                && _repositoryWrapper.Account.UpdateUserData( lUserId, userChangeModel.User ) )
+            {
+                _repositoryWrapper.Save();
+            }
+
+            return Ok();
+        }
     }
 }
