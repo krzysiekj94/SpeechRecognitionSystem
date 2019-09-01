@@ -1,8 +1,26 @@
 $(document).ready(function() {
     
-    //#TODO To tests
-    $(".change-icon").click(function() {
-        $("#dialog").dialog();
+    $("#change-account-icon").click(function() {
+        Swal.fire({
+            title: '<strong>Wybierz awatar</strong>',
+            type: 'info',
+            width: 600,
+            html: '<img class="user-icon" src="/images/1.png" />'
+            + '<img class="user-icon" src="/images/2.png" />'
+            + '<img class="user-icon" src="/images/3.png" />'
+            + '<img class="user-icon" src="/images/4.png" />'
+            + '<img class="user-icon" src="/images/5.png" />'
+            + '<img class="user-icon" src="/images/6.png" />'
+            + '<img class="user-icon" src="/images/7.png" />'
+            + '<img class="user-icon" src="/images/8.png" />',
+            showCloseButton: true,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<b>Zapisz wybór!</b>',
+            cancelButtonText:
+              '<b>Anuluj</b>',
+          });
     });
     
     $("#delete-account").click(function() {
