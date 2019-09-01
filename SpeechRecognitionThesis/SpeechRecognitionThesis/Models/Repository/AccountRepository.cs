@@ -53,22 +53,26 @@ namespace SpeechRecognitionThesis.Models.Repository
         public bool UpdateUserData( long lUserId, User user )
         {
             User userFromDb = GetUser( lUserId );
-            string userNewPasswordString = UserTools.ConvertInputTextToSha512(user.Password);
-            string userEmailString = user.Email;
+            string userPassword = user.Password;
+            string userNewPasswordString = ( userPassword != null ) ? 
+                UserTools.ConvertInputTextToSha512( userPassword.Trim() ) : string.Empty;
+            string userEmailString = ( user.Email != null ) ? user.Email.Trim() : string.Empty;
             bool bUpdateUserDb = false;
 
             if( userFromDb != null )
             {
                 bUpdateUserDb = true;
 
-                if ( user.Password.Length > 0 
+                if( userNewPasswordString != null 
+                    && userNewPasswordString.Length > 0
                     && userNewPasswordString != userFromDb.Password )
                 {
                     userFromDb.Password = userNewPasswordString;
                     userFromDb.LastUpdateAccountDate = DateTime.Now.ToString();
                 }
 
-                if( userEmailString.Length > 0 
+                if( userEmailString != null 
+                    && userEmailString.Length > 0
                     && userEmailString != userFromDb.Email )
                 {
                     userFromDb.Email = userEmailString;

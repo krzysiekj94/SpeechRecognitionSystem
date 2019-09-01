@@ -55,9 +55,19 @@ namespace SpeechRecognitionThesis.Controllers
 
         private bool ProcessRegisterUserModelData(User registerUser)
         {
-            return UpdateUserModelDates(registerUser) 
+            return DeleteWhiteSpaces(registerUser)
+                && UpdateUserModelDates(registerUser) 
                 && UserTools.ConvertPasswordToSha512(registerUser)
                 && SetActiveFlagForRegisterUser(registerUser);
+        }
+
+        private bool DeleteWhiteSpaces(User registerUser)
+        {
+            registerUser.NickName = registerUser.NickName.Trim();
+            registerUser.Password = registerUser.Password.Trim();
+            registerUser.Email = registerUser.Email.Trim();
+
+            return true;
         }
 
         private bool SetActiveFlagForRegisterUser(User registerUser)

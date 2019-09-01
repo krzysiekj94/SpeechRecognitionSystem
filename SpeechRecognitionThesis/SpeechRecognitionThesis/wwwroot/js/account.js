@@ -31,12 +31,13 @@ $(document).ready(function() {
     });
 
 
-    $("#change-account-data").click(function() {
+    $("#change-data-form").submit(function(event){
         var serializeData = $(this).serialize();
 
         $.ajax({
             type        : 'POST',
             url         : '/account/change',
+            data        : serializeData,
             dataType    : 'json',
             encode      : true,
             statusCode: {

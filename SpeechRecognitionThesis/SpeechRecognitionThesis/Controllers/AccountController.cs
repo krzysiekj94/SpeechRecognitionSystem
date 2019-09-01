@@ -99,13 +99,16 @@ namespace SpeechRecognitionThesis.Controllers
 
         [HttpPost]
         [Route("Change")]
-        public IActionResult ChangeUserDataAccount( [FromForm] RegisterUserModel userChangeModel )
+        public IActionResult ChangeUserDataAccount( [FromForm] AccountUserModel userChangeModel )
         {
-            if( userChangeModel == null )
+            if( userChangeModel == null 
+                || ( userChangeModel != null && userChangeModel.User == null ) )
             {
                 return BadRequest();
             }
-            else if( userChangeModel.ConfirmPassword != userChangeModel.User.Password )
+            else if( userChangeModel.User.Password != null 
+                && userChangeModel.ConfirmPassword != null 
+                && userChangeModel.User.Password != userChangeModel.ConfirmPassword )
             {
                 return BadRequest("Hasło i jego potwierdzenie nie są zgodne!");
             }

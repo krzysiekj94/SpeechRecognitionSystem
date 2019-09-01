@@ -36,7 +36,7 @@ namespace SpeechRecognitionThesis.Models.Database
            new User
            {
                Id = 2,
-               NickName = " RobertSon",
+               NickName = "RobertSon",
                Password = UserTools.ConvertInputTextToSha512("passwordTest231"),
                Email = "robert@mail.com",
                CreateAccountDate = new DateTime(2019, 05, 21).ToString(),
