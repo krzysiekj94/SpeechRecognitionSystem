@@ -1,18 +1,25 @@
 $(document).ready(function() {
     
+    function GetUserIconHtmlString()
+    {
+        var htmlString = '';
+        for(i=1; i<=8;i++)
+        {
+            htmlString += '<img class="user-icon" src="/images/' + i + '.png"/>';
+        }
+        
+        return htmlString;
+    }
+    
     $("#change-account-icon").click(function() {
+        
+        var htmlString = GetUserIconHtmlString();
+
         Swal.fire({
             title: '<strong>Wybierz awatar</strong>',
             type: 'info',
             width: 600,
-            html: '<img class="user-icon" src="/images/1.png" />'
-            + '<img class="user-icon" src="/images/2.png" />'
-            + '<img class="user-icon" src="/images/3.png" />'
-            + '<img class="user-icon" src="/images/4.png" />'
-            + '<img class="user-icon" src="/images/5.png" />'
-            + '<img class="user-icon" src="/images/6.png" />'
-            + '<img class="user-icon" src="/images/7.png" />'
-            + '<img class="user-icon" src="/images/8.png" />',
+            html: htmlString,
             showCloseButton: true,
             showCancelButton: true,
             focusConfirm: false,
@@ -20,7 +27,20 @@ $(document).ready(function() {
               '<b>Zapisz wybór!</b>',
             cancelButtonText:
               '<b>Anuluj</b>',
-          });
+          }).then(result => {
+            if( result.value ) 
+            {
+              // handle Confirm button click
+              // result.value will contain `true` or the input value
+              alert("Działa!");
+            } 
+            else 
+            {
+              // handle dismissals
+              // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
+              alert("Nie działą!");
+            }
+        });
     });
     
     $("#delete-account").click(function() {
@@ -75,5 +95,10 @@ $(document).ready(function() {
         });
 
         event.preventDefault();
+    });
+
+    $('body').on('click','.user-icon',function(){
+        var index = $(this).index();
+        alert("kliknięty element: " + index );
     });
 });
