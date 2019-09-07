@@ -32,6 +32,8 @@ namespace SpeechRecognitionThesis.Models
 
         public AccountActiveState ActiveAccountState { get; set; }
 
-        public bool IsLogged { get; set; } 
+        public bool IsLogged { get; set; }
+
+        public int AvatarId { get; set; }
     }
 }

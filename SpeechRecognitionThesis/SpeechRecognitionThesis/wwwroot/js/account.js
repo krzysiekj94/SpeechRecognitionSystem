@@ -1,5 +1,7 @@
 $(document).ready(function() {
     
+    var indexSelectedIcon = -1;
+
     function GetUserIconHtmlString()
     {
         var htmlString = '';
@@ -30,16 +32,16 @@ $(document).ready(function() {
           }).then(result => {
             if( result.value ) 
             {
-              // handle Confirm button click
-              // result.value will contain `true` or the input value
-              alert("Działa!");
+              console.log("Zapis informacji dot. awatara użytkownika!");
+              SaveAvatarInfoIntoDB( indexSelectedIcon );
+              UpdateUserMainAvatar( indexSelectedIcon );
             } 
             else 
             {
-              // handle dismissals
-              // result.dismiss can be 'cancel', 'overlay', 'esc' or 'timer'
-              alert("Nie działą!");
+              console.log("Anulowanie zapisu info dot. awatara użytkownika!");
             }
+
+            indexSelectedIcon = -1;
         });
     });
     
@@ -98,7 +100,59 @@ $(document).ready(function() {
     });
 
     $('body').on('click','.user-icon',function(){
-        var index = $(this).index();
-        alert("kliknięty element: " + index );
+        var choosenIconIndex = $(this).index();
+        
+        if( indexSelectedIcon != -1 )
+        {
+            $( ".user-icon:eq(" + indexSelectedIcon + ")" ).css( "background-color", "white" );
+        }
+
+        indexSelectedIcon = choosenIconIndex;
+
+        $( ".user-icon:eq(" + indexSelectedIcon + ")" ).css( "background-color", "red" );
     });
+
+    function SaveAvatarInfoIntoDB( indexSelectedIcon )
+    {
+        var userObject = 
+        {
+            "NickName" : "User",
+            "AvatarId" : indexSelectedIcon
+        };
+
+        var userUpdateObject = 
+        { 
+          "User" : userObject,
+        };
+
+        var data =  JSON.stringify(userUpdateObject);
+
+        $.ajax({
+            type        : 'POST',
+            url         : '/account/avatar',
+            data        : JSON.stringify(userUpdateObject),
+            contentType   : 'application/json; charset=utf-8',
+            dataType    : 'json',
+            encode      : true,
+            statusCode: {
+                200: 
+                    function (data1) {
+                        console.log('Avatar zaktualizowany pomyślnie');
+                    },
+                400: 
+                    function (data1) {
+                        console.log('Avatar nie został zaktualizowany pomyślnie');
+                    }
+            }
+        })
+        .done(function(data) {
+            console.log("Aktualizacja avatara przebiegła pomyślnie"); 
+        });
+    }
+
+    function UpdateUserMainAvatar( indexSelectedIcon )
+    {
+        var imageNumber = indexSelectedIcon + 1; 
+        $(".main-user-icon").attr("src", "/images/" + imageNumber + ".png");
+    }
 });

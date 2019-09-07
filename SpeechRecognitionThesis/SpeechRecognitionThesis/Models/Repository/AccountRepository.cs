@@ -78,6 +78,12 @@ namespace SpeechRecognitionThesis.Models.Repository
                     userFromDb.Email = userEmailString;
                 }
 
+                if( user.AvatarId > -1 
+                    && userFromDb.AvatarId != user.AvatarId )
+                {
+                    userFromDb.AvatarId = user.AvatarId;
+                }
+
                 Update( userFromDb );
             }
 

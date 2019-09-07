@@ -4,10 +4,13 @@
     ViewData["Title"] = "Moje konto";
     ViewData["AccountMainDescription"] = "Witaj " + User.Identity.Name + " w zakładce 'Moje konto'";
 
-    string userRegisterDateString = TokenProvider.GetRegisterUserPropertyString( User.Identity,
-        SpeechRecognitionThesis.Models.Scripts.UserTools.REGISTER_DATE_PROPERTY_STRING );
+    string userRegisterDateString = TokenProvider.GetRegisterUserPropertyString(User.Identity,
+        SpeechRecognitionThesis.Models.Scripts.UserTools.REGISTER_DATE_PROPERTY_STRING);
     string userLastLoggedDateString = TokenProvider.GetRegisterUserPropertyString(User.Identity,
-        SpeechRecognitionThesis.Models.Scripts.UserTools.USER_LAST_LOGGED_DATE_PROPERTY_STRING );
+        SpeechRecognitionThesis.Models.Scripts.UserTools.USER_LAST_LOGGED_DATE_PROPERTY_STRING);
+
+    int iImageNumber = int.Parse(@Html.ValueFor(model => model.User.AvatarId)) + 1;
+    string mainAccountAvatar = "/images/" + iImageNumber.ToString() + ".png";
 }
 
 <h2>@ViewData["AccountMainDescription"]</h2>
@@ -19,7 +22,7 @@
     <div class="col-md-6">
         <div class="control-group">
             <div class="account-controls">
-                <img class="main-user-icon" src="~/images/1.png" />
+                <img class="main-user-icon" src="@mainAccountAvatar" />
             </div>
             <div class="account-controls">
                 <button id="change-account-icon">Zmień obrazek</button>

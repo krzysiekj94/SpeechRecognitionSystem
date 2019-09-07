@@ -123,5 +123,28 @@ namespace SpeechRecognitionThesis.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("Avatar")]
+        public IActionResult ChangeUserAvatarAccount( [FromBody] AccountUserModel userAccountModel )
+        {
+            if(userAccountModel == null 
+                || ( userAccountModel != null 
+                && userAccountModel.User == null
+                && userAccountModel.User.AvatarId == -1 ) )
+            {
+                return BadRequest();
+            }
+
+            long lUserId = TokenProvider.GetLoggedUserId(User.Identity);
+
+            if (lUserId != -1
+                && _repositoryWrapper.Account.UpdateUserData(lUserId, userAccountModel.User))
+            {
+                _repositoryWrapper.Save();
+            }
+
+            return Ok();
+        }
     }
 }

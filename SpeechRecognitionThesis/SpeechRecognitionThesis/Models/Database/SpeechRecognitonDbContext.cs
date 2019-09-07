@@ -25,13 +25,14 @@ namespace SpeechRecognitionThesis.Models.Database
             {
                 Id = 1,
                 NickName = UserTools.ANONYMOUS_USER_NICKNAME,
-                Password = UserTools.ConvertInputTextToSha512( UserTools.ANONYMOUS_USER_NICKNAME ),
+                Password = UserTools.ConvertInputTextToSha512(UserTools.ANONYMOUS_USER_NICKNAME),
                 Email = "guest@speechrecognition.com",
                 CreateAccountDate = new DateTime(2019, 05, 30).ToString(),
                 LastUpdateAccountDate = new DateTime(2019, 06, 20).ToString(),
                 LastLoggedAccountDate = new DateTime(2019, 08, 24).ToString(),
                 ActiveAccountState = AccountActiveState.Active,
-                IsLogged = true
+                IsLogged = true,
+                AvatarId = 1
             },
            new User
            {
@@ -43,7 +44,8 @@ namespace SpeechRecognitionThesis.Models.Database
                LastUpdateAccountDate = new DateTime(2019, 06, 23).ToString(),
                LastLoggedAccountDate = new DateTime(2019, 08, 23).ToString(),
                ActiveAccountState = AccountActiveState.Active,
-               IsLogged = false
+               IsLogged = false,
+               AvatarId = 2
            });
         }
 

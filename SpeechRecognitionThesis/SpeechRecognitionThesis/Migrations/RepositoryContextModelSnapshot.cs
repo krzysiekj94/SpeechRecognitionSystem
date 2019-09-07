@@ -80,21 +80,21 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
-                            ArticleModificationDate = "27.08.2019 22:09:17",
+                            ArticleModificationDate = "07.09.2019 14:18:17",
                             ArticleRefId = 1L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            ArticleModificationDate = "27.08.2019 22:09:17",
+                            ArticleModificationDate = "07.09.2019 14:18:17",
                             ArticleRefId = 2L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 3L,
-                            ArticleModificationDate = "27.08.2019 22:09:17",
+                            ArticleModificationDate = "07.09.2019 14:18:17",
                             ArticleRefId = 1L,
                             UserRefId = 2L
                         });
@@ -107,6 +107,8 @@ namespace SpeechRecognitionThesis.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ActiveAccountState");
+
+                    b.Property<int>("AvatarId");
 
                     b.Property<string>("CreateAccountDate");
 
@@ -134,6 +136,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 1L,
                             ActiveAccountState = 1,
+                            AvatarId = 1,
                             CreateAccountDate = "30.05.2019 00:00:00",
                             Email = "guest@speechrecognition.com",
                             IsLogged = true,
@@ -146,12 +149,13 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 2L,
                             ActiveAccountState = 1,
+                            AvatarId = 2,
                             CreateAccountDate = "21.05.2019 00:00:00",
                             Email = "robert@mail.com",
                             IsLogged = false,
                             LastLoggedAccountDate = "23.08.2019 00:00:00",
                             LastUpdateAccountDate = "23.06.2019 00:00:00",
-                            NickName = " RobertSon",
+                            NickName = "RobertSon",
                             Password = "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828"
                         });
                 });
