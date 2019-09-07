@@ -20,10 +20,15 @@ namespace SpeechRecognitionThesis.Controllers
             _repositoryWrapper = repositoryWrapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            if(User.Identity.IsAuthenticated)
+            {
+                HttpContext.Session.Clear();
+            }
+
             return Redirect("/");
         }
     }

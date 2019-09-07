@@ -182,25 +182,27 @@ $.getScript("/js/speech_engine.js", function(){
 
     artyom.addCommands([
         {
-            indexes: ["zmień nazwę użytkownika", "zmień nick", "zmień nik"],
+            indexes: ["zmień nazwę użytkownika", "zmień nick", "zmień nik", 
+            "nazwa użytkownika", "nick", "nik", "ustaw nick", "ustaw nazwę",
+            "login", "ustaw login", "ustaw nazwę użytkownika", "nazwa"],
             action: function(){
                 $("#NickName").focus();
             }
         },
         {
-            indexes: ["zmień hasło"],
+            indexes: ["zmień hasło", "hasło", "ustaw hasło"],
             action: function(){
                 $("#Password").focus();
             }
         },
         {
-            indexes: ["potwierdź hasło"],
+            indexes: ["potwierdź hasło", "potwierdzenie", "potwierdź", "zatwierdź"],
             action: function(){
                 $("#ConfirmPassword").focus();
             }
         },
         {
-            indexes: ["zmień e-mail", "zmień email"],
+            indexes: ["email", "e-mail", "zmień e-mail", "zmień email"],
             action: function(){
                 $("#Email").focus();
             }

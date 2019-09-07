@@ -25,4 +25,40 @@ $(document).ready(function() {
         });
         event.preventDefault();
     });
+
+    $.getScript("/js/speech_engine.js", function(){
+        artyom.addCommands([
+            {
+                indexes: ["nazwa użytkownika", "nick", "nik", "ustaw nick", "ustaw nazwę",
+                          "login", "ustaw login", "ustaw nazwę użytkownika", "nazwa"],
+                action: function(){
+                    $("#NickName").focus();
+                }
+            },
+            {
+                indexes: ["hasło", "ustaw hasło"],
+                action: function(){
+                    $("#Password").focus();
+                }
+            },
+            {
+                indexes: ["potwierdź hasło", "potwierdzenie", "potwierdź", "zatwierdź"],
+                action: function(){
+                    $("#ConfirmPassword").focus();
+                }
+            },
+            {
+                indexes: ["email", "e-mail", "zmień e-mail", "zmień email"],
+                action: function(){
+                    $("#Email").focus();
+                }
+            },
+            {
+                indexes: ["Zarejestruj", "Zarejestruj się"],
+                action: function(){
+                    $(".register-button").submit();
+                }
+            },
+        ]);
+     });
 });

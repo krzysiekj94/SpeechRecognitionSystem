@@ -29,43 +29,17 @@ namespace SpeechRecognitionThesis.Models.Scripts
                 case ACCOUNT_RELATIVE_PATH_STRING:
                     urlPathString = SPEECH_ACCOUNT_PAGE_RELATIVE_PATH_STRING;
                     break;
+                case LOGIN_USER_RELATIVE_PATH_STRING:
+                    urlPathString = LOGIN_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
+                case REGISTER_NEW_USER_RELATIVE_PATH_STRING:
+                    urlPathString = REGISTER_NEW_USER_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
                 default:
                     break;
             }
 
             return urlPathString;
-        }
-
-        public static string getRegisterScriptPathString( string urlRelativePathString )
-        {
-            string registerScriptPathString = string.Empty;
-
-            switch( urlRelativePathString.ToLower() )
-            {
-                case REGISTER_NEW_USER_RELATIVE_PATH_STRING:
-                    registerScriptPathString = REGISTER_NEW_USER_SCRIPT_RELATIVE_PATH_STRING;
-                    break;
-                default:
-                    break;
-            }
-
-            return registerScriptPathString;
-        }
-
-        public static string getLoginScriptPathString(string urlRelativePathString)
-        {
-            string registerScriptPathString = string.Empty;
-
-            switch (urlRelativePathString.ToLower())
-            {
-                case LOGIN_USER_RELATIVE_PATH_STRING:
-                    registerScriptPathString = LOGIN_SCRIPT_RELATIVE_PATH_STRING;
-                    break;
-                default:
-                    break;
-            }
-
-            return registerScriptPathString;
         }
     }
 }

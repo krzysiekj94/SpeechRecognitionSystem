@@ -52,7 +52,6 @@ function addComandsToArtyom()
             {
                 indexes: ["wyszukiwarka"],
                 action: function(){
-                    artyom.say("Przekierowuję na stronę wyszukiwarki artykułów.");
                     window.open("/search","_self");
                 }
             },
@@ -66,6 +65,24 @@ function addComandsToArtyom()
                 indexes: ["moje konto"],
                 action: function(){
                     window.open("/account","_self");
+                }
+            },
+            {
+                indexes: ["Zaloguj", "Logowanie"],
+                action: function(){
+                    window.open("/login","_self");
+                }
+            },
+            {
+                indexes: ["Wyloguj", "Wylogowanie"],
+                action: function(){
+                    window.open("/logout","_self");
+                }
+            },
+            {
+                indexes: ["Rejestracja"],
+                action: function(){
+                    window.open("/register","_self");
                 }
             },
         ]);
