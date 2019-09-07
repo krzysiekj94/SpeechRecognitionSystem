@@ -178,10 +178,45 @@ $(document).ready(function() {
         $(".main-user-icon").attr("src", "/images/" + imageNumber + ".png");
     }
 
-//account speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
     artyom.addCommands([
+        {
+            indexes: ["zmień nazwę użytkownika", "zmień nick", "zmień nik"],
+            action: function(){
+                $("#NickName").focus();
+            }
+        },
+        {
+            indexes: ["zmień hasło"],
+            action: function(){
+                $("#Password").focus();
+            }
+        },
+        {
+            indexes: ["potwierdź hasło"],
+            action: function(){
+                $("#ConfirmPassword").focus();
+            }
+        },
+        {
+            indexes: ["zmień e-mail", "zmień email"],
+            action: function(){
+                $("#Email").focus();
+            }
+        },
+        {
+            indexes: ["zmień dane", "zapisz dane"],
+            action: function(){
+                $("#change-account-data").submit();
+            }
+        },
+        {
+            indexes: ["usuń konto", "usuń swoje konto"],
+            action: function(){
+                $("#delete-account").click();
+            }
+        },
         {
             indexes: ["zmień obrazek"],
             action: function(){
