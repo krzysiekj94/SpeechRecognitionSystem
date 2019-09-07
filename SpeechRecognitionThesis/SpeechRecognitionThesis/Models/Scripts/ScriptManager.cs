@@ -9,11 +9,13 @@ namespace SpeechRecognitionThesis.Models.Scripts
     {
         const string SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING              = "/js/speech_engine.js";
         const string SPEECH_ARTICLES_PAGE_RELATIVE_PATH_STRING          = "/js/articles_speech.js";
+        const string SPEECH_ACCOUNT_PAGE_RELATIVE_PATH_STRING           = "/js/account.js";
         const string ADD_ARTICLES_RELATIVE_PATH_STRING                  = "/articles/add";
         const string REGISTER_NEW_USER_SCRIPT_RELATIVE_PATH_STRING      = "/js/register.js";
         const string REGISTER_NEW_USER_RELATIVE_PATH_STRING             = "/register";
         const string LOGIN_USER_RELATIVE_PATH_STRING                    = "/login";
         const string LOGIN_SCRIPT_RELATIVE_PATH_STRING                  = "/js/login.js";
+        const string ACCOUNT_RELATIVE_PATH_STRING                       = "/account";
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
@@ -23,6 +25,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
             {
                 case ADD_ARTICLES_RELATIVE_PATH_STRING:
                     urlPathString = SPEECH_ARTICLES_PAGE_RELATIVE_PATH_STRING;
+                    break;
+                case ACCOUNT_RELATIVE_PATH_STRING:
+                    urlPathString = SPEECH_ACCOUNT_PAGE_RELATIVE_PATH_STRING;
                     break;
                 default:
                     break;

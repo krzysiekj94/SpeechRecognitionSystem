@@ -1,6 +1,15 @@
 $(document).ready(function() {
     
-    var indexSelectedIcon = -1;
+    var firstIndexIcon = parseInt(GetUserIconId());
+    var indexSelectedIcon = parseInt(GetUserIconId());
+
+    function GetUserIconId()
+    {
+        var srcMainIconString = $('.main-user-icon').attr('src');
+        var srcNameSplitString =  srcMainIconString.split('.')[0] + '';
+        var fileimageSplitString = srcNameSplitString.split('/');
+        return fileimageSplitString[fileimageSplitString.length-1];
+    }
 
     function GetUserIconHtmlString()
     {
@@ -14,7 +23,11 @@ $(document).ready(function() {
     }
     
     $("#change-account-icon").click(function() {
-        
+        ChangeAccountIcon();
+    });
+
+    function ChangeAccountIcon()
+    {
         var htmlString = GetUserIconHtmlString();
 
         Swal.fire({
@@ -33,17 +46,20 @@ $(document).ready(function() {
             if( result.value ) 
             {
               console.log("Zapis informacji dot. awatara użytkownika!");
-              SaveAvatarInfoIntoDB( indexSelectedIcon );
-              UpdateUserMainAvatar( indexSelectedIcon );
+              if( firstIndexIcon != indexSelectedIcon )
+              {
+                  SaveAvatarInfoIntoDB( indexSelectedIcon );
+                  UpdateUserMainAvatar( indexSelectedIcon );
+                  firstIndexIcon = indexSelectedIcon;
+              }
             } 
             else 
             {
               console.log("Anulowanie zapisu info dot. awatara użytkownika!");
+              indexSelectedIcon = firstIndexIcon;
             }
-
-            indexSelectedIcon = -1;
         });
-    });
+    }
     
     $("#delete-account").click(function() {
         $.ajax({
@@ -101,16 +117,22 @@ $(document).ready(function() {
 
     $('body').on('click','.user-icon',function(){
         var choosenIconIndex = $(this).index();
-        
-        if( indexSelectedIcon != -1 )
+        ChooseImgIcon(choosenIconIndex);
+    });
+
+    function ChooseImgIcon(choosenIconIndex)
+    {
+        chooseIconIndexTemp = choosenIconIndex - 1;
+
+        if( indexSelectedIcon > -1 )
         {
             $( ".user-icon:eq(" + indexSelectedIcon + ")" ).css( "background-color", "white" );
         }
 
-        indexSelectedIcon = choosenIconIndex;
+        indexSelectedIcon = chooseIconIndexTemp;
 
         $( ".user-icon:eq(" + indexSelectedIcon + ")" ).css( "background-color", "red" );
-    });
+    }
 
     function SaveAvatarInfoIntoDB( indexSelectedIcon )
     {
@@ -155,4 +177,86 @@ $(document).ready(function() {
         var imageNumber = indexSelectedIcon + 1; 
         $(".main-user-icon").attr("src", "/images/" + imageNumber + ".png");
     }
+
+//account speech recognizer engine
+$.getScript("/js/speech_engine.js", function(){
+
+    artyom.addCommands([
+        {
+            indexes: ["zmień obrazek"],
+            action: function(){
+                ChangeAccountIcon();
+            }
+        },
+        {
+            indexes: ["zapisz obrazek"],
+            action: function(){
+                console.log("Zapis informacji dot. awatara użytkownika!");
+                Swal.close();
+                if( firstIndexIcon != indexSelectedIcon )
+                {
+                    SaveAvatarInfoIntoDB( indexSelectedIcon );
+                    UpdateUserMainAvatar( indexSelectedIcon );
+                    firstIndexIcon = indexSelectedIcon;
+                }
+            }
+        },
+        {
+            indexes: ["anuluj"],
+            action: function(){
+                console.log("Zamykam dialog wyboru awatara!");
+                Swal.close();
+                indexSelectedIcon = firstIndexIcon;
+            }
+        },
+        {
+            indexes: ["wybierz pierwszy", "wybierz 1", "wybierz jeden"],
+            action: function(){
+                ChooseImgIcon(1);
+            },
+        },
+        {
+            indexes: ["wybierz drugi", "wybierz 2", "wybierz dwa"],
+            action: function(){
+                ChooseImgIcon(2);
+            },
+        },
+        {
+            indexes: ["wybierz trzeci", "wybierz 3", "wybierz trzy"],
+            action: function(){
+                ChooseImgIcon(3);
+            },
+        },
+        {
+            indexes: ["wybierz czwarty", "wybierz 4", "wybierz cztery"],
+            action: function(){
+                ChooseImgIcon(4);
+            },
+        },
+        {
+            indexes: ["wybierz pięć", "wybierz 5", "wybierz pięć"],
+            action: function(){
+                ChooseImgIcon(5);
+            },
+        },
+        {
+            indexes: ["wybierz szósty", "wybierz 6", "wybierz sześć"],
+            action: function(){
+                ChooseImgIcon(6);
+            },
+        },
+        {
+            indexes: ["wybierz siedem", "wybierz 7", "wybierz siedem"],
+            action: function(){
+                ChooseImgIcon(7);
+            },
+        },
+        {
+            indexes: ["wybierz osiem", "wybierz 8", "wybierz osiem"],
+            action: function(){
+                ChooseImgIcon(8);
+            },
+        },
+    ]);
+ });
 });

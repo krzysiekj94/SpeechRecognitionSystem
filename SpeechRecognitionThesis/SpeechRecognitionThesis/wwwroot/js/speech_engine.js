@@ -63,9 +63,9 @@ function addComandsToArtyom()
                 }
             },
             {
-                indexes: ["dane konta"],
+                indexes: ["moje konto"],
                 action: function(){
-                    window.open("/articles/newest","_self");
+                    window.open("/account","_self");
                 }
             },
         ]);
