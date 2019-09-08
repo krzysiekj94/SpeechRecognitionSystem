@@ -27,9 +27,60 @@ $(document).ready(function() {
     });
 
     $.getScript("/js/speech_engine.js", function(){
+        
+        function LoadLettersAndNumbersCommands()
+        {
+            artyom.addCommands([
+                {
+                    indexes: ["małe a"],
+                    action: function(){
+                        var currentElement = document.activeElement.id;
+                        var valueElement = "";
+    
+                        if( currentElement.length > 0 )
+                        {
+                            valueElement =  $( "#" + currentElement ).val();
+                            valueElement += "a";
+                            $( "#" + currentElement ).val(valueElement);
+                        }
+                    }
+                },
+                {
+                    indexes: ["duże a"],
+                    action: function(){
+                        var currentElement = document.activeElement.id;
+                        var valueElement = "";
+    
+                        if( currentElement.length > 0 )
+                        {
+                            valueElement =  $( "#" + currentElement ).val();
+                            valueElement += "A";
+                            $( "#" + currentElement ).val(valueElement);
+                        }
+                    }
+                },
+                {
+                    indexes: ["cyfra 1"],
+                    action: function(){
+                        var currentElement = document.activeElement.id;
+                        var valueElement = "";
+    
+                        if( currentElement.length > 0 )
+                        {
+                            valueElement =  $( "#" + currentElement ).val();
+                            valueElement += "1";
+                            $( "#" + currentElement ).val(valueElement);
+                        }
+                    }
+                },
+            ]);
+        }
+        
         var commands = artyom.getAvailableCommands();
-        commands.slice(7,1);
+        commands.splice(7,1);
         artyom.emptyCommands();
+
+        LoadLettersAndNumbersCommands();
         artyom.addCommands(commands);
         artyom.addCommands([
             {
