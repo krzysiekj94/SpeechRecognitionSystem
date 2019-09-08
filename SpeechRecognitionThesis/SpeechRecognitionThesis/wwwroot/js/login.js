@@ -30,50 +30,78 @@ $(document).ready(function() {
         
         function LoadLettersAndNumbersCommands()
         {
+            var charValueString = "";
+            var indexesCommand = "duże";
+            var changeToSmaller = false;
+            var indexes = [];
+
+            for(var i =65; i <= 90; i++)
+            {
+                charValueString = String.fromCharCode(i);
+
+                if( changeToSmaller )
+                {
+                    charValueString = charValueString.toLowerCase()
+                }
+
+                indexes.push(indexesCommand + " " + charValueString);
+
+                if( i == 90 ) 
+                {
+                    if( !changeToSmaller )
+                    {
+                        i = 64;
+                        changeToSmaller = true;
+                        indexesCommand = "małe";
+                    }
+                }
+            }
+
             artyom.addCommands([
                 {
-                    indexes: ["małe a"],
-                    action: function(){
+                    indexes: indexes,
+                    action: function(indexOfArray){
                         var currentElement = document.activeElement.id;
                         var valueElement = "";
-    
+                        var codeAsciiValue = indexOfArray;
+
                         if( currentElement.length > 0 )
                         {
                             valueElement =  $( "#" + currentElement ).val();
-                            valueElement += "a";
-                            $( "#" + currentElement ).val(valueElement);
-                        }
-                    }
-                },
-                {
-                    indexes: ["duże a"],
-                    action: function(){
-                        var currentElement = document.activeElement.id;
-                        var valueElement = "";
-    
-                        if( currentElement.length > 0 )
-                        {
-                            valueElement =  $( "#" + currentElement ).val();
-                            valueElement += "A";
-                            $( "#" + currentElement ).val(valueElement);
-                        }
-                    }
-                },
-                {
-                    indexes: ["cyfra 1"],
-                    action: function(){
-                        var currentElement = document.activeElement.id;
-                        var valueElement = "";
-    
-                        if( currentElement.length > 0 )
-                        {
-                            valueElement =  $( "#" + currentElement ).val();
-                            valueElement += "1";
+                            
+                            if( codeAsciiValue > 25 )
+                            {
+                                codeAsciiValue = (codeAsciiValue % 26) + 32;
+                            }
+
+                            valueElement += String.fromCharCode(codeAsciiValue+65);
                             $( "#" + currentElement ).val(valueElement);
                         }
                     }
                 },
             ]);
+
+            for( var j=0; j <= 9; j++)
+            {
+                var numberValue = j.toString();
+
+                artyom.addCommands([
+                    {
+                        indexes: ["cyfra " + numberValue],
+                        action: function(){
+                            var currentElement = document.activeElement.id;
+                            var valueElement = "";
+        
+                            if( currentElement.length > 0 )
+                            {
+                                valueElement =  $( "#" + currentElement ).val();
+                                valueElement += numberValue;
+                                $( "#" + currentElement ).val(valueElement);
+                            }
+                        }
+                    },
+                ]);
+            }
         }
         
         var commands = artyom.getAvailableCommands();
