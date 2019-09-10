@@ -39,7 +39,7 @@ $(document).ready(function() {
             showCancelButton: true,
             focusConfirm: false,
             confirmButtonText:
-              '<b>Zapisz wybór!</b>',
+              '<b>Zapisz obrazek!</b>',
             cancelButtonText:
               '<b>Anuluj</b>',
           }).then(result => {
