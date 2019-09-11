@@ -31,7 +31,9 @@ function LoadArticleView(filterValue)
                 $articlesResultElement.append(
                     '<li class="list-group-item article-result">'
                             + 'Artykuł ID: '            + article.id 
+                            + '<br/>Subject: '          + article.subject
                             + '<br/>Content: '          + article.content
+                            //+ '<br/>Kategoria: '        + article.category
                             + '<br/>Data utworzenia: '  + article.insertionDate
                             + '<br/>Data modyfikacji: ' + article.lastUpdateDate
                     +  '</li>'); 

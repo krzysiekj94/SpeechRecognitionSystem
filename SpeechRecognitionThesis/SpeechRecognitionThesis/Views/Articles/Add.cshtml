@@ -1,15 +1,27 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.ArticleUserModel
+
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Dodawanie nowego artykułu";
 }
 
-<h2>Add</h2>
+<h2>Dodawanie nowego artykułu</h2>
 
 <div class="row menu-news-content">
     <div class="form-group">
+        <label for="article-subject">Temat artykułu</label>
+        <input type="text" class="form-control" id="article-subject" placeholder="Wpisz temat artykułu tutaj">
+    </div>
+    <div class="form-group">
+        <label for="article-category">Wybierz kategorię artykułu:</label>
+        <br/>
+        <select id="article-category" size="6"
+                asp-items="@(new SelectList(Model.ArticleCategoryList,"Id","Name"))">
+        </select>
+    </div>
+    <div class="form-group">
         <label for="comment">Treść artykułu:</label>
         @Html.AntiForgeryToken()
-        <textarea class="article-content form-control" rows="5" id="comment"></textarea>
+        <textarea class="article-content form-control" rows="5" id="comment" placeholder="Wpisz treść artykułu tutaj"></textarea>
         <button name="save-article-button" class="save-article-button alert-success" type="submit">Zapisz artykuł</button>
         <button class="clear-article-button alert-danger" type="submit">Wyczyść artykuł</button>
     </div>

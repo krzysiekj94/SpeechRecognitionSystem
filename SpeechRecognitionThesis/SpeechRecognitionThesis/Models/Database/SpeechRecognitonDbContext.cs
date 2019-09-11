@@ -14,9 +14,39 @@ namespace SpeechRecognitionThesis.Models.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            InitArticlesCategory(modelBuilder);
             InitArticles(modelBuilder);
             InitUsers(modelBuilder);
             InitUserArticles(modelBuilder);
+        }
+
+        private void InitArticlesCategory(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ArticleCategory>().HasData(new ArticleCategory
+            {
+                Id = 1,
+                Name = "Sport"
+            },
+            new ArticleCategory
+            {
+                Id = 2,
+                Name = "Nauka"
+            },
+            new ArticleCategory
+            {
+                Id = 3,
+                Name = "Świat"
+            },
+            new ArticleCategory
+            {
+                Id = 4,
+                Name = "Kraj"
+            },
+            new ArticleCategory
+            {
+                Id = 5,
+                Name = "Popularnonaukowe"
+            });
         }
 
         private void InitUsers(ModelBuilder modelBuilder)
@@ -54,7 +84,9 @@ namespace SpeechRecognitionThesis.Models.Database
             modelBuilder.Entity<Article>().HasData(new Article
             {
                 Id = 1,
-                Content = "To jest artykuł 1",
+                ArticleCategoryRefId = 1,
+                Subject = "Artykuł 1",
+                Content = "To jest treść artykułu 1",
                 InsertionDate = new DateTime(2017, 04, 25),
                 LastUpdateDate = new DateTime(2018, 05, 11),
 
@@ -62,6 +94,8 @@ namespace SpeechRecognitionThesis.Models.Database
             new Article
             {
                 Id = 2,
+                ArticleCategoryRefId = 4,
+                Subject = "Artykuł 2",
                 Content = "To jest artykuł 2",
                 InsertionDate = new DateTime(2019, 05, 05),
                 LastUpdateDate = new DateTime(2019, 05, 05),

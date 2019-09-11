@@ -7,6 +7,7 @@ namespace SpeechRecognitionThesis.Models.Repository
         IAccountRepository Account  { get; }
         IArticleRepository Articles { get; }
         IUserArticlesRepository UserArticles { get; }
+        IArticleCategoryRepository ArticlesCategory { get; }
 
         void Save();
     }

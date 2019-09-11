@@ -25,6 +25,8 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<long>("ArticleCategoryRefId");
+
                     b.Property<bool>("AvailabilityStatus");
 
                     b.Property<string>("Content");
@@ -33,7 +35,11 @@ namespace SpeechRecognitionThesis.Migrations
 
                     b.Property<DateTime>("LastUpdateDate");
 
+                    b.Property<string>("Subject");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ArticleCategoryRefId");
 
                     b.ToTable("Articles");
 
@@ -41,18 +47,62 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
+                            ArticleCategoryRefId = 1L,
                             AvailabilityStatus = false,
-                            Content = "To jest artykuł 1",
+                            Content = "To jest treść artykułu 1",
                             InsertionDate = new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdateDate = new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastUpdateDate = new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Subject = "Artykuł 1"
                         },
                         new
                         {
                             Id = 2L,
+                            ArticleCategoryRefId = 4L,
                             AvailabilityStatus = false,
                             Content = "To jest artykuł 2",
                             InsertionDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LastUpdateDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            LastUpdateDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Subject = "Artykuł 2"
+                        });
+                });
+
+            modelBuilder.Entity("SpeechRecognitionThesis.Models.DatabaseModels.ArticleCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ArticleCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "Sport"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "Nauka"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "Świat"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Name = "Kraj"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Name = "Popularnonaukowe"
                         });
                 });
 
@@ -80,21 +130,21 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
-                            ArticleModificationDate = "07.09.2019 14:18:17",
+                            ArticleModificationDate = "12.09.2019 00:27:53",
                             ArticleRefId = 1L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            ArticleModificationDate = "07.09.2019 14:18:17",
+                            ArticleModificationDate = "12.09.2019 00:27:53",
                             ArticleRefId = 2L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 3L,
-                            ArticleModificationDate = "07.09.2019 14:18:17",
+                            ArticleModificationDate = "12.09.2019 00:27:53",
                             ArticleRefId = 1L,
                             UserRefId = 2L
                         });
@@ -158,6 +208,14 @@ namespace SpeechRecognitionThesis.Migrations
                             NickName = "RobertSon",
                             Password = "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828"
                         });
+                });
+
+            modelBuilder.Entity("SpeechRecognitionThesis.Models.Article", b =>
+                {
+                    b.HasOne("SpeechRecognitionThesis.Models.DatabaseModels.ArticleCategory", "ArticleCategory")
+                        .WithMany()
+                        .HasForeignKey("ArticleCategoryRefId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SpeechRecognitionThesis.Models.DatabaseModels.UserArticles", b =>

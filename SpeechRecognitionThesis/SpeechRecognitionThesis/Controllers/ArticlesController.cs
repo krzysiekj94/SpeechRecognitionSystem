@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
@@ -53,7 +54,10 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("Add")]
         public IActionResult GetAddArticleView()
         {
-            return View("Add");
+            ArticleUserModel articleUserModel = new ArticleUserModel();
+            articleUserModel.ArticleCategoryList = _repositoryWrapper.ArticlesCategory.FindAll().ToList();
+
+            return View("Add", articleUserModel);
         }
 
         [AllowAnonymous]

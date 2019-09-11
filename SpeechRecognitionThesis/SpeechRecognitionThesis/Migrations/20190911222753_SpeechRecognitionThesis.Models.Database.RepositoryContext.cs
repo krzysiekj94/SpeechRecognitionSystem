@@ -9,19 +9,16 @@ namespace SpeechRecognitionThesis.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Articles",
+                name: "ArticleCategory",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(nullable: true),
-                    InsertionDate = table.Column<DateTime>(nullable: false),
-                    LastUpdateDate = table.Column<DateTime>(nullable: false),
-                    AvailabilityStatus = table.Column<bool>(nullable: false)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Articles", x => x.Id);
+                    table.PrimaryKey("PK_ArticleCategory", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,6 +40,30 @@ namespace SpeechRecognitionThesis.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Articles",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Subject = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    InsertionDate = table.Column<DateTime>(nullable: false),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false),
+                    AvailabilityStatus = table.Column<bool>(nullable: false),
+                    ArticleCategoryRefId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Articles_ArticleCategory_ArticleCategoryRefId",
+                        column: x => x.ArticleCategoryRefId,
+                        principalTable: "ArticleCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,12 +94,15 @@ namespace SpeechRecognitionThesis.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Articles",
-                columns: new[] { "Id", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate" },
+                table: "ArticleCategory",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1L, false, "To jest artykuł 1", new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2L, false, "To jest artykuł 2", new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1L, "Sport" },
+                    { 2L, "Nauka" },
+                    { 3L, "Świat" },
+                    { 4L, "Kraj" },
+                    { 5L, "Popularnonaukowe" }
                 });
 
             migrationBuilder.InsertData(
@@ -91,19 +115,34 @@ namespace SpeechRecognitionThesis.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "UserArticles",
-                columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 1L, "07.09.2019 14:18:17", 1L, 1L });
+                table: "Articles",
+                columns: new[] { "Id", "ArticleCategoryRefId", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
+                values: new object[] { 1L, 1L, false, "To jest treść artykułu 1", new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 1" });
+
+            migrationBuilder.InsertData(
+                table: "Articles",
+                columns: new[] { "Id", "ArticleCategoryRefId", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
+                values: new object[] { 2L, 4L, false, "To jest artykuł 2", new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 2" });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
                 columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 2L, "07.09.2019 14:18:17", 2L, 1L });
+                values: new object[] { 1L, "12.09.2019 00:27:53", 1L, 1L });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
                 columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 3L, "07.09.2019 14:18:17", 1L, 2L });
+                values: new object[] { 3L, "12.09.2019 00:27:53", 1L, 2L });
+
+            migrationBuilder.InsertData(
+                table: "UserArticles",
+                columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
+                values: new object[] { 2L, "12.09.2019 00:27:53", 2L, 1L });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articles_ArticleCategoryRefId",
+                table: "Articles",
+                column: "ArticleCategoryRefId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserArticles_ArticleRefId",
@@ -126,6 +165,9 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "ArticleCategory");
         }
     }
 }

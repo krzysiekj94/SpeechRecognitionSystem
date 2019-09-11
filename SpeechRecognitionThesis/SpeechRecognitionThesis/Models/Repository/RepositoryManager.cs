@@ -11,6 +11,7 @@ namespace SpeechRecognitionThesis.Models.Repository
     {
         private IAccountRepository          _accountRepository;
         private IArticleRepository          _articleRepository;
+        private IArticleCategoryRepository  _articleCategoryRepository;
         private IUserArticlesRepository     _userArticlesRepository;
         private RepositoryContext           _repositoryContext;
 
@@ -42,6 +43,19 @@ namespace SpeechRecognitionThesis.Models.Repository
                 }
 
                 return _articleRepository;
+            }
+        }
+
+        public IArticleCategoryRepository ArticlesCategory
+        {
+            get
+            {
+                if (_articleCategoryRepository == null)
+                {
+                    _articleCategoryRepository = new ArticleCategoryRepository(_repositoryContext);
+                }
+
+                return _articleCategoryRepository;
             }
         }
 

@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20190505155442_SpeechRecognitionThesis.Models.Database.SpeechRecognitonDbContextSeed.Designer.cs" />
     <Compile Remove="Migrations\20190627185005_SpeechRecognitionThesis.Migrations.SpeechRecognitionThesisModelsDatabaseSpeechRecognitonDbContext.cs" />
     <Compile Remove="Migrations\20190627185005_SpeechRecognitionThesis.Migrations.SpeechRecognitionThesisModelsDatabaseSpeechRecognitonDbContext.Designer.cs" />
+    <Compile Remove="Migrations\20190907121818_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20190907121818_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20190911222122_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20190911222122_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

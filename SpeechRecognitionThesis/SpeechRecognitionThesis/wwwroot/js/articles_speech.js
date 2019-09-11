@@ -173,9 +173,11 @@ function SaveArticleContentToDatabase()
 
   var insertionDateTime   = GetCurrentDateTimeString();
   var lastUpdateDateTime  = GetCurrentDateTimeString();
+  var articleSubjectString = "#TODO Subject example string";
 
   var articleObject = 
   { 
+    "Subject"         :   articleSubjectString,
     "Content"         :   articleContentString,
     "InsertionDate"   :   insertionDateTime,
     "LastUpdateDate"  :   lastUpdateDateTime,

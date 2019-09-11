@@ -38,6 +38,14 @@ namespace SpeechRecognitionThesis.Models.Repository
             }
         }
 
+        public IArticleCategoryRepository ArticlesCategory
+        {
+            get
+            {
+                return _repositoryManager.ArticlesCategory;
+            }
+        }
+
         public void Save()
         {
             _repositoryContext.SaveChanges();
