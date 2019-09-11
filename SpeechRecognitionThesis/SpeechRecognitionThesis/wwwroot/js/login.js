@@ -11,7 +11,7 @@ $(document).ready(function() {
             encode      : true,
             statusCode: {
                 200: 
-                    function(data1){
+                    function(){
                         Swal.fire({
                             position: 'center',
                             type: 'success',
@@ -23,7 +23,7 @@ $(document).ready(function() {
                           });
                     },
                 400: 
-                    function (data1) {
+                    function () {
                         Swal.fire({
                             position: 'center',
                             type: 'error',

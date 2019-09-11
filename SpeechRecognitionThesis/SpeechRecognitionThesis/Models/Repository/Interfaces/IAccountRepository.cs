@@ -11,6 +11,6 @@ namespace SpeechRecognitionThesis.Models.Repository
         User GetUser( long lUserId );
         User GetAnonymousUser();
         bool UpdateLoggedUserData( User loggedUser );
-        bool UpdateUserData(long lUserId, User user);
+        bool UpdateUserData(long lUserId, User user, bool bIsChangeAvatar);
     }
 }

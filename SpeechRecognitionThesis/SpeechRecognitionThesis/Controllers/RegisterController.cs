@@ -48,6 +48,15 @@ namespace SpeechRecognitionThesis.Controllers
             {
                 _repositoryWrapper.Account.Add(registerUser);
                 _repositoryWrapper.Save();
+                
+                TokenProvider tokenProvider = new TokenProvider();
+                string userTokenString = tokenProvider.CreateUserTokenString(registerUser);
+
+                if (userTokenString != null
+                    && userTokenString.Length > 0)
+                {
+                    HttpContext.Session.SetString(TokenProvider.GetTokenSessionKeyString(), userTokenString);
+                }
             }
 
             return Ok();
@@ -90,7 +99,8 @@ namespace SpeechRecognitionThesis.Controllers
             if( registerUser != null )
             {
                 registerUser.CreateAccountDate = DateTime.Now.ToString();
-                registerUser.LastUpdateAccountDate = registerUser.CreateAccountDate;
+                registerUser.LastUpdateAccountDate = DateTime.Now.ToString();
+                registerUser.LastLoggedAccountDate = DateTime.Now.ToString();
                 bUpdateUserModelDates = true;
             }
 

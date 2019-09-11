@@ -116,7 +116,7 @@ namespace SpeechRecognitionThesis.Controllers
             long lUserId = TokenProvider.GetLoggedUserId( User.Identity );
 
             if( lUserId != -1 
-                && _repositoryWrapper.Account.UpdateUserData( lUserId, userChangeModel.User ) )
+                && _repositoryWrapper.Account.UpdateUserData( lUserId, userChangeModel.User, false ) )
             {
                 _repositoryWrapper.Save();
             }
@@ -139,7 +139,7 @@ namespace SpeechRecognitionThesis.Controllers
             long lUserId = TokenProvider.GetLoggedUserId(User.Identity);
 
             if (lUserId != -1
-                && _repositoryWrapper.Account.UpdateUserData(lUserId, userAccountModel.User))
+                && _repositoryWrapper.Account.UpdateUserData(lUserId, userAccountModel.User, true))
             {
                 _repositoryWrapper.Save();
             }

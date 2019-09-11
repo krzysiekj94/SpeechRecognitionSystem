@@ -104,7 +104,7 @@ $(document).ready(function() {
 
     $("#change-data-form").submit(function(event){
         var serializeData = $(this).serialize();
-
+        
         $.ajax({
             type        : 'POST',
             url         : '/account/change',

@@ -50,7 +50,7 @@ namespace SpeechRecognitionThesis.Models.Repository
             return true;
         }
 
-        public bool UpdateUserData( long lUserId, User user )
+        public bool UpdateUserData( long lUserId, User user, bool bIsChangeAvatar )
         {
             User userFromDb = GetUser( lUserId );
             string userPassword = user.Password;
@@ -78,7 +78,8 @@ namespace SpeechRecognitionThesis.Models.Repository
                     userFromDb.Email = userEmailString;
                 }
 
-                if( user.AvatarId > -1 
+                if( bIsChangeAvatar
+                    && user.AvatarId > -1 
                     && userFromDb.AvatarId != user.AvatarId )
                 {
                     userFromDb.AvatarId = user.AvatarId;
