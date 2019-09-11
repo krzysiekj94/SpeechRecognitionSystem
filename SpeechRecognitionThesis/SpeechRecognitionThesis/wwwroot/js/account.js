@@ -70,17 +70,32 @@ $(document).ready(function() {
             statusCode: {
                 200: 
                     function (data1) {
-                        alert('Twoje konto zostało usunięte! Zostaniesz przeniesiony do strony głównej');
-                        window.location.href = "/";
+                        Swal.fire({
+                            position: 'center',
+                            type: 'warning',
+                            title: 'Twoje konto zostało usunięte! Zostaniesz przeniesiony do strony głównej!',
+                            showConfirmButton: true,
+                            timer: 3000
+                          }).then(function(){
+                            window.location.href = "/";
+                          });
                     },
                 400: 
                     function (data1) {
-                        alert('Wystąpił błąd przy tworzeniu twojego konta! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz');
+                        Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Wystąpił błąd przy tworzeniu twojego konta! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz!',
+                            showConfirmButton: true,
+                            timer: 3000
+                          }).then(function(){
+                            //do nothing
+                          });
                     }
             }
         })
         .done(function(data) {
-            console.log("The process delete account was successful!"); 
+            console.log("The process delete account was done successful!"); 
         });
 
         event.preventDefault();
@@ -97,14 +112,29 @@ $(document).ready(function() {
             dataType    : 'json',
             encode      : true,
             statusCode: {
-                200: 
-                    function (data1) {
-                        alert('Dane twojego konta zostało zmienione! Zostaniesz przeniesiony do strony głównej');
-                        window.location.href = "/";
+                200:
+                    function() {
+                        Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Dane twojego konta zostało zmienione! Będziesz mógł z nich skorzystać po ponownym zalogowaniu się na swoje konto!',
+                            showConfirmButton: true,
+                            timer: 5000
+                          }).then(function(){
+                            //do nothing
+                          });
                     },
                 400: 
-                    function (data1) {
-                        alert('Wystąpił błąd przy tworzeniu twojego konta! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz');
+                    function() {
+                        Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Wystąpił błąd przy tworzeniu twojego konta! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz!',
+                            showConfirmButton: true,
+                            timer: 5000
+                          }).then(function(){
+                            //do nothing
+                          });
                     }
             }
         })
@@ -180,6 +210,8 @@ $(document).ready(function() {
 
 $.getScript("/js/speech_engine.js", function(){
 
+    LoadLettersAndNumbersCommands();
+    LoadSpecialCharactersCommands();
     artyom.addCommands([
         {
             indexes: ["zmień nazwę użytkownika", "zmień nick", "zmień nik", 
@@ -202,9 +234,65 @@ $.getScript("/js/speech_engine.js", function(){
             }
         },
         {
-            indexes: ["email", "e-mail", "zmień e-mail", "zmień email"],
+            indexes: ["zmień e-mail", "zmień email"],
             action: function(){
                 $("#Email").focus();
+            }
+        },
+        {
+            indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę", "wyczyść nazwę użytkownika"],
+            action: function(){
+                $("#NickName").val("");
+                $("#NickName").focus();
+            }
+        },
+        {
+            indexes: ["wyczyść hasło"],
+            action: function(){
+                $("#Password").val("");
+                $("#Password").focus();
+            }
+        },
+        {
+            indexes: ["wyczyść potwierdzenie", "wyczyść potwierdzenie"],
+            action: function(){
+                $("#ConfirmPassword").val("");
+                $("#ConfirmPassword").focus();
+            }
+        },
+        {
+            indexes: ["wyczyść email", "wyczyść e-mail", "wyczyść email'a"],
+            action: function(){
+                $("#Email").val("");
+                $("#Email").focus();
+            }
+        },
+        {
+            indexes: ["sprawdź hasło"],
+            action: function(){
+                $("#Password").attr('type', 'text'); 
+                $("#ConfirmPassword").attr('type', 'text'); 
+            }
+        },
+        {
+            indexes: ["ukryj hasło"],
+            action: function(){
+                $("#Password").attr('type', 'password'); 
+                $("#ConfirmPassword").attr('type', 'password'); 
+            }
+        },
+        {
+            indexes: ["cofnij"],
+            action: function(){
+                var currentElement = document.activeElement.id;
+                var valueElement = "";
+
+                if( currentElement.length > 0 )
+                {
+                    valueElement =  $( "#" + currentElement ).val();
+                    valueElement = valueElement.slice(0, -1);
+                    $( "#" + currentElement ).val(valueElement);
+                }
             }
         },
         {

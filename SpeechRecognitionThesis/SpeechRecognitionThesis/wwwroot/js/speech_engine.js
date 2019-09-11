@@ -88,3 +88,114 @@ function addComandsToArtyom()
         ]);
     }
 }
+
+function InsertCharsIntoFocusCtrl(insertCharsToFocusCtrl)
+{
+    var currentElement = document.activeElement.id;
+    var valueElement = "";
+
+    if( currentElement.length > 0 )
+    {
+        valueElement =  $( "#" + currentElement ).val();
+        valueElement += insertCharsToFocusCtrl;
+        $( "#" + currentElement ).val(valueElement);
+    }
+}
+
+function LoadSpecialCharactersCommands()
+{
+    if( artyom != null )
+    {
+        artyom.addCommands([
+            {
+                indexes: ["małpa"],
+                action: function(){
+                    InsertCharsIntoFocusCtrl("@");
+                }
+            },
+            {
+                indexes: ["kropka"],
+                action: function(){
+                    InsertCharsIntoFocusCtrl(".");
+                }
+            },
+        ]);
+    }
+}
+
+function LoadLettersAndNumbersCommands()
+{
+    var charValueString = "";
+    var indexesCommand = "duże";
+    var changeToSmaller = false;
+    var indexes = [];
+
+    for(var i =65; i <= 90; i++)
+    {
+        charValueString = String.fromCharCode(i);
+
+        if( changeToSmaller )
+        {
+            charValueString = charValueString.toLowerCase()
+        }
+
+        indexes.push(indexesCommand + " " + charValueString);
+
+        if( i == 90 ) 
+        {
+            if( !changeToSmaller )
+            {
+                i = 64;
+                changeToSmaller = true;
+                indexesCommand = "małe";
+            }
+        }
+    }
+
+    if( artyom != null )
+    {
+        artyom.addCommands([
+            {
+                indexes: indexes,
+                action: function(indexOfArray){
+                    var currentElement = document.activeElement.id;
+                    var valueElement = "";
+                    var codeAsciiValue = indexOfArray;
+
+                    if( currentElement.length > 0 )
+                    {
+                        valueElement =  $( "#" + currentElement ).val();
+                        
+                        if( codeAsciiValue > 25 )
+                        {
+                            codeAsciiValue = (codeAsciiValue % 26) + 32;
+                        }
+
+                        valueElement += String.fromCharCode(codeAsciiValue+65);
+                        $( "#" + currentElement ).val(valueElement);
+                    }
+                }
+            },
+        ]);
+    }
+
+    indexes = [];
+
+    for( var j=0; j <= 9; j++)
+    {
+        var numberValue = j.toString();
+        indexes.push("cyfra " + numberValue);
+    }
+
+    if( artyom != null )
+    {
+        artyom.addCommands([
+            {
+                indexes: indexes,
+                action: function(indexOfArray){      
+                    InsertCharsIntoFocusCtrl( indexOfArray.toString() );
+                }
+            },
+        ]);
+    }
+}
