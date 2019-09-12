@@ -1,4 +1,5 @@
 var articleRecognizer = null;
+var bIsChanged = false;
 
 //article textarea handlers
 $(window).on('load', function () {
@@ -16,21 +17,23 @@ $(document).ready(function(){
     
     var contentArticle = $("#article-content").val();
     
-    if(contentArticle !== "")
+    if(articleRecognizer != null)
     {
-      localStorage.setItem( "articleContent", contentArticle );
+      articleRecognizer.finalArticleContentTranscript = contentArticle;
+      localStorage.setItem("articleContent", contentArticle);
+      bIsChanged = true;
     }
   }); 
 });
 
-$("#article-content").keyup(function(){
+$('#article-content').on('input', function() {
   var contentArticle = $("#article-content").val();
     
-  if(contentArticle !== "" 
-    && articleRecognizer != null)
+  if(articleRecognizer != null)
   {
     articleRecognizer.finalArticleContentTranscript = contentArticle;
     localStorage.setItem("articleContent", contentArticle);
+    bIsChanged = true;
   }
 });
 
@@ -143,7 +146,7 @@ class ArticleSpeechRecognizer {
 
     InitVariables() {
         this.recognition.interimResults = true;
-        this.recognition.maxAlternatives = 10;
+        this.recognition.maxAlternatives = 1;
         this.recognition.continuous = true;
         this.recognition.lang = "pl-PL"
     }
@@ -176,24 +179,32 @@ class ArticleSpeechRecognizer {
             let interimTranscript = '';
             let eventLength = event.results.length;
        
-            for( let i = event.resultIndex; i < eventLength; i++ ) 
+            if( bIsChanged )
             {
-              let transcript = event.results[i][0].transcript;
-             
-              if( event.results[i].isFinal ) 
+                interimTranscript = "";
+                bIsChanged = false;
+            }
+            else
+            {
+              for( let i = event.resultIndex; i < eventLength; i++ ) 
               {
-                if( IsSetFocus("articleContent") )
+                let transcript = event.results[i][0].transcript;
+               
+                if( event.results[i].isFinal ) 
                 {
-                  this.finalArticleContentTranscript += transcript;   
+                  if( IsSetFocus("articleContent") )
+                  {
+                    this.finalArticleContentTranscript += transcript;   
+                  }
+                  else if( IsSetFocus("articleSubject") )
+                  {
+                    this.finalArticleSubjectTranscript += transcript;
+                  }    
+                } 
+                else 
+                {
+                  interimTranscript += transcript;
                 }
-                else if( IsSetFocus("articleSubject") )
-                {
-                  this.finalArticleSubjectTranscript += transcript;
-                }    
-              } 
-              else 
-              {
-                interimTranscript += transcript;
               }
             }
 
@@ -230,10 +241,31 @@ class ArticleSpeechRecognizer {
         finalContentTranscript = this.finalArticleSubjectTranscript;
       }
 
-      finalContentTranscript += interimTranscript;
+      if( !this.IsStringContainAnotherAtEnd( finalContentTranscript, interimTranscript ) )
+      {
+          finalContentTranscript += interimTranscript;
+      }
 
       console.log(finalContentTranscript);
       $("#" + focusCtrlIdString.toString() ).val(finalContentTranscript.toString() ); 
+    }
+
+    IsStringContainAnotherAtEnd( firstString, secondString) 
+    {
+        var bIsStringContainAnotherAtEnd = false;
+
+        firstString = firstString.trim();
+        secondString = secondString.trim();
+        
+        var indexOfBeginSecondString = firstString.lastIndexOf(secondString);
+
+        if( indexOfBeginSecondString > 0 
+          && firstString.substring(indexOfBeginSecondString) == secondString )
+        {
+          bIsStringContainAnotherAtEnd = true;
+        }
+
+        return bIsStringContainAnotherAtEnd;
     }
 
     FixContentTextAfterEndCommand()
