@@ -9,7 +9,7 @@
 <div class="row menu-news-content">
     <div class="form-group">
         <label for="article-subject">Temat artykułu</label>
-        <input type="text" class="form-control" id="article-subject" placeholder="Wpisz temat artykułu tutaj">
+        <input type="text" class="form-control" id="article-subject" placeholder="Wpisz temat artykułu tutaj" autofocus>
     </div>
     <div class="form-group">
         <label for="article-category">Wybierz kategorię artykułu:</label>
@@ -21,7 +21,7 @@
     <div class="form-group">
         <label for="comment">Treść artykułu:</label>
         @Html.AntiForgeryToken()
-        <textarea class="article-content form-control" rows="5" id="comment" placeholder="Wpisz treść artykułu tutaj"></textarea>
+        <textarea class="article-content form-control" rows="5" id="article-content" placeholder="Wpisz treść artykułu tutaj"></textarea>
         <button name="save-article-button" class="save-article-button alert-success" type="submit">Zapisz artykuł</button>
         <button class="clear-article-button alert-danger" type="submit">Wyczyść artykuł</button>
     </div>

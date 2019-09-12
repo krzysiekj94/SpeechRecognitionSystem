@@ -102,6 +102,17 @@ function InsertCharsIntoFocusCtrl(insertCharsToFocusCtrl)
     }
 }
 
+function GetFocusCtrlId()
+{
+    var currentElement = document.activeElement.id;
+    return currentElement;
+}
+
+function IsSetFocus(idCtrlString)
+{
+  return (idCtrlString == GetFocusCtrlId);
+}
+
 function LoadSpecialCharactersCommands()
 {
     if( artyom != null )

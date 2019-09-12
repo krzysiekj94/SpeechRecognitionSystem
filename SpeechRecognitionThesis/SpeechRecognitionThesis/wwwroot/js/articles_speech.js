@@ -2,29 +2,34 @@ var articleRecognizer = null;
 
 //article textarea handlers
 $(window).on('load', function () {
-  var articleContent = localStorage.getItem("articleContent");
-  $(".article-content").val(articleContent);
+  var articleContentLocalStorage = localStorage.getItem("articleContent");
+  var articleSubjectLocalStorage = localStorage.getItem("articleSubject");
+  
+  var articleContent = articleContentLocalStorage ? articleContentLocalStorage : "";
+  var articleSubject = articleSubjectLocalStorage ? articleSubjectLocalStorage : "";
+  $("#article-content").val(articleContent);
+  $("#article-subject").val(articleSubject);
 });
 
 $(document).ready(function(){ 
-  $(".article-content").change(function(){
+  $("#article-content").change(function(){
     
-    var contentArticle = $(".article-content").val();
+    var contentArticle = $("#article-content").val();
     
     if(contentArticle !== "")
     {
-      localStorage.setItem("articleContent", contentArticle);
+      localStorage.setItem( "articleContent", contentArticle );
     }
   }); 
 });
 
-$(".article-content").keyup(function(){
-  var contentArticle = $(".article-content").val();
+$("#article-content").keyup(function(){
+  var contentArticle = $("#article-content").val();
     
   if(contentArticle !== "" 
     && articleRecognizer != null)
   {
-    articleRecognizer.finalTranscript = contentArticle;
+    articleRecognizer.finalArticleContentTranscript = contentArticle;
     localStorage.setItem("articleContent", contentArticle);
   }
 });
@@ -35,47 +40,101 @@ $( ".save-article-button" ).click(function() {
 
 $( ".clear-article-button" ).click(function() {
   localStorage.setItem("articleContent", "");
-  $(".article-content").val(localStorage.getItem("articleContent"));
+  $("#article-content").val("");
+  localStorage.setItem("articleSubject", "");
+  $("#article-subject").val("");
 
   if(articleRecognizer != null )
   {
-    articleRecognizer.finalTranscript = "";
+    articleRecognizer.finalArticleContentTranscript = "";
+    articleRecognizer.finalArticleSubjectTranscript = "";
   }
 });
+
+//#TODO handlers for article subject 
+//
+//
+//
 
 //article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
-    artyom.addCommands([
+    LoadArticlesBaseCommand();
+    LoadLettersAndNumbersCommands();
+    LoadSpecialCharactersCommands();
+
+    function LoadArticlesBaseCommand()
+    {
+      artyom.addCommands([
         {
-            indexes: ["napisz"],
+            indexes: ["napisz treść", "napisz tekst"],
             action: function(){
                 artyom.fatality();
-                $(".article-content").focus(); 
+                $("#article-content").focus(); 
                 StartRecognition();
             }
         },
         {
-            indexes: ["zapisz"],
+            indexes: ["zapisz artykuł"],
             action: function(){
               SaveArticleContentToDatabase(); 
             },
         },
         {
-          indexes: ["wyczyść"],
+          indexes: ["wyczyść treść", "wyczyść tekst"],
           action: function(){
             localStorage.setItem("articleContent", "");
-            $(".article-content").val(localStorage.getItem("articleContent"));
+            $("#article-content").val("");
           },
-      },
+        },
+        {
+          indexes: ["wyczyść temat"],
+          action: function(){
+            localStorage.setItem("articleSubject", "");
+            $("#article-subject").val("");
+          },
+        },
+        {
+          indexes: ["wyczyść artykuł"],
+          action: function(){
+            localStorage.setItem("articleContent", "");
+            $("#article-content").val("");
+            localStorage.setItem("articleSubject", "");
+            $("#article-subject").val("");
+          },
+        },
+        {
+          indexes: ["napisz temat"],
+          action: function(){
+              artyom.fatality();
+              $("#article-subject").focus(); 
+              StartRecognition();
+          }
+        },
+        {
+          indexes: ["cofnij"],
+          action: function(){
+              var currentElement = document.activeElement.id;
+              var valueElement = "";
+
+              if( currentElement.length > 0 )
+              {
+                  valueElement =  $( "#" + currentElement ).val();
+                  valueElement = valueElement.slice(0, -1);
+                  $( "#" + currentElement ).val(valueElement);
+              }
+          }
+        },
     ]);
- 
+    }
  });
+
 
 class ArticleSpeechRecognizer {
     constructor() {
         window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-        this.finalTranscript = localStorage.articleContent;
+        this.finalArticleContentTranscript = $("#article-content").val();
+        this.finalArticleSubjectTranscript = $("#article-subject").val();
         this.recognition = new SpeechRecognition();
         this.letRecognize = true;
         this.InitVariables();
@@ -97,11 +156,17 @@ class ArticleSpeechRecognizer {
         this.recognition.stop();    
         initializeArtyom();
         
-        var contentArticle = $(".article-content").val();
+        var contentArticle = $("#article-content").val();
+        var subjectArticle = $("#article-subject").val();
     
         if(contentArticle !== "")
         {
           localStorage.setItem("articleContent", contentArticle);
+        }
+
+        if( subjectArticle !== "")
+        {
+          localStorage.setItem("articleSubject", subjectArticle);
         }
     }
 
@@ -111,19 +176,29 @@ class ArticleSpeechRecognizer {
             let interimTranscript = '';
             let eventLength = event.results.length;
        
-            for (let i = event.resultIndex; i < eventLength; i++) {
-             
+            for( let i = event.resultIndex; i < eventLength; i++ ) 
+            {
               let transcript = event.results[i][0].transcript;
              
-              if (event.results[i].isFinal) {
-                this.finalTranscript += transcript;       
-              } else {
+              if( event.results[i].isFinal ) 
+              {
+                if( IsSetFocus("articleContent") )
+                {
+                  this.finalArticleContentTranscript += transcript;   
+                }
+                else if( IsSetFocus("articleSubject") )
+                {
+                  this.finalArticleSubjectTranscript += transcript;
+                }    
+              } 
+              else 
+              {
                 interimTranscript += transcript;
               }
             }
 
             if( this.letRecognize 
-              && interimTranscript.toLowerCase().includes("zakończ") 
+             && interimTranscript.toLowerCase().includes("zakończ") 
              && interimTranscript.toLowerCase().includes("artykuł") )
             {
                 this.letRecognize = false;
@@ -133,26 +208,57 @@ class ArticleSpeechRecognizer {
             }
             else
             {
-              if( this.letRecognize )
+              if( this.letRecognize && interimTranscript != "" )
               {
-                console.log(this.finalTranscript+interimTranscript);
-                $(".article-content").val(this.finalTranscript+interimTranscript);    
+                this.AppendRecognizedTextToFocusCtrl(interimTranscript); 
               }
             }
         }
     }
 
+    AppendRecognizedTextToFocusCtrl(interimTranscript)
+    {
+      var focusCtrlIdString = GetFocusCtrlId();
+      var finalContentTranscript = "";
+
+      if( focusCtrlIdString == "article-content" )
+      {
+        finalContentTranscript = this.finalArticleContentTranscript;
+      }
+      else if( focusCtrlIdString == "article-subject" )
+      {
+        finalContentTranscript = this.finalArticleSubjectTranscript;
+      }
+
+      finalContentTranscript += interimTranscript;
+
+      console.log(finalContentTranscript);
+      $("#" + focusCtrlIdString.toString() ).val(finalContentTranscript.toString() ); 
+    }
+
     FixContentTextAfterEndCommand()
     {
-      var textAreaString = $(".article-content").val().toLowerCase();   
-      var lastIndex = textAreaString.lastIndexOf("zakończ");
-      textAreaString = textAreaString.substring(0, lastIndex);
-      $(".article-content").val(textAreaString);
+      var focusCtrlIdString = GetFocusCtrlId();
+      var textAreaString = $("#" + focusCtrlIdString ).val().toLowerCase();   
+      var lastIndex = textAreaString.lastIndexOf("zak");
+      if( lastIndex > 0)
+      {
+        textAreaString = textAreaString.substring(0, lastIndex).trim();
+        $("#" + focusCtrlIdString ).val(textAreaString);
+      }
+      else
+      {
+        console.log("Bad index in FixContentTextAfterEndCommand = " + lastIndex.toString() );
+      }
     }
 
     SaveArticleContentToLocalStorage()
     {
-      localStorage.setItem("articleContent", this.finalTranscript);
+      this.finalArticleContentTranscript = $("#article-content").val();
+      this.finalArticleSubjectTranscript = $("#article-subject").val();
+      
+      localStorage.setItem("articleContent", this.finalArticleContentTranscript);
+      localStorage.setItem("articleSubject", this.finalArticleSubjectTranscript);
     }
 }
 
@@ -169,19 +275,13 @@ function StartRecognition()
 
 function SaveArticleContentToDatabase()
 {
-  var articleContentString = $(".article-content").val();
-
-  var insertionDateTime   = GetCurrentDateTimeString();
-  var lastUpdateDateTime  = GetCurrentDateTimeString();
-  var articleSubjectString = "#TODO Subject example string";
+  var articleContentString = $("#article-content").val();
+  var articleSubjectString = $("#article-subject").val();
 
   var articleObject = 
   { 
     "Subject"         :   articleSubjectString,
     "Content"         :   articleContentString,
-    "InsertionDate"   :   insertionDateTime,
-    "LastUpdateDate"  :   lastUpdateDateTime,
-    "AvailabilityStatus" : true
   };
 
   $.ajax({
@@ -201,17 +301,4 @@ function SaveArticleContentToDatabase()
     console.log("/articles/add success");
     console.log("Article ID: " + result);
   });
-}
-
-function GetCurrentDateTimeString()
-{
-  var date = new Date();
-  var day = date.getDate();       
-  var month = date.getMonth() + 1;    
-  var year = date.getFullYear();  
-  var hour = date.getHours();
-  var minute = date.getMinutes();
-  var second = date.getSeconds();
-
-  return date;
 }
