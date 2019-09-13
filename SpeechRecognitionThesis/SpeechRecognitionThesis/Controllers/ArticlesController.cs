@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.DatabaseModels;
 using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.Scripts;
 using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
@@ -94,7 +95,10 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("My")]
         public IActionResult GetMyArticleView()
         {
-            return View("My");
+            MyArticlesModel myArticlesModel = new MyArticlesModel();
+            SetLoggedUserForAccountUserModel(myArticlesModel);
+
+            return View("My", myArticlesModel);
         }
 
         private void SaveNewGuestArticle( Article article )
@@ -126,6 +130,7 @@ namespace SpeechRecognitionThesis.Controllers
 
             if( user != null )
             {
+                 article.ArticleModificationDate = DateTime.Now.ToString();
                 _repositoryWrapper.Articles.Add( article );
                 _repositoryWrapper.Save(); //After save article object is filled correctly ID from DB
                 _repositoryWrapper.UserArticles.Add( GetNewUserArticle( user, article ) );
@@ -139,9 +144,43 @@ namespace SpeechRecognitionThesis.Controllers
 
             userArticles.ArticleRefId = article.Id;
             userArticles.UserRefId = user.Id;
-            userArticles.ArticleModificationDate = DateTime.Now.ToString(); 
 
             return userArticles;
+        }
+
+        private void SetLoggedUserForAccountUserModel(MyArticlesModel myArticlesModel)
+        {
+            long lUserId = GetLoggedUserId();
+            User loggedUser = null;
+            IEnumerable<UserArticles> userArticlesList = null;
+            List<Article> articleList = null;
+
+            if (myArticlesModel != null
+                && lUserId > -1 )
+            {
+                loggedUser = _repositoryWrapper.Account.GetUser(lUserId);
+                loggedUser.Password = string.Empty;
+                loggedUser.Id = -1;
+
+                myArticlesModel.User = loggedUser;
+                userArticlesList = _repositoryWrapper.UserArticles.GetUserArticles(lUserId);
+
+                if(userArticlesList != null 
+                    && userArticlesList.Count() > 0)
+                {
+                    articleList = _repositoryWrapper.Articles.GetArticles(userArticlesList);
+                    SetCategoryForUserArticles(articleList);
+                    myArticlesModel.UserArticleList = articleList;
+                }
+            }
+        }
+
+        private void SetCategoryForUserArticles(List<Article> articleList)
+        {
+            for( int i = 0; i < articleList.Count; i++)
+            {
+                articleList[i].ArticleCategory = _repositoryWrapper.ArticlesCategory.GetCategory(articleList[i].ArticleCategoryRefId);
+            }
         }
     }
 }

@@ -19,5 +19,8 @@ namespace SpeechRecognitionThesis.Models
         [ForeignKey("ArticleCategory")]
         public long ArticleCategoryRefId { get; set; }
         public ArticleCategory ArticleCategory { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public string ArticleModificationDate { get; set; }
     }
 }

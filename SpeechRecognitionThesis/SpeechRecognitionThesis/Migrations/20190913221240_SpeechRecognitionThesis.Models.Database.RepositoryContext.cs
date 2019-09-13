@@ -53,7 +53,8 @@ namespace SpeechRecognitionThesis.Migrations
                     InsertionDate = table.Column<DateTime>(nullable: false),
                     LastUpdateDate = table.Column<DateTime>(nullable: false),
                     AvailabilityStatus = table.Column<bool>(nullable: false),
-                    ArticleCategoryRefId = table.Column<long>(nullable: false)
+                    ArticleCategoryRefId = table.Column<long>(nullable: false),
+                    ArticleModificationDate = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,8 +74,7 @@ namespace SpeechRecognitionThesis.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserRefId = table.Column<long>(nullable: false),
-                    ArticleRefId = table.Column<long>(nullable: false),
-                    ArticleModificationDate = table.Column<string>(nullable: true)
+                    ArticleRefId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,28 +116,28 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.InsertData(
                 table: "Articles",
-                columns: new[] { "Id", "ArticleCategoryRefId", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
-                values: new object[] { 1L, 1L, false, "To jest treść artykułu 1", new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 1" });
+                columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
+                values: new object[] { 1L, 1L, "14.09.2019 00:12:40", false, "To jest treść artykułu 1", new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 1" });
 
             migrationBuilder.InsertData(
                 table: "Articles",
-                columns: new[] { "Id", "ArticleCategoryRefId", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
-                values: new object[] { 2L, 4L, false, "To jest artykuł 2", new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 2" });
+                columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
+                values: new object[] { 2L, 4L, "14.09.2019 00:12:40", false, "To jest artykuł 2", new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 2" });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
-                columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 1L, "12.09.2019 00:27:53", 1L, 1L });
+                columns: new[] { "Id", "ArticleRefId", "UserRefId" },
+                values: new object[] { 1L, 1L, 1L });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
-                columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 3L, "12.09.2019 00:27:53", 1L, 2L });
+                columns: new[] { "Id", "ArticleRefId", "UserRefId" },
+                values: new object[] { 3L, 1L, 2L });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
-                columns: new[] { "Id", "ArticleModificationDate", "ArticleRefId", "UserRefId" },
-                values: new object[] { 2L, "12.09.2019 00:27:53", 2L, 1L });
+                columns: new[] { "Id", "ArticleRefId", "UserRefId" },
+                values: new object[] { 2L, 2L, 1L });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_ArticleCategoryRefId",

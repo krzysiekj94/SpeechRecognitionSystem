@@ -1,7 +1,44 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.MyArticlesModel
+
 @{
-    ViewData["Title"] = "My";
+    ViewData["Title"] = "Moje artykuły";
+
+    int iImageNumber = int.Parse(@Html.ValueFor(model => model.User.AvatarId)) + 1;
+    string mainAccountAvatar = "/images/" + iImageNumber.ToString() + ".png";
 }
 
-<h2>My</h2>
+<h2>Moje artykuły</h2>
+
+<div class="row my-articles">
+
+    @if (Model.UserArticleList != null)
+    {
+        @foreach (var userArticle in Model.UserArticleList)
+        {
+            <div class="row my-article">
+                <div class="col-sm-3">
+                    <div class="text-center">
+                        <p><h3>@Model.User.NickName</h3></p>
+                        <img src="@mainAccountAvatar" class="img-circle" height="120" width="120" alt="Avatar użytkownika">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <h2>@userArticle.Subject</h2>
+                    <h4 maxlength="100" readonly>@userArticle.Content</h4>
+                    <h3>Kategoria: @userArticle.ArticleCategory.Name</h3>
+                    <h3>Data modyfikacji: @userArticle.ArticleModificationDate</h3>
+                    <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row my-article">
+            <div class="alert alert-warning" role="alert">
+                <h4>Brak artykułów do wyświetlenia!</h4>
+            </div>
+        </div>
+    }
+</div>
 

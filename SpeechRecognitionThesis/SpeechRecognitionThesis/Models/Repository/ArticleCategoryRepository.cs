@@ -17,5 +17,10 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             _repositoryContext = repositoryContext;
         }
+
+        public ArticleCategory GetCategory(long articleCategoryRefId)
+        {
+            return FindAll().FirstOrDefault(category => category.Id == articleCategoryRefId);
+        }
     }
 }

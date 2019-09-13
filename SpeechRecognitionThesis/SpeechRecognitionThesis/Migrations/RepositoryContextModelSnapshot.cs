@@ -27,6 +27,8 @@ namespace SpeechRecognitionThesis.Migrations
 
                     b.Property<long>("ArticleCategoryRefId");
 
+                    b.Property<string>("ArticleModificationDate");
+
                     b.Property<bool>("AvailabilityStatus");
 
                     b.Property<string>("Content");
@@ -48,6 +50,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 1L,
                             ArticleCategoryRefId = 1L,
+                            ArticleModificationDate = "14.09.2019 00:12:40",
                             AvailabilityStatus = false,
                             Content = "To jest treść artykułu 1",
                             InsertionDate = new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -58,6 +61,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 2L,
                             ArticleCategoryRefId = 4L,
+                            ArticleModificationDate = "14.09.2019 00:12:40",
                             AvailabilityStatus = false,
                             Content = "To jest artykuł 2",
                             InsertionDate = new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -112,8 +116,6 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArticleModificationDate");
-
                     b.Property<long>("ArticleRefId");
 
                     b.Property<long>("UserRefId");
@@ -130,21 +132,18 @@ namespace SpeechRecognitionThesis.Migrations
                         new
                         {
                             Id = 1L,
-                            ArticleModificationDate = "12.09.2019 00:27:53",
                             ArticleRefId = 1L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 2L,
-                            ArticleModificationDate = "12.09.2019 00:27:53",
                             ArticleRefId = 2L,
                             UserRefId = 1L
                         },
                         new
                         {
                             Id = 3L,
-                            ArticleModificationDate = "12.09.2019 00:27:53",
                             ArticleRefId = 1L,
                             UserRefId = 2L
                         });

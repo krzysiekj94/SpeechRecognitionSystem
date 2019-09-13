@@ -58,7 +58,7 @@ function addComandsToArtyom()
             {
                 indexes: ["moje artykuły"],
                 action: function(){
-                    artyom.say("Przekierowuję na stronę Twoich artykułów.");
+                    window.open("/articles/my","_self");
                 }
             },
             {

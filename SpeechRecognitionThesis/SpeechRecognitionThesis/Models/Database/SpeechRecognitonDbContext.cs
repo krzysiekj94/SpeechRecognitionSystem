@@ -89,7 +89,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Content = "To jest treść artykułu 1",
                 InsertionDate = new DateTime(2017, 04, 25),
                 LastUpdateDate = new DateTime(2018, 05, 11),
-
+                ArticleModificationDate = DateTime.Now.ToString(),
             },
             new Article
             {
@@ -99,6 +99,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Content = "To jest artykuł 2",
                 InsertionDate = new DateTime(2019, 05, 05),
                 LastUpdateDate = new DateTime(2019, 05, 05),
+                ArticleModificationDate = DateTime.Now.ToString(),
             });
         }
 
@@ -109,21 +110,18 @@ namespace SpeechRecognitionThesis.Models.Database
                 Id = 1,
                 UserRefId = 1,
                 ArticleRefId = 1,
-                ArticleModificationDate = DateTime.Now.ToString()
             },
             new UserArticles
             {
                 Id = 2,
                 UserRefId = 1,
                 ArticleRefId = 2,
-                ArticleModificationDate = DateTime.Now.ToString()
             },
             new UserArticles
             {
                 Id = 3,
                 UserRefId = 2,
                 ArticleRefId = 1,
-                ArticleModificationDate = DateTime.Now.ToString(),
             });
         }
 

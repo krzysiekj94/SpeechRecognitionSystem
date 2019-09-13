@@ -20,8 +20,5 @@ namespace SpeechRecognitionThesis.Models.DatabaseModels
         [ForeignKey("Article")]
         public long ArticleRefId { get; set; }
         public Article Article { get; set; }
-
-        [DataType(DataType.DateTime)]
-        public string ArticleModificationDate { get; set; }
     }
 }

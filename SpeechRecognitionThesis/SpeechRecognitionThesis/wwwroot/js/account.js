@@ -26,6 +26,10 @@ $(document).ready(function() {
         ChangeAccountIcon();
     });
 
+    $( ".your-articles-button" ).click(function() {
+        window.open("/articles/my","_self");
+      });
+
     function ChangeAccountIcon()
     {
         var htmlString = GetUserIconHtmlString();
