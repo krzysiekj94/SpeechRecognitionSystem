@@ -1,5 +1,6 @@
 var articleRecognizer = null;
 var bIsChanged = false;
+var articleCategoryArray = null;
 
 //article textarea handlers
 $(window).on('load', function () {
@@ -10,6 +11,7 @@ $(window).on('load', function () {
   var articleSubject = articleSubjectLocalStorage ? articleSubjectLocalStorage : "";
   $("#article-content").val(articleContent);
   $("#article-subject").val(articleSubject);
+
 });
 
 $(document).ready(function(){ 
@@ -62,9 +64,23 @@ $( ".clear-article-button" ).click(function() {
 //article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
+    LoadCategoryFromDb();
     LoadArticlesBaseCommand();
     LoadLettersAndNumbersCommands();
     LoadSpecialCharactersCommands();
+    LoadCategoryCommands();
+
+    function LoadCategoryCommands()
+    {
+      artyom.addCommands([
+        {
+            indexes: articleCategoryArray,
+            action: function(indexOfArray){
+              $("#article-category").val( indexOfArray + 1 );
+            }
+        },
+      ]);
+    }
 
     function LoadArticlesBaseCommand()
     {
@@ -333,4 +349,28 @@ function SaveArticleContentToDatabase()
     console.log("/articles/add success");
     console.log("Article ID: " + result);
   });
+}
+
+function LoadCategoryFromDb()
+{
+  articleCategoryArray = new Array();
+
+    $.ajax({
+        url           :     '/category/results',
+        type          :     'GET',
+        contentType   :     'application/json; charset=utf-8',
+     })
+     .done(function(categories) {
+        AddCategoryToArray(categories);
+     });
+}
+
+function AddCategoryToArray(categories)
+{
+  if(categories != null)
+  {
+    categories.forEach(function(category){            
+      articleCategoryArray.push(category.name);
+      });
+  }
 }
