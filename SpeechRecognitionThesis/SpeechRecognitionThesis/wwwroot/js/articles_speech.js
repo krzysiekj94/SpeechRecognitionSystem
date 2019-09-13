@@ -2,7 +2,7 @@ var articleRecognizer = null;
 var bIsChanged = false;
 var articleCategoryArray = null;
 
-//article textarea handlers
+//article subject/content/select category handlers
 $(window).on('load', function () {
   var articleContentLocalStorage = localStorage.getItem("articleContent");
   var articleSubjectLocalStorage = localStorage.getItem("articleSubject");
@@ -12,6 +12,31 @@ $(window).on('load', function () {
   $("#article-content").val(articleContent);
   $("#article-subject").val(articleSubject);
 
+});
+
+$(document).ready(function(){ 
+  $("#article-subject").change(function(){
+    
+    var contentSubject = $("#article-subject").val();
+    
+    if(articleRecognizer != null)
+    {
+      articleRecognizer.finalArticleSubjectTranscript = contentSubject;
+      localStorage.setItem("articleSubject", contentSubject);
+      bIsChanged = true;
+    }
+  }); 
+});
+
+$('#article-subject').on('input', function() {
+  var contentSubject = $("#article-subject").val();
+    
+  if(articleRecognizer != null)
+  {
+    articleRecognizer.finalArticleSubjectTranscript = contentSubject;
+    localStorage.setItem("articleSubject", contentSubject);
+    bIsChanged = true;
+  }
 });
 
 $(document).ready(function(){ 
@@ -56,15 +81,10 @@ $( ".clear-article-button" ).click(function() {
   }
 });
 
-//#TODO handlers for article subject 
-//
-//
-//
-
 //article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
-    LoadCategoryFromDb();
+    LoadCategoryCommandFromDb();
     LoadArticlesBaseCommand();
     LoadLettersAndNumbersCommands();
     LoadSpecialCharactersCommands();
@@ -351,6 +371,11 @@ function SaveArticleContentToDatabase()
   });
 }
 
+function LoadCategoryCommandFromDb()
+{
+  LoadCategoryFromDb();
+}
+
 function LoadCategoryFromDb()
 {
   articleCategoryArray = new Array();
@@ -370,7 +395,7 @@ function AddCategoryToArray(categories)
   if(categories != null)
   {
     categories.forEach(function(category){            
-      articleCategoryArray.push(category.name);
+      articleCategoryArray.push("Wybierz " + category.name);
       });
   }
 }
