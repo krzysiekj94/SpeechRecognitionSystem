@@ -14,20 +14,6 @@ $(window).on('load', function () {
 
 });
 
-$(document).ready(function(){ 
-  $("#article-subject").change(function(){
-    
-    var contentSubject = $("#article-subject").val();
-    
-    if(articleRecognizer != null)
-    {
-      articleRecognizer.finalArticleSubjectTranscript = contentSubject;
-      localStorage.setItem("articleSubject", contentSubject);
-      bIsChanged = true;
-    }
-  }); 
-});
-
 $('#article-subject').on('input', function() {
   var contentSubject = $("#article-subject").val();
     
@@ -37,20 +23,6 @@ $('#article-subject').on('input', function() {
     localStorage.setItem("articleSubject", contentSubject);
     bIsChanged = true;
   }
-});
-
-$(document).ready(function(){ 
-  $("#article-content").change(function(){
-    
-    var contentArticle = $("#article-content").val();
-    
-    if(articleRecognizer != null)
-    {
-      articleRecognizer.finalArticleContentTranscript = contentArticle;
-      localStorage.setItem("articleContent", contentArticle);
-      bIsChanged = true;
-    }
-  }); 
 });
 
 $('#article-content').on('input', function() {
@@ -182,7 +154,7 @@ class ArticleSpeechRecognizer {
 
     InitVariables() {
         this.recognition.interimResults = true;
-        this.recognition.maxAlternatives = 1;
+        this.recognition.maxAlternatives = 10;
         this.recognition.continuous = true;
         this.recognition.lang = "pl-PL"
     }
@@ -214,33 +186,25 @@ class ArticleSpeechRecognizer {
 
             let interimTranscript = '';
             let eventLength = event.results.length;
-       
-            if( bIsChanged )
+            
+            for( let i = event.resultIndex; i < eventLength; i++ ) 
             {
-                interimTranscript = "";
-                bIsChanged = false;
-            }
-            else
-            {
-              for( let i = event.resultIndex; i < eventLength; i++ ) 
+              let transcript = event.results[i][0].transcript;
+              
+              if( event.results[i].isFinal ) 
               {
-                let transcript = event.results[i][0].transcript;
-               
-                if( event.results[i].isFinal ) 
+                if( IsSetFocus("article-content") )
                 {
-                  if( IsSetFocus("articleContent") )
-                  {
-                    this.finalArticleContentTranscript += transcript;   
-                  }
-                  else if( IsSetFocus("articleSubject") )
-                  {
-                    this.finalArticleSubjectTranscript += transcript;
-                  }    
-                } 
-                else 
-                {
-                  interimTranscript += transcript;
+                  this.finalArticleContentTranscript += transcript;   
                 }
+                else if( IsSetFocus("article-subject") )
+                {
+                  this.finalArticleSubjectTranscript += transcript;
+                }    
+              } 
+              else 
+              {
+                interimTranscript += transcript;
               }
             }
 
@@ -267,7 +231,7 @@ class ArticleSpeechRecognizer {
     {
       var focusCtrlIdString = GetFocusCtrlId();
       var finalContentTranscript = "";
-
+      
       if( focusCtrlIdString == "article-content" )
       {
         finalContentTranscript = this.finalArticleContentTranscript;
@@ -276,10 +240,14 @@ class ArticleSpeechRecognizer {
       {
         finalContentTranscript = this.finalArticleSubjectTranscript;
       }
-
-      if( !this.IsStringContainAnotherAtEnd( finalContentTranscript, interimTranscript ) )
+      
+      if( !bIsChanged )
       {
-          finalContentTranscript += interimTranscript;
+        finalContentTranscript += interimTranscript;
+      }
+      else
+      {
+        bIsChanged = false;
       }
 
       console.log(finalContentTranscript);
@@ -345,11 +313,13 @@ function SaveArticleContentToDatabase()
 {
   var articleContentString = $("#article-content").val();
   var articleSubjectString = $("#article-subject").val();
+  var articleCategoryString = $("#article-category").val();
 
   var articleObject = 
   { 
-    "Subject"         :   articleSubjectString,
-    "Content"         :   articleContentString,
+    "Subject"               :   articleSubjectString,
+    "Content"               :   articleContentString,
+    "ArticleCategoryRefId"  :   articleCategoryString,
   };
 
   $.ajax({
@@ -362,7 +332,33 @@ function SaveArticleContentToDatabase()
         RequestVerificationToken: 
             $('input:hidden[name="__RequestVerificationToken"]').val()
     },
-    data: JSON.stringify(articleObject)
+    data: JSON.stringify(articleObject),
+    statusCode: {
+      200: 
+          function(){
+              Swal.fire({
+                  position: 'center',
+                  type: 'success',
+                  title: 'Artykuł został pomyślnie dodany!',
+                  showConfirmButton: true,
+                  timer: 3000
+                }).then(function(){
+                  //do nothing
+                });
+          },
+      400: 
+          function () {
+              Swal.fire({
+                  position: 'center',
+                  type: 'error',
+                  title: 'Wystąpił błąd przy dodawaniu artykułu! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz',
+                  showConfirmButton: true,
+                  timer: 3000
+                }).then(function(){
+                  //do nothing
+                });
+          }
+      }
   })
   .done(function(result) 
   {

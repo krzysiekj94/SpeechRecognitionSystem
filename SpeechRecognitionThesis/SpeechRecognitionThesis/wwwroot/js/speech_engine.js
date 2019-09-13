@@ -110,7 +110,7 @@ function GetFocusCtrlId()
 
 function IsSetFocus(idCtrlString)
 {
-  return (idCtrlString == GetFocusCtrlId);
+  return (idCtrlString == GetFocusCtrlId() );
 }
 
 function LoadSpecialCharactersCommands()
