@@ -27,7 +27,11 @@
                     <h4 maxlength="100" readonly>@userArticle.Content</h4>
                     <h3>Kategoria: @userArticle.ArticleCategory.Name</h3>
                     <h3>Data modyfikacji: @userArticle.ArticleModificationDate</h3>
-                    <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                    <form action="/articles/@userArticle.Id" method="get">
+                        <h4>
+                            <input class="news-see-more-button btn-danger" type="submit" value="Zobacz więcej"/>
+                        </h4>
+                    </form>
                 </div>
             </div>
         }

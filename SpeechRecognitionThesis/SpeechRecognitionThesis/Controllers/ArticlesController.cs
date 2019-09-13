@@ -101,6 +101,13 @@ namespace SpeechRecognitionThesis.Controllers
             return View("My", myArticlesModel);
         }
 
+        [HttpGet]
+        [Route("{articleId}")]
+        public IActionResult GetArticleView( [FromRoute] int articleId )
+        {
+            return View("Article");
+        }
+
         private void SaveNewGuestArticle( Article article )
         {
             User anonymousUser = _repositoryWrapper.Account.GetAnonymousUser();
