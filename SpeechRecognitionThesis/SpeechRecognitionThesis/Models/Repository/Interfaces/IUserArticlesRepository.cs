@@ -10,5 +10,6 @@ namespace SpeechRecognitionThesis.Models.Repository.Interfaces
     {
         IEnumerable<UserArticles> GetUserArticles(long lUserId);
         IEnumerable<UserArticles> DeleteArticles( long lUserId );
+        UserArticles GetUserArticle(long lArticleId, long lUserId);
     }
 }

@@ -1,7 +1,36 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.ConcreteArticleModel
+
 @{
     ViewData["Title"] = "Karta artykułu";
+
+    int iImageNumber = int.Parse(@Html.ValueFor(model => model.UserArticle.User.AvatarId)) + 1;
+    string mainAccountAvatar = "/images/" + iImageNumber.ToString() + ".png";
+    long lLoggedUserId = TokenProvider.GetLoggedUserId( User.Identity );
 }
 
 <h2>Karta artykułu</h2>
 
+<div class="row article">
+    <div class="row my-article">
+        <div class="col-sm-3">
+            <div class="text-center">
+                <p><h3>@Model.UserArticle.User.NickName</h3></p>
+                <img src="@mainAccountAvatar" class="img-circle" height="120" width="120" alt="Avatar użytkownika">
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <h2>@Model.Article.Subject</h2>
+            <h4 maxlength="100" readonly>@Model.Article.Content</h4>
+            <h3>Kategoria: @Model.Article.ArticleCategory.Name</h3>
+            <h3>Data modyfikacji: @Model.Article.ArticleModificationDate</h3>
+            @if (lLoggedUserId == Model.UserArticle.User.Id)
+            {
+                <form action="/articles/@Model.Article.Id" method="get">
+                    <h4>
+                        <input class="news-see-more-button btn-danger" type="submit" value="Zobacz więcej" />
+                    </h4>
+                </form>
+            }
+        </div>
+    </div>
+</div>

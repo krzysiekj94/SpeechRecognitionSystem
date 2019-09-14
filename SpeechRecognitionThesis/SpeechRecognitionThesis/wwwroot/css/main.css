@@ -14,7 +14,7 @@
 	padding: 10px;
 }
 
-.news-see-more-button{
+.edit-article-button, .news-see-more-button{
 	float: right;
 	margin-bottom: 5px;
 	margin-right: 5%;

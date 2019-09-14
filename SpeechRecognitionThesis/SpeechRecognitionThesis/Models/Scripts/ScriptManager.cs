@@ -21,6 +21,13 @@ namespace SpeechRecognitionThesis.Models.Scripts
         {
             string urlPathString = SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING;
 
+            if( urlRelativePathString.Any(char.IsDigit) 
+                && urlRelativePathString.Contains("articles")
+                && urlRelativePathString.Contains("edit") )
+            {
+                urlRelativePathString = ADD_ARTICLES_RELATIVE_PATH_STRING;
+            }
+
             switch( urlRelativePathString.ToLower() )
             {
                 case ADD_ARTICLES_RELATIVE_PATH_STRING:

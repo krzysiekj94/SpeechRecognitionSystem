@@ -102,10 +102,110 @@ namespace SpeechRecognitionThesis.Controllers
         }
 
         [HttpGet]
-        [Route("{articleId}")]
-        public IActionResult GetArticleView( [FromRoute] int articleId )
+        [Route("{lArticleId}")]
+        public IActionResult GetArticleView( [FromRoute] long lArticleId)
         {
-            return View("Article");
+            ConcreteArticleModel concreteArticleModel = new ConcreteArticleModel();
+            FillConcreteArticleModel(concreteArticleModel, lArticleId);
+
+            return View( "Article", concreteArticleModel );
+        }
+
+        private void FillConcreteArticleModel(ConcreteArticleModel concreteArticleModel, long lArticleId)
+        {
+            Article conreteArticle = _repositoryWrapper.Articles.GetArticle(lArticleId);
+            UserArticles concreteUserArticle = _repositoryWrapper.UserArticles
+                                                .GetUserArticle(lArticleId, GetLoggedUserId());
+            conreteArticle.ArticleCategory = _repositoryWrapper.ArticlesCategory
+                                            .GetCategory(conreteArticle.ArticleCategoryRefId);
+            concreteUserArticle.User = _repositoryWrapper.Account.GetUser(GetLoggedUserId());
+            concreteUserArticle.User.Password = "";
+
+            concreteArticleModel.Article = conreteArticle;
+            concreteArticleModel.UserArticle = concreteUserArticle;
+        }
+
+        [HttpGet]
+        [Route("{lArticleId}/edit")]
+        public IActionResult GetEditArticleView( [FromRoute] long lArticleId )
+        {
+            EditConcreteArticleModel editConcreteArticleModel = new EditConcreteArticleModel();
+            ConcreteArticleModel concreteArticleModel = new ConcreteArticleModel();
+            editConcreteArticleModel.ConcreteArticleModel = concreteArticleModel;
+            FillConcreteArticleModel(editConcreteArticleModel.ConcreteArticleModel, lArticleId);
+            editConcreteArticleModel.ArticleCategoryList = _repositoryWrapper.ArticlesCategory.FindAll().ToList();
+
+
+            return View( "Edit", editConcreteArticleModel );
+        }
+
+        [HttpPut]
+        [ValidateAntiForgeryToken]
+        [Route("{lArticleId}")]
+        public IActionResult UpdateUserArticle( [FromRoute] long lArticleId, [FromBody] Article article )
+        {
+            if( article == null || lArticleId < 0)
+            {
+                return BadRequest("Article is null.");
+            }
+
+            long iLoggedUserId = -1;
+
+            if( HttpContext.User.Identity.IsAuthenticated )
+            {
+                iLoggedUserId = GetLoggedUserId();
+
+                if( iLoggedUserId > -1 )
+                {
+                    UpdateUserArticleDb( iLoggedUserId, lArticleId, article );
+                }
+            }
+            else
+            {
+                return BadRequest("Article for guest will be not editable!");
+            }
+
+            return Ok();
+        }
+
+        private void UpdateUserArticleDb( long lLoggedUserId, long lArticleId, Article article )
+        {
+            User user = _repositoryWrapper.Account.GetUser( lLoggedUserId );
+            Article articleFromDb = _repositoryWrapper.Articles.GetArticle( lArticleId );
+            bool bIsChange = false;
+
+            if ( user != null && articleFromDb != null )
+            {
+                if( article.ArticleCategoryRefId > -1 
+                    && articleFromDb.ArticleCategoryRefId != article.ArticleCategoryRefId )
+                {
+                    articleFromDb.ArticleCategoryRefId = article.ArticleCategoryRefId;
+                    bIsChange = true;
+                }
+
+                if( article.Subject != null
+                    && article.Subject.Length > 0 
+                    && article.Subject != articleFromDb.Subject )
+                {
+                    articleFromDb.Subject = article.Subject;
+                    bIsChange = true;
+                }
+
+                if (article.Content != null
+                    && article.Content.Length > 0
+                    && article.Content != articleFromDb.Content)
+                {
+                    articleFromDb.Content = article.Content;
+                    bIsChange = true;
+                }
+
+                if( bIsChange )
+                {
+                    articleFromDb.ArticleModificationDate = DateTime.Now.ToString();
+                    _repositoryWrapper.Articles.Update( articleFromDb );
+                    _repositoryWrapper.Save();
+                }
+            }
         }
 
         private void SaveNewGuestArticle( Article article )

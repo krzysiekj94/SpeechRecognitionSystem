@@ -11,5 +11,6 @@ namespace SpeechRecognitionThesis.Models.Repository
         Article GetLastAddedArticle();
         void DeleteArticles(IEnumerable<UserArticles> userArticlesEnumerable);
         List<Article> GetArticles(IEnumerable<UserArticles> userArticlesEnumerable);
+        Article GetArticle( long lArticleId );
     }
 }

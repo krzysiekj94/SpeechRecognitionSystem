@@ -1,7 +1,35 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.EditConcreteArticleModel
+
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja artykułu";
+
+    int iImageNumber = int.Parse(@Html.ValueFor(model => model.ConcreteArticleModel.UserArticle.User.AvatarId)) + 1;
+    string mainAccountAvatar = "/images/" + iImageNumber.ToString() + ".png";
+
+    long lLoggedUserId = TokenProvider.GetLoggedUserId(User.Identity);
 }
 
-<h2>Edit</h2>
+<h2>Edycja artykułu</h2>
+
+<div class="row menu-news-content">
+    <div class="form-group">
+        <label for="article-subject">Temat artykułu</label>
+        <input type="text" class="form-control" id="article-subject" placeholder="Wpisz temat artykułu tutaj" 
+        value="@Model.ConcreteArticleModel.Article.Subject" autofocus>
+    </div>
+    <div class="form-group">
+        <label for="article-category">Wybierz kategorię artykułu:</label>
+        <br />
+        <select id="article-category" size="6"
+                asp-items="@(new SelectList(Model.ArticleCategoryList,"Id","Name", Model.ConcreteArticleModel.Article.ArticleCategoryRefId))"></select>
+    </div>
+    <div class="form-group">
+        <label for="comment">Treść artykułu:</label>
+        @Html.AntiForgeryToken()
+        <textarea class="article-content form-control" rows="5" id="article-content" 
+        placeholder="Wpisz treść artykułu tutaj">@Model.ConcreteArticleModel.Article.Content</textarea>
+        <button name="update-article-button" class="update-article-button alert-success" type="submit">Zapisz artykuł</button>
+        <button class="clear-article-button alert-danger" type="submit">Wyczyść artykuł</button>
+    </div>
+</div>
 

@@ -37,5 +37,11 @@ namespace SpeechRecognitionThesis.Models.Repository
             return FindAll()
                 .Where(user => user.UserRefId == lUserId).ToList();
         }
+
+        public UserArticles GetUserArticle(long lArticleId, long lUserId)
+        {
+            return FindAll().FirstOrDefault( userArticle => 
+                userArticle.ArticleRefId == lArticleId && userArticle.UserRefId == lUserId );
+        }
     }
 }

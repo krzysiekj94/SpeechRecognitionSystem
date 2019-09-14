@@ -27,9 +27,9 @@
                     <h4 maxlength="100" readonly>@userArticle.Content</h4>
                     <h3>Kategoria: @userArticle.ArticleCategory.Name</h3>
                     <h3>Data modyfikacji: @userArticle.ArticleModificationDate</h3>
-                    <form action="/articles/@userArticle.Id" method="get">
+                    <form action="/articles/@userArticle.Id/edit" method="get">
                         <h4>
-                            <input class="news-see-more-button btn-danger" type="submit" value="Zobacz więcej"/>
+                            <input class="edit-article-button btn-danger" type="submit" value="Edytuj"/>
                         </h4>
                     </form>
                 </div>

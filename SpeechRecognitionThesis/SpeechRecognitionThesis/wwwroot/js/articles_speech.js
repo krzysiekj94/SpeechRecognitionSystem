@@ -3,16 +3,41 @@ var bIsChanged = false;
 var articleCategoryArray = null;
 
 //article subject/content/select category handlers
-$(window).on('load', function () {
-  var articleContentLocalStorage = localStorage.getItem("articleContent");
-  var articleSubjectLocalStorage = localStorage.getItem("articleSubject");
-  
-  var articleContent = articleContentLocalStorage ? articleContentLocalStorage : "";
-  var articleSubject = articleSubjectLocalStorage ? articleSubjectLocalStorage : "";
-  $("#article-content").val(articleContent);
-  $("#article-subject").val(articleSubject);
-
+$(window).on('load', function(){
+  if( !IsEditArticleMode() )
+  {
+    var articleContentLocalStorage = localStorage.getItem("articleContent");
+    var articleSubjectLocalStorage = localStorage.getItem("articleSubject");
+    
+    var articleContent = articleContentLocalStorage ? articleContentLocalStorage : "";
+    var articleSubject = articleSubjectLocalStorage ? articleSubjectLocalStorage : "";
+    $("#article-content").val(articleContent);
+    $("#article-subject").val(articleSubject);
+  }
 });
+
+function GetLastPartOfUrlPath()
+{
+  var urlString = window.location.pathname;
+  urlString = urlString.substring( urlString.lastIndexOf('/') + 1 );
+
+  return urlString;
+}
+
+function IsEditArticleMode()
+{
+  var modeFromUrlString = GetLastPartOfUrlPath();
+  return ( modeFromUrlString == "edit" );
+}
+
+function GetArticleIdFromUrl()
+{
+  var urlString = window.location.pathname;
+  urlString = urlString.replace("/edit", ""); 
+  urlString = urlString.substring( urlString.lastIndexOf('/') + 1 )
+
+  return urlString;
+}
 
 $('#article-subject').on('input', function() {
   var contentSubject = $("#article-subject").val();
@@ -37,7 +62,11 @@ $('#article-content').on('input', function() {
 });
 
 $( ".save-article-button" ).click(function() {
-  SaveArticleContentToDatabase();
+  SaveArticleContentToDatabase("save");
+});
+
+$( ".update-article-button" ).click(function() {
+  SaveArticleContentToDatabase("update");
 });
 
 $( ".clear-article-button" ).click(function() {
@@ -88,7 +117,14 @@ $.getScript("/js/speech_engine.js", function(){
         {
             indexes: ["zapisz artykuł"],
             action: function(){
-              SaveArticleContentToDatabase(); 
+              if( IsEditArticleMode() )
+              {
+                SaveArticleContentToDatabase("update"); 
+              }
+              else
+              {
+                SaveArticleContentToDatabase("save");
+              }
             },
         },
         {
@@ -309,11 +345,14 @@ function StartRecognition()
 }
 
 
-function SaveArticleContentToDatabase()
+function SaveArticleContentToDatabase(stateString)
 {
   var articleContentString = $("#article-content").val();
   var articleSubjectString = $("#article-subject").val();
   var articleCategoryString = $("#article-category").val();
+  var urlAction = "";
+  var idFromUrl = "";
+  var methodAction = "";
 
   var articleObject = 
   { 
@@ -322,9 +361,21 @@ function SaveArticleContentToDatabase()
     "ArticleCategoryRefId"  :   articleCategoryString,
   };
 
+  if( stateString == "save" )
+  {
+    urlAction = "/articles/add";
+    methodAction = "GET";
+  }
+  else if( stateString == "update" )
+  {
+    idFromUrl = GetArticleIdFromUrl();
+    urlAction = "/articles/" + idFromUrl;
+    methodAction = "PUT";
+  }
+
   $.ajax({
-    url           : '/articles/add',
-    type          : 'POST',
+    url           : urlAction,
+    type          : methodAction,
     contentType   : 'application/json; charset=utf-8',
     dataType      : 'json',
     headers       : 
@@ -339,7 +390,7 @@ function SaveArticleContentToDatabase()
               Swal.fire({
                   position: 'center',
                   type: 'success',
-                  title: 'Artykuł został pomyślnie dodany!',
+                  title: 'Artykuł został pomyślnie dodany/zaktualizowany!',
                   showConfirmButton: true,
                   timer: 3000
                 }).then(function(){
@@ -351,7 +402,7 @@ function SaveArticleContentToDatabase()
               Swal.fire({
                   position: 'center',
                   type: 'error',
-                  title: 'Wystąpił błąd przy dodawaniu artykułu! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz',
+                  title: 'Wystąpił błąd przy dodawaniu/aktualizacji artykułu! Sprawdź poprawność wpisanych danych i spróbuj jeszcze raz',
                   showConfirmButton: true,
                   timer: 3000
                 }).then(function(){
