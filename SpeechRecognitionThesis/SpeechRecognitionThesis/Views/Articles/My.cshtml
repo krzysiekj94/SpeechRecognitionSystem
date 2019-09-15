@@ -27,9 +27,12 @@
                     <h4 maxlength="100" readonly>@userArticle.Content</h4>
                     <h3>Kategoria: @userArticle.ArticleCategory.Name</h3>
                     <h3>Data modyfikacji: @userArticle.ArticleModificationDate</h3>
-                    <form class="article-form" action="/articles/@userArticle.Id/edit" method="get">
+                    <h4>
+                        <button class="delete-article-button btn-danger" type="submit" value="@userArticle.Id">Usuń</button>
+                    </h4>
+                    <form class="article-edit-form" action="/articles/@userArticle.Id/edit" method="get">
                         <h4>
-                            <input class="edit-article-button btn-danger" type="submit" value="Edytuj"/>
+                            <input class="edit-article-button btn-success" type="submit" value="Edytuj" />
                         </h4>
                     </form>
                 </div>

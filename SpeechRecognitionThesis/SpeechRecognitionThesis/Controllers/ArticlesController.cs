@@ -168,6 +168,48 @@ namespace SpeechRecognitionThesis.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("{lArticleId}")]
+        public IActionResult DeleteUserArticle([FromRoute] long lArticleId )
+        {
+            if( lArticleId < 0)
+            {
+                return BadRequest("Article is null.");
+            }
+
+            long iLoggedUserId = -1;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                iLoggedUserId = GetLoggedUserId();
+
+                if( iLoggedUserId > -1 )
+                {
+                    DeleteUserArticleDb( iLoggedUserId, lArticleId );
+                }
+            }
+            else
+            {
+                return BadRequest("Article for guest will be not editable!");
+            }
+
+            return Ok();
+        }
+
+        private void DeleteUserArticleDb( long lLoggedUserId, long lArticleId )
+        {
+            User user = _repositoryWrapper.Account.GetUser(lLoggedUserId);
+            Article articleFromDb = _repositoryWrapper.Articles.GetArticle(lArticleId);
+            UserArticles userArticleFromDb = _repositoryWrapper.UserArticles.GetUserArticle(articleFromDb.Id, user.Id);
+
+            if( user != null && articleFromDb != null && userArticleFromDb != null )
+            {
+                _repositoryWrapper.UserArticles.Delete(userArticleFromDb);
+                _repositoryWrapper.Articles.Delete(articleFromDb);
+                _repositoryWrapper.Save();
+            }
+        }
+
         private void UpdateUserArticleDb( long lLoggedUserId, long lArticleId, Article article )
         {
             User user = _repositoryWrapper.Account.GetUser( lLoggedUserId );
