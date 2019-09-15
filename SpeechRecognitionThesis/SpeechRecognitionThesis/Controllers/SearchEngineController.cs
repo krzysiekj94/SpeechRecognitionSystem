@@ -33,7 +33,10 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("Results")]
         public IActionResult GetAllArticles()
         {
-            return Json( _repositoryWrapper.Articles.FindAll().ToList() );
+            List<Article> articleList = _repositoryWrapper.Articles.FindAll().ToList();
+            articleList.ForEach( article => article.ArticleCategory = _repositoryWrapper.ArticlesCategory.GetCategory(article.ArticleCategoryRefId) );
+
+            return Json( articleList );
         }
 
         [AllowAnonymous]

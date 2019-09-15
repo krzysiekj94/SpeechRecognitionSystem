@@ -30,12 +30,11 @@ function LoadArticleView(filterValue)
             {
                 $articlesResultElement.append(
                     '<li class="list-group-item article-result">'
-                            + 'Artykuł ID: '            + article.id 
-                            + '<br/>Subject: '          + article.subject
-                            + '<br/>Content: '          + article.content
-                            //+ '<br/>Kategoria: '        + article.category
-                            + '<br/>Data utworzenia: '  + article.insertionDate
-                            + '<br/>Data modyfikacji: ' + article.lastUpdateDate
+                            + 'Temat: '                 + article.subject
+                            + '<br/>Treść: '            + article.content
+                            + '<br/>Kategoria: '        + article.articleCategory.name
+                            + '<br/>Data modyfikacji: ' + article.articleModificationDate
+                            + '<button class="see-article-button btn-success" type="submit" value="' + article.id + '">Zobacz</button>'
                     +  '</li>'); 
 
                     iCounterAddedArticles++;
