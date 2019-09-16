@@ -344,7 +344,6 @@ function StartRecognition()
     }
 }
 
-
 function SaveArticleContentToDatabase(stateString)
 {
   var articleContentString = $("#article-content").val();
@@ -364,7 +363,7 @@ function SaveArticleContentToDatabase(stateString)
   if( stateString == "save" )
   {
     urlAction = "/articles/add";
-    methodAction = "GET";
+    methodAction = "POST";
   }
   else if( stateString == "update" )
   {

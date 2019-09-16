@@ -15,6 +15,8 @@ namespace SpeechRecognitionThesis.Models.Scripts
         const string MY_ARTICLES_SCRIPT_RELATIVE_PATH_STRING            = "/js/myarticles.js";
         const string REGISTER_NEW_USER_SCRIPT_RELATIVE_PATH_STRING      = "/js/register.js";
         const string REGISTER_NEW_USER_RELATIVE_PATH_STRING             = "/register";
+        const string SEARCH_RELATIVE_PATH_STRING                        = "/search";
+        const string SEARCH_SCRIPT_RELATIVE_PATH_STRING                 = "/js/search.js";
         const string LOGIN_USER_RELATIVE_PATH_STRING                    = "/login";
         const string LOGIN_SCRIPT_RELATIVE_PATH_STRING                  = "/js/login.js";
         const string ACCOUNT_RELATIVE_PATH_STRING                       = "/account";
@@ -46,6 +48,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
                     break;
                 case MY_ARTICLES_RELATIVE_PATH_STRING:
                     urlPathString = MY_ARTICLES_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
+                case SEARCH_RELATIVE_PATH_STRING:
+                    urlPathString = SEARCH_SCRIPT_RELATIVE_PATH_STRING;
                     break;
                 default:
                     break;
