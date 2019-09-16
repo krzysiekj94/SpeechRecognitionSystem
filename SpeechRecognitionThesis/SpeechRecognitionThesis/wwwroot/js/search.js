@@ -16,6 +16,12 @@ $(".search-text-input").keyup(function(){
     LoadArticleView(searchText);
 });
 
+$(document).on( 'click', '.see-article-button', function()
+{
+    var idArticle = $(this).val();
+    window.open( "/articles/" + idArticle.toString(), "_self" );
+});
+
 //functions
 function LoadArticleView(filterValue)
 {
@@ -24,9 +30,9 @@ function LoadArticleView(filterValue)
     if(articleArray != null 
         && articleArray.length > 0)
     {
-        articleArray.forEach(function(article) 
+        articleArray.forEach(function( article ) 
         {
-            if( IsCompatibilityWithFilter(article,filterValue) )
+            if( IsCompatibilityWithFilter( article,filterValue ) )
             {
                 $articlesResultElement.append(
                     '<li class="list-group-item article-result">'

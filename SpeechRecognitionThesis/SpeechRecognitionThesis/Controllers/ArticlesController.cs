@@ -106,19 +106,38 @@ namespace SpeechRecognitionThesis.Controllers
         public IActionResult GetArticleView( [FromRoute] long lArticleId)
         {
             ConcreteArticleModel concreteArticleModel = new ConcreteArticleModel();
-            FillConcreteArticleModel(concreteArticleModel, lArticleId);
+            FillConcreteArticleModel( concreteArticleModel, lArticleId, -1 );
 
             return View( "Article", concreteArticleModel );
         }
 
-        private void FillConcreteArticleModel(ConcreteArticleModel concreteArticleModel, long lArticleId)
+        private void FillConcreteArticleModel(ConcreteArticleModel concreteArticleModel, long lArticleId, long lUserId )
         {
             Article conreteArticle = _repositoryWrapper.Articles.GetArticle(lArticleId);
-            UserArticles concreteUserArticle = _repositoryWrapper.UserArticles
-                                                .GetUserArticle(lArticleId, GetLoggedUserId());
+            UserArticles concreteUserArticle = new UserArticles();
+
+            if(lUserId > -1 )
+            {
+                concreteUserArticle = _repositoryWrapper.UserArticles
+                                    .GetUserArticle(lArticleId, lUserId);
+            }
+            else
+            {
+                concreteUserArticle = _repositoryWrapper.UserArticles
+                                   .GetUserArticle(lArticleId);
+            }
+
             conreteArticle.ArticleCategory = _repositoryWrapper.ArticlesCategory
                                             .GetCategory(conreteArticle.ArticleCategoryRefId);
-            concreteUserArticle.User = _repositoryWrapper.Account.GetUser(GetLoggedUserId());
+            if( lUserId > -1 )
+            {
+                concreteUserArticle.User = _repositoryWrapper.Account.GetUser(lUserId);
+            }
+            else
+            {
+                concreteUserArticle.User = _repositoryWrapper.Account.GetUser(concreteUserArticle.UserRefId);
+            }
+
             concreteUserArticle.User.Password = "";
 
             concreteArticleModel.Article = conreteArticle;
@@ -132,7 +151,7 @@ namespace SpeechRecognitionThesis.Controllers
             EditConcreteArticleModel editConcreteArticleModel = new EditConcreteArticleModel();
             ConcreteArticleModel concreteArticleModel = new ConcreteArticleModel();
             editConcreteArticleModel.ConcreteArticleModel = concreteArticleModel;
-            FillConcreteArticleModel(editConcreteArticleModel.ConcreteArticleModel, lArticleId);
+            FillConcreteArticleModel(editConcreteArticleModel.ConcreteArticleModel, lArticleId, GetLoggedUserId() );
             editConcreteArticleModel.ArticleCategoryList = _repositoryWrapper.ArticlesCategory.FindAll().ToList();
 
 

@@ -43,5 +43,11 @@ namespace SpeechRecognitionThesis.Models.Repository
             return FindAll().FirstOrDefault( userArticle => 
                 userArticle.ArticleRefId == lArticleId && userArticle.UserRefId == lUserId );
         }
+
+        public UserArticles GetUserArticle(long lArticleId)
+        {
+            return FindAll().FirstOrDefault(userArticle =>
+               userArticle.ArticleRefId == lArticleId);
+        }
     }
 }
