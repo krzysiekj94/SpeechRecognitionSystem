@@ -101,6 +101,7 @@ namespace SpeechRecognitionThesis.Controllers
             return View("My", myArticlesModel);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("{lArticleId}")]
         public IActionResult GetArticleView( [FromRoute] long lArticleId)
