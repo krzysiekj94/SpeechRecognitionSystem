@@ -210,3 +210,30 @@ function LoadLettersAndNumbersCommands()
         ]);
     }
 }
+
+function DeleteCharsFromControlInputString(methodDelete)
+{
+    var currentElement = document.activeElement.id;
+    var valueElement = "";
+    var lastIndex = -1;
+
+    if( currentElement.length > 0 )
+    {
+        valueElement =  $( "#" + currentElement ).val();
+        
+        if( methodDelete == "char")
+        {
+            valueElement = valueElement.slice(0, -1);
+        }
+
+        else if( methodDelete == "word" )
+        {
+            lastIndex = valueElement.lastIndexOf(" ");
+            valueElement = valueElement.substring(0, lastIndex);
+        }
+
+        $( "#" + currentElement ).val(valueElement);
+    }
+
+    return valueElement;
+}

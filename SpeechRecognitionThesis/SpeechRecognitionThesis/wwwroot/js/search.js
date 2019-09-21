@@ -26,7 +26,7 @@ $(document).ready(function() {
             }
         },
         {
-            indexes: ["wyczyść frazę", "wyczyść frazy", "wyczyść słowa"],
+            indexes: ["wyczyść", "usuń"],
             action: function(){
               $("#search-text-input").val("");
               $articlesResultElement.empty();
@@ -34,7 +34,7 @@ $(document).ready(function() {
             },
         },
         {
-            indexes: ["wprowadź frazę", "napisz frazę", "napisz słowa"],
+            indexes: ["wyszukaj", "wprowadź", "napisz"],
             action: function(){
                 artyom.fatality();
                 $("#search-text-input").focus(); 
@@ -42,18 +42,27 @@ $(document).ready(function() {
             },
         },
         {
-            indexes: ["cofnij"],
-            action: function(){
-                var currentElement = document.activeElement.id;
-                var valueElement = "";
-  
-                if( currentElement.length > 0 )
+            smart: true,
+            indexes: ["cofnij *"],
+            action: function( i, wildcard ){
+                
+                var letterRegexString = RegExp('lit[\\S]+');
+                var wordRegexString = RegExp('sło[\\S]+');
+                var valueFilterArticle = "";
+
+                if( letterRegexString.test( wildcard ) )
                 {
-                    valueElement =  $( "#" + currentElement ).val();
-                    valueElement = valueElement.slice(0, -1);
-                    $( "#" + currentElement ).val(valueElement);
+                    valueFilterArticle = DeleteCharsFromControlInputString("char");
+                }
+                else if( wordRegexString.test( wildcard ) )
+                {
+                    valueFilterArticle = DeleteCharsFromControlInputString("word");
+                }
+
+                if( valueFilterArticle.length > 0 )
+                {
                     $articlesResultElement.empty();
-                    LoadArticleView(valueElement);
+                    LoadArticleView(valueFilterArticle);
                 }
             },
         },
@@ -90,7 +99,12 @@ $(window).on('load', function()
 
 $("#search-text-input").keyup(function(){
     var searchText = $("#search-text-input").val();
-    searchArticleRecognizer.finalSearchContentTranscript = searchText;
+    
+    if( searchArticleRecognizer != null )
+    {
+        searchArticleRecognizer.finalSearchContentTranscript = searchText;
+    }
+
     $articlesResultElement.empty();
     LoadArticleView(searchText);
 });
