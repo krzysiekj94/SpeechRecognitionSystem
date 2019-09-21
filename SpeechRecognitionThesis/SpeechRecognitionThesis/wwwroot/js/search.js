@@ -3,7 +3,13 @@ var articleArray = null;
 var searchArticleRecognizer = null;
 
 $(document).ready(function() {
+    
+    $("#datepicker-article-from").datepicker();
+    $("#datepicker-article-to").datepicker();
+    
     $.getScript("/js/speech_engine.js", function(){
+        AddAllCategoriesFilterToSelectList();
+
         setTimeout(function(){
             LoadSearchCommands();
             LoadLettersAndNumbersCommandsForSearch();
@@ -11,6 +17,8 @@ $(document).ready(function() {
         },1000);
     });
  });
+
+
 
  function LoadSearchCommands()
  {
@@ -190,6 +198,15 @@ function AddArticleToArray(articles)
             articleArray.push(article);
         });
     }
+}
+
+function AddAllCategoriesFilterToSelectList()
+{
+    var allCategoryOptionText = 'Wszystkie kategorie'; 
+    var allCategoryOptionValue = '-1'; 
+
+    $('#search-article-category').append( '<option value="' + allCategoryOptionValue + '">' + allCategoryOptionText + '</option>' );
+    $('#search-article-category').val( allCategoryOptionValue );
 }
 
 class SearchArticleSpeechRecognizer {

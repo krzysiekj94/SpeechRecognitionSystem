@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SpeechRecognitionThesis.Models;
 using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.ViewModels;
 
 namespace SpeechRecognitionThesis.Controllers
 {
@@ -25,7 +26,13 @@ namespace SpeechRecognitionThesis.Controllers
         [HttpGet]
         public IActionResult GetSearchEngineView()
         {
-            return View("Search");
+            SearchEngineModel searchEngineModel = new SearchEngineModel();
+
+            searchEngineModel.ArticleCategoryList = _repositoryWrapper.ArticlesCategory
+                                                    .FindAll().ToList();
+
+
+            return View("Search", searchEngineModel );
         }
 
         [AllowAnonymous]

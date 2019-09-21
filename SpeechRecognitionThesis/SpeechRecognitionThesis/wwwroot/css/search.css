@@ -1,0 +1,11 @@
+#search-text-input{
+    width: 80%;
+    margin-left: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.date-picker-article-from, .date-picker-article-to{
+    font-weight: bold;
+}
