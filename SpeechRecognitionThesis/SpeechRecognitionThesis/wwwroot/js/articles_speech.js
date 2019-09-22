@@ -1,6 +1,5 @@
 var articleRecognizer = null;
 var bIsChanged = false;
-var articleCategoryArray = null;
 
 //article subject/content/select category handlers
 $(window).on('load', function(){
@@ -15,14 +14,6 @@ $(window).on('load', function(){
     $("#article-subject").val(articleSubject);
   }
 });
-
-function GetLastPartOfUrlPath()
-{
-  var urlString = window.location.pathname;
-  urlString = urlString.substring( urlString.lastIndexOf('/') + 1 );
-
-  return urlString;
-}
 
 function IsEditArticleMode()
 {
@@ -85,7 +76,7 @@ $( ".clear-article-button" ).click(function() {
 //article speech recognizer engine
 $.getScript("/js/speech_engine.js", function(){
 
-    LoadCategoryCommandFromDb();
+    var articleCategoryTempArray = LoadCategoryCommandFromDb();
     LoadArticlesBaseCommand();
     LoadLettersAndNumbersCommands();
     LoadSpecialCharactersCommands();
@@ -95,7 +86,7 @@ $.getScript("/js/speech_engine.js", function(){
     {
       artyom.addCommands([
         {
-            indexes: articleCategoryArray,
+            indexes: articleCategoryTempArray,
             action: function(indexOfArray){
               $("#article-category").val( indexOfArray + 1 );
             }
@@ -415,33 +406,4 @@ function SaveArticleContentToDatabase(stateString)
     console.log("/articles/add success");
     console.log("Article ID: " + result);
   });
-}
-
-function LoadCategoryCommandFromDb()
-{
-  LoadCategoryFromDb();
-}
-
-function LoadCategoryFromDb()
-{
-  articleCategoryArray = new Array();
-
-    $.ajax({
-        url           :     '/category/results',
-        type          :     'GET',
-        contentType   :     'application/json; charset=utf-8',
-     })
-     .done(function(categories) {
-        AddCategoryToArray(categories);
-     });
-}
-
-function AddCategoryToArray(categories)
-{
-  if(categories != null)
-  {
-    categories.forEach(function(category){            
-      articleCategoryArray.push("Wybierz " + category.name);
-      });
-  }
 }

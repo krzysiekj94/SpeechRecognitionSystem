@@ -1,6 +1,8 @@
 const $articlesResultElement = $('.articles-result');
 var articleArray = null;
 var searchArticleRecognizer = null;
+var dayOfMonthCalenderPrefix19CommandArray = [ "pierwszy", "drugi", "trzeci", "czwarty", "piąty", "szósty", "siódmy", "ósmy", "dziewiąty" ];
+var dayOfMonthCalender = dayOfMonthCalenderPrefix19CommandArray;
 
 $(document).ready(function() {
     
@@ -8,17 +10,79 @@ $(document).ready(function() {
     $("#datepicker-article-to").datepicker();
     
     $.getScript("/js/speech_engine.js", function(){
-        AddAllCategoriesFilterToSelectList();
+        
+        var articleCategoryTempArray = LoadCategoryCommandFromDb();
 
         setTimeout(function(){
+            LoadCategoryCommands();
             LoadSearchCommands();
             LoadLettersAndNumbersCommandsForSearch();
             LoadSpecialCharactersCommandsForSearch();
+            PrepareDayOfMonthCalenderCommands();
         },1000);
+
+        function LoadCategoryCommands()
+        {
+            articleCategoryTempArray.push( "Wybierz wszystkie" );
+            AddAllCategoriesFilterToSelectList( articleCategoryTempArray.length );
+            
+            artyom.addCommands([
+            {
+                indexes: articleCategoryTempArray,
+                action: function(indexOfArray){
+                    $("#search-article-category").val( indexOfArray + 1 );
+                }
+            },
+            ]);
+
+            return articleCategoryTempArray;
+        }
     });
  });
 
+ function PrepareRestOfMonthDays()
+ {
+    for(var iDay = 10; iDay <= 31; iDay++ )
+    {
+       dayOfMonthCalender.push( iDay.toString() );
+    }
+ }
 
+ function PrepareDayOfMonthCalenderCommands()
+ {
+     PrepareRestOfMonthDays();
+
+    artyom.addCommands([
+    {
+        indexes: dayOfMonthCalender,
+        action: function( indexOfArray ){
+            
+            var valueFromArray = isNaN( dayOfMonthCalender[ indexOfArray ] ) ? indexOfArray+1 : dayOfMonthCalender[ indexOfArray ];
+            var date = new Date();
+            date.setDate( valueFromArray );
+            
+            if( IsSetFocus("datepicker-article-from") )
+            {
+                $("#datepicker-article-from").datepicker('setDate', new Date(  date.getFullYear(), date.getMonth(), date.getDate() ) ); 
+            }
+            else if( IsSetFocus("datepicker-article-to") )
+            {
+                $("#datepicker-article-from").datepicker('setDate', new Date(  date.getFullYear(), date.getMonth(), date.getDate() ) ); 
+            }
+        }
+    },
+    ]);
+ }
+
+ function PrepareMonthsCalenderCommands()
+ {
+
+ }
+
+ function PrepareYearsCalenderCommands()
+ {
+     
+ }
 
  function LoadSearchCommands()
  {
@@ -42,7 +106,7 @@ $(document).ready(function() {
             },
         },
         {
-            indexes: ["wyszukaj", "wprowadź", "napisz"],
+            indexes: ["wyszukaj", "wprowadź słow", "napisz słow"],
             action: function(){
                 artyom.fatality();
                 $("#search-text-input").focus(); 
@@ -71,6 +135,37 @@ $(document).ready(function() {
                 {
                     $articlesResultElement.empty();
                     LoadArticleView(valueFilterArticle);
+                }
+            },
+        },
+        {
+            smart: true,
+            indexes: ["data *", "ustaw datę *"],
+            action: function( i, wildcard ){
+                
+                var createDateFrom = RegExp('po[\\S]*');
+                var createdDateTo = RegExp('ko[\\S]*');
+                
+                if( wildcard == "od" || createDateFrom.test( wildcard ) )
+                {
+                    $("#datepicker-article-from").datepicker('show'); 
+                }
+                else if( wildcard == "do" || createdDateTo.test( wildcard ) )
+                {
+                    $("#datepicker-article-to").datepicker('show');
+                }
+            },
+        },
+        {
+            indexes: ["ukryj datę"],
+            action: function(){
+                if( IsSetFocus("datepicker-article-from") )
+                {
+                    $("#datepicker-article-from").datepicker('hide'); 
+                }
+                else if( IsSetFocus("datepicker-article-to") )
+                {
+                    $("#datepicker-article-to").datepicker('hide');
                 }
             },
         },
@@ -200,10 +295,10 @@ function AddArticleToArray(articles)
     }
 }
 
-function AddAllCategoriesFilterToSelectList()
+function AddAllCategoriesFilterToSelectList( iSizeArticleCategoryList )
 {
     var allCategoryOptionText = 'Wszystkie kategorie'; 
-    var allCategoryOptionValue = '-1'; 
+    var allCategoryOptionValue = iSizeArticleCategoryList; 
 
     $('#search-article-category').append( '<option value="' + allCategoryOptionValue + '">' + allCategoryOptionText + '</option>' );
     $('#search-article-category').val( allCategoryOptionValue );

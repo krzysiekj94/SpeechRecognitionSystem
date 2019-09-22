@@ -1,6 +1,34 @@
 const artyom = new Artyom();
-initializeArtyom();
+var articleCategoryArray = null;
+
+if( !IsSearchPage() )
+{
+    initializeArtyom();
+}
+else
+{
+    initializeArtyomForSearch();
+}
+
 addComandsToArtyom();
+
+function initializeArtyomForSearch()
+{
+    setTimeout(function(){
+        artyom.initialize({
+            lang:"pl-PL",
+            continuous:true,
+            listen:true,
+            debug:true,
+            mode: "normal",
+        }).then(() => {
+            console.log("Artyom succesfully initialized");
+        }).catch((err) => {
+            console.log("Artyom couldn't be initialized, please check the console for errors");
+            console.log(err);
+        });
+    },250);
+}
 
 function initializeArtyom()
 {
@@ -18,6 +46,19 @@ function initializeArtyom()
             console.log(err);
         });
     },250);
+}
+
+function IsSearchPage()
+{
+    return GetLastPartOfUrlPath() == "search"; 
+}
+
+function GetLastPartOfUrlPath()
+{
+  var urlString = window.location.pathname;
+  urlString = urlString.substring( urlString.lastIndexOf('/') + 1 );
+
+  return urlString;
 }
 
 function addComandsToArtyom()
@@ -236,4 +277,35 @@ function DeleteCharsFromControlInputString(methodDelete)
     }
 
     return valueElement;
+}
+
+function LoadCategoryCommandFromDb()
+{
+  return articleCategoryArray ? articleCategoryArray : LoadCategoryFromDb();
+}
+
+function LoadCategoryFromDb()
+{
+    articleCategoryArray = new Array();
+
+    $.ajax({
+        url           :     '/category/results',
+        type          :     'GET',
+        contentType   :     'application/json; charset=utf-8',
+     })
+     .done(function(categories) {
+        AddCategoryToArray(categories);
+     });
+
+     return articleCategoryArray;
+}
+
+function AddCategoryToArray(categories)
+{
+  if(categories != null)
+  {
+    categories.forEach(function(category){            
+      articleCategoryArray.push("Wybierz " + category.name);
+      });
+  }
 }
