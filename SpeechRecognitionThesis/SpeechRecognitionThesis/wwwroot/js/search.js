@@ -3,15 +3,20 @@ var articleArray = null;
 var searchArticleRecognizer = null;
 var dayOfMonthCalenderPrefix19CommandArray = [ "pierwszy", "drugi", "trzeci", "czwarty", "piąty", "szósty", "siódmy", "ósmy", "dziewiąty" ];
 var dayOfMonthCalender = dayOfMonthCalenderPrefix19CommandArray;
+var monthsCalender = [ "styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień" ];
+var yearsArray = [];
+var actualDateFrom = null;
+var actualDateTo = null;
 
 $(document).ready(function() {
     
-    $("#datepicker-article-from").datepicker();
-    $("#datepicker-article-to").datepicker();
+    $("#datepicker-article-from").datepicker( $.datepicker.regional[ "pl" ] );
+    $("#datepicker-article-to").datepicker( $.datepicker.regional[ "pl" ] );
     
     $.getScript("/js/speech_engine.js", function(){
         
         var articleCategoryTempArray = LoadCategoryCommandFromDb();
+        InitDateInfo();
 
         setTimeout(function(){
             LoadCategoryCommands();
@@ -19,6 +24,8 @@ $(document).ready(function() {
             LoadLettersAndNumbersCommandsForSearch();
             LoadSpecialCharactersCommandsForSearch();
             PrepareDayOfMonthCalenderCommands();
+            PrepareMonthsCalenderCommands();
+            PrepareYearsCalenderCommands();
         },1000);
 
         function LoadCategoryCommands()
@@ -40,6 +47,16 @@ $(document).ready(function() {
     });
  });
 
+ function InitDateInfo()
+ {
+    actualDateFrom = new Date();
+    actualDateFrom.setFullYear( actualDateFrom.getFullYear() - 1 );
+    actualDateTo = new Date();
+
+    $("#datepicker-article-from").datepicker('setDate', new Date(  actualDateFrom.getFullYear(), actualDateFrom.getMonth(), actualDateFrom.getDate() ) ); 
+    $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
+ }
+
  function PrepareRestOfMonthDays()
  {
     for(var iDay = 10; iDay <= 31; iDay++ )
@@ -57,17 +74,17 @@ $(document).ready(function() {
         indexes: dayOfMonthCalender,
         action: function( indexOfArray ){
             
-            var valueFromArray = isNaN( dayOfMonthCalender[ indexOfArray ] ) ? indexOfArray+1 : dayOfMonthCalender[ indexOfArray ];
-            var date = new Date();
-            date.setDate( valueFromArray );
+            var valueOfMonthDayFromArray = isNaN( dayOfMonthCalender[ indexOfArray ] ) ? indexOfArray+1 : dayOfMonthCalender[ indexOfArray ];
             
             if( IsSetFocus("datepicker-article-from") )
             {
-                $("#datepicker-article-from").datepicker('setDate', new Date(  date.getFullYear(), date.getMonth(), date.getDate() ) ); 
+                actualDateFrom.setDate( valueOfMonthDayFromArray );
+                $("#datepicker-article-from").datepicker('setDate', new Date(  actualDateFrom.getFullYear(), actualDateFrom.getMonth(), actualDateFrom.getDate() ) ); 
             }
             else if( IsSetFocus("datepicker-article-to") )
             {
-                $("#datepicker-article-from").datepicker('setDate', new Date(  date.getFullYear(), date.getMonth(), date.getDate() ) ); 
+                actualDateTo.setDate( valueOfMonthDayFromArray );
+                $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
             }
         }
     },
@@ -76,12 +93,58 @@ $(document).ready(function() {
 
  function PrepareMonthsCalenderCommands()
  {
+    artyom.addCommands([
+        {
+            indexes: monthsCalender,
+            action: function( indexOfArray ){
+                
+                if( IsSetFocus("datepicker-article-from") )
+                {
+                    actualDateFrom.setMonth( indexOfArray );
+                    $("#datepicker-article-from").datepicker('setDate', new Date(  actualDateFrom.getFullYear(), actualDateFrom.getMonth(), actualDateFrom.getDate() ) ); 
+                }
+                else if( IsSetFocus("datepicker-article-to") )
+                {
+                    actualDateTo.setMonth( indexOfArray );
+                    $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
+                }
+            }
+        },
+        ]);
+ }
 
+ function LoadYearsInfo()
+ {
+     var iEndYear = actualDateTo.getFullYear();
+
+     for( var iYear = 1970; iYear <= iEndYear; iYear++ )
+     {
+        yearsArray.push( iYear.toString() );
+     }
  }
 
  function PrepareYearsCalenderCommands()
  {
-     
+    LoadYearsInfo();
+
+    artyom.addCommands([
+        {
+            indexes: yearsArray,
+            action: function( indexOfArray ){
+                                
+                if( IsSetFocus("datepicker-article-from") )
+                {
+                    actualDateFrom.setFullYear( yearsArray[ indexOfArray ] );
+                    $("#datepicker-article-from").datepicker('setDate', new Date(  actualDateFrom.getFullYear(), actualDateFrom.getMonth(), actualDateFrom.getDate() ) ); 
+                }
+                else if( IsSetFocus("datepicker-article-to") )
+                {
+                    actualDateTo.setFullYear( yearsArray[ indexOfArray ] );
+                    $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
+                }
+            }
+        },
+        ]);
  }
 
  function LoadSearchCommands()
