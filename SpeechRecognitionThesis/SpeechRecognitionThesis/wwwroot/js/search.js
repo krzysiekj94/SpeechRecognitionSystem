@@ -7,6 +7,8 @@ var monthsCalender = [ "styczeń", "luty", "marzec", "kwiecień", "maj", "czerwi
 var yearsArray = [];
 var actualDateFrom = null;
 var actualDateTo = null;
+var articleCategoryArray = null;
+var searchArticleCommandsArray = null;
 
 $(document).ready(function() {
     
@@ -15,7 +17,7 @@ $(document).ready(function() {
     
     $.getScript("/js/speech_engine.js", function(){
         
-        var articleCategoryTempArray = LoadCategoryCommandFromDb();
+        var articleCategoryArray = LoadCategoryCommandFromDb();
         InitDateInfo();
 
         setTimeout(function(){
@@ -26,23 +28,28 @@ $(document).ready(function() {
             PrepareDayOfMonthCalenderCommands();
             PrepareMonthsCalenderCommands();
             PrepareYearsCalenderCommands();
-        },1000);
+            LoadArticleView("");
+        },1500);
 
         function LoadCategoryCommands()
         {
-            articleCategoryTempArray.push( "Wybierz wszystkie" );
-            AddAllCategoriesFilterToSelectList( articleCategoryTempArray.length );
+            articleCategoryArray.push( "Wybierz wszystkie" );
+            AddAllCategoriesFilterToSelectList( articleCategoryArray.length );
             
             artyom.addCommands([
             {
-                indexes: articleCategoryTempArray,
+                indexes: articleCategoryArray,
                 action: function(indexOfArray){
                     $("#search-article-category").val( indexOfArray + 1 );
+
+                    var searchText = $("#search-text-input").val();
+                    $articlesResultElement.empty();
+                    LoadArticleView( searchText );
                 }
             },
             ]);
 
-            return articleCategoryTempArray;
+            return articleCategoryArray;
         }
     });
  });
@@ -149,7 +156,7 @@ $(document).ready(function() {
 
  function LoadSearchCommands()
  {
-    var searchArticleCommandsArray = GetSearchArticleCommandsArray();
+    GetSearchArticleCommandsArray();
 
     if( artyom != null )
     {
@@ -244,15 +251,15 @@ $(document).ready(function() {
 
 function GetSearchArticleCommandsArray()
 {
-    var articleSearchCommandsArray = [];
-    var countOfArticles = GetNumberOfArticles();
+    searchArticleCommandsArray = [];
+    var countOfArticles = articleArray.length;  //GetNumberOfArticles();
 
     for( var iCounter = 1; iCounter <= countOfArticles; iCounter++ )
     {
-        articleSearchCommandsArray.push( "Zobacz " + iCounter.toString() );
+        searchArticleCommandsArray.push( "Zobacz " + iCounter.toString() );
     }
 
-    return articleSearchCommandsArray;
+    return searchArticleCommandsArray;
 }
 
 //handlers
@@ -260,7 +267,7 @@ $(window).on('load', function()
 {
     setTimeout(function(){
         LoadArticleFromDb();
-    },500);
+    },800);
 });
 
 $("#search-text-input").keyup(function(){
@@ -281,6 +288,12 @@ $(document).on( 'click', '.see-article-button', function()
     window.open( "/articles/" + idArticle.toString(), "_self" );
 });
 
+$('#search-article-category').on('change', function() {
+    var searchText = $("#search-text-input").val();
+    $articlesResultElement.empty();
+    LoadArticleView(searchText);
+  });
+
 //functions
 function LoadArticleView(filterValue)
 {
@@ -293,7 +306,8 @@ function LoadArticleView(filterValue)
     {
         articleArray.forEach(function( article ) 
         {
-            if( IsCompatibilityWithFilter( article,filterValue ) )
+            if( IsProperCategory( article.articleCategory.name ) 
+            && IsCompatibilityWithFilter( article,filterValue ) )
             {
                 $articlesResultElement.append(
                     '<li class="list-group-item article-result">'
@@ -314,6 +328,25 @@ function LoadArticleView(filterValue)
         $articlesResultElement.append('<li class="list-group-item article-result">Brak artykułów spełniających kryteria wyszukiwania!</li>');
     }
 }
+
+function IsProperCategory( categoryName )
+{
+    var bIsProperCategory = false;
+    var valueOfSelectedCategory = parseInt( $('#search-article-category').val() );
+    var indexArrayOfSelectedCategory = valueOfSelectedCategory - 1;
+    categoryName = categoryName.toLowerCase();
+
+    if( valueOfSelectedCategory == 6 
+        || ( indexArrayOfSelectedCategory < articleCategoryArray.length 
+            && indexArrayOfSelectedCategory > -1 
+            && ( articleCategoryArray[ indexArrayOfSelectedCategory ].toLowerCase().includes( categoryName ) ) ) )
+    {
+        bIsProperCategory = true;
+    }
+
+    return bIsProperCategory;
+}
+
 
 function IsCompatibilityWithFilter(article, filterValue)
 {
@@ -344,7 +377,6 @@ function LoadArticleFromDb()
      .done(function(articles) {
 
         AddArticleToArray(articles);
-        LoadArticleView("");
      });
 }
 
