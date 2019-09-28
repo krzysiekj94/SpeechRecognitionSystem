@@ -243,16 +243,10 @@ $(document).ready(function() {
     }
  }
 
- function GetNumberOfArticles()
-{
-    var countNumbersOfArticles = $(".articles-result").children().length;
-    return countNumbersOfArticles;
-}
-
 function GetSearchArticleCommandsArray()
 {
     searchArticleCommandsArray = [];
-    var countOfArticles = articleArray.length;  //GetNumberOfArticles();
+    var countOfArticles = articleArray.length;
 
     for( var iCounter = 1; iCounter <= countOfArticles; iCounter++ )
     {
