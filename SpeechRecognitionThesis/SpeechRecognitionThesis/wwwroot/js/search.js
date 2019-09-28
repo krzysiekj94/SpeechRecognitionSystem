@@ -337,14 +337,7 @@ function LoadArticleView(filterValue)
             && IsSetProperlyDateFilter( article.articleModificationDate )
             && IsCompatibilityWithFilter( article,filterValue ) )
             {
-                $articlesResultElement.append(
-                    '<li class="list-group-item article-result">'
-                            + 'Temat: '                 + article.subject
-                            + '<br/>Treść: '            + article.content
-                            + '<br/>Kategoria: '        + article.articleCategory.name
-                            + '<br/>Data modyfikacji: ' + article.articleModificationDate
-                            + '<button class="see-article-button btn-success" type="submit" value="' + article.id + '">Zobacz</button>'
-                    +  '</li>'); 
+                $articlesResultElement.append( GetArticleHtmlElement( article ) ); 
 
                     iCounterAddedArticles++;
             }      
@@ -353,8 +346,26 @@ function LoadArticleView(filterValue)
 
     if( iCounterAddedArticles <= 0 )
     {
-        $articlesResultElement.append('<li class="list-group-item article-result">Brak artykułów spełniających kryteria wyszukiwania!</li>');
+        $articlesResultElement.append( GetEmptyArticlesListMessageString() );
     }
+}
+
+function GetEmptyArticlesListMessageString()
+{
+    return '<li class="list-group-item article-result">Brak artykułów spełniających kryteria wyszukiwania!</li>';
+}
+
+function GetArticleHtmlElement( article )
+{
+   var articleResultHtml = '<li class="list-group-item article-result">'
+                            + 'Temat: '                 + article.subject
+                            + '<br/>Treść: '            + article.content
+                            + '<br/>Kategoria: '        + article.articleCategory.name
+                            + '<br/>Data modyfikacji: ' + article.articleModificationDate
+                            + '<button class="see-article-button btn-success" type="submit" value="' + article.id + '">Zobacz</button>'
+                            '</li>';
+
+    return articleResultHtml;
 }
 
 function GetNumberWithoutSuffixZero( numberWithSuffixZeroString )
