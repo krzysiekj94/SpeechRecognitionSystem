@@ -9,3 +9,12 @@
 .date-picker-article-from, .date-picker-article-to{
     font-weight: bold;
 }
+
+.articles-result-container{
+    margin-top: 10px;
+}
+
+.articles-result-container-description{ 
+    font-weight: bold;
+    margin-left: 20px;
+}
