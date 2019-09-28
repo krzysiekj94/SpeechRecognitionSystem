@@ -12,9 +12,28 @@ var searchArticleCommandsArray = null;
 
 $(document).ready(function() {
     
-    $("#datepicker-article-from").datepicker( $.datepicker.regional[ "pl" ] );
-    $("#datepicker-article-to").datepicker( $.datepicker.regional[ "pl" ] );
+    $.datepicker.regional[ "pl" ];
     
+    $('#datepicker-article-from').datepicker(
+        {
+        onSelect: function( date, datepicker ) {
+            
+            var dateFromPLFormatArray = GetDateArrayFromPLFormat( date );
+            actualDateFrom = new Date( dateFromPLFormatArray[2], dateFromPLFormatArray[1]-1 ,dateFromPLFormatArray[0] );
+            LoadArticleViewWithKeywords();                
+        },
+    });
+
+    $('#datepicker-article-to').datepicker(
+        {
+        onSelect: function( date, datepicker ) {
+            
+            var dateFromPLFormatArray = GetDateArrayFromPLFormat( date );
+            actualDateTo = new Date( dateFromPLFormatArray[2], dateFromPLFormatArray[1]-1 ,dateFromPLFormatArray[0] );
+            LoadArticleViewWithKeywords();                
+        },
+    });
+
     $.getScript("/js/speech_engine.js", function(){
         
         var articleCategoryArray = LoadCategoryCommandFromDb();
@@ -283,12 +302,18 @@ $(document).on( 'click', '.see-article-button', function()
 });
 
 $('#search-article-category').on('change', function() {
-    var searchText = $("#search-text-input").val();
-    $articlesResultElement.empty();
-    LoadArticleView(searchText);
+    LoadArticleViewWithKeywords();
   });
 
 //functions
+
+function LoadArticleViewWithKeywords()
+{
+    var searchText = $("#search-text-input").val();
+    $articlesResultElement.empty();
+    LoadArticleView(searchText);
+}
+
 function LoadArticleView(filterValue)
 {
     var iCounterAddedArticles = 0;
@@ -336,26 +361,34 @@ function GetNumberWithoutSuffixZero( numberWithSuffixZeroString )
     return numberValueString;
 }
 
+function GetDateTimeArrayFromPLFormat( datePLFormatString )
+{
+    var lastIndex = datePLFormatString.lastIndexOf(" ");
+    var tempValueArticleDate = datePLFormatString.substring( 0, lastIndex ).toString();
+    var dateStringArray = tempValueArticleDate.split(".");
+
+    return dateStringArray;
+} 
+
+function GetDateArrayFromPLFormat( datePLFormatString )
+{
+    return datePLFormatString.split(".");
+} 
+
 function IsSetProperlyDateFilter( createArticleDateString )
 {
-    var lastIndex = createArticleDateString.lastIndexOf(" ");
-    var tempValueArticleDate = createArticleDateString.substring( 0, lastIndex ).toString();
-    var dateStringArray = tempValueArticleDate.split(".");
+    var dateFromPLFormatArray = GetDateTimeArrayFromPLFormat( createArticleDateString );
     var createArticleDate = null;
     var bIsSetProperDateFilter = false;
 
-    if( dateStringArray.length == 3 )
+    if( dateFromPLFormatArray.length == 3 )
     {
-        createArticleDate = new Date( dateStringArray[2], dateStringArray[1]-1 ,dateStringArray[0] );
-        
-        var datenum = createArticleDate.getDate();
-        var datemonth = createArticleDate.getMonth();
-        var dateyear = createArticleDate.getFullYear();
+        createArticleDate = new Date( dateFromPLFormatArray[2], dateFromPLFormatArray[1]-1 ,dateFromPLFormatArray[0] );
 
         if( createArticleDate != null 
             && actualDateFrom != null 
             && actualDateTo != null
-            && actualDateFrom <= createArticleDate 
+            && actualDateFrom <= createArticleDate
             && actualDateTo >= createArticleDate )
         {
             bIsSetProperDateFilter = true;
