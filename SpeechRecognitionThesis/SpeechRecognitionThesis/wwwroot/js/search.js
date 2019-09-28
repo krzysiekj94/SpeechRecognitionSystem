@@ -105,13 +105,17 @@ $(document).ready(function() {
             if( IsSetFocus("datepicker-article-from") )
             {
                 actualDateFrom.setDate( valueOfMonthDayFromArray );
+                actualDateFrom.setHours( 0,0,0,0 );
                 $("#datepicker-article-from").datepicker('setDate', new Date(  actualDateFrom.getFullYear(), actualDateFrom.getMonth(), actualDateFrom.getDate() ) ); 
             }
             else if( IsSetFocus("datepicker-article-to") )
             {
                 actualDateTo.setDate( valueOfMonthDayFromArray );
+                actualDateTo.setHours( 0,0,0,0 );
                 $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
             }
+
+            LoadArticleViewWithKeywords();
         }
     },
     ]);
@@ -134,6 +138,8 @@ $(document).ready(function() {
                     actualDateTo.setMonth( indexOfArray );
                     $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
                 }
+
+                LoadArticleViewWithKeywords();
             }
         },
         ]);
@@ -168,6 +174,8 @@ $(document).ready(function() {
                     actualDateTo.setFullYear( yearsArray[ indexOfArray ] );
                     $("#datepicker-article-to").datepicker('setDate', new Date(  actualDateTo.getFullYear(), actualDateTo.getMonth(), actualDateTo.getDate() ) ); 
                 }
+
+                LoadArticleViewWithKeywords();
             }
         },
         ]);
