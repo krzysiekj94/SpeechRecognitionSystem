@@ -307,6 +307,7 @@ function LoadArticleView(filterValue)
         articleArray.forEach(function( article ) 
         {
             if( IsProperCategory( article.articleCategory.name ) 
+            && IsSetProperlyDateFilter( article.articleModificationDate )
             && IsCompatibilityWithFilter( article,filterValue ) )
             {
                 $articlesResultElement.append(
@@ -327,6 +328,47 @@ function LoadArticleView(filterValue)
     {
         $articlesResultElement.append('<li class="list-group-item article-result">Brak artykułów spełniających kryteria wyszukiwania!</li>');
     }
+}
+
+function GetNumberWithoutSuffixZero( numberWithSuffixZeroString )
+{
+    var numberValueString = numberWithSuffixZeroString;
+
+    if( numberValueString.charAt( 0 ) == '0' )
+    {
+        numberValueString = numberValueString.substring( 1,numberValueString.length )
+    }
+
+    return numberValueString;
+}
+
+function IsSetProperlyDateFilter( createArticleDateString )
+{
+    var lastIndex = createArticleDateString.lastIndexOf(" ");
+    var tempValueArticleDate = createArticleDateString.substring( 0, lastIndex ).toString();
+    var dateStringArray = tempValueArticleDate.split(".");
+    var createArticleDate = null;
+    var bIsSetProperDateFilter = false;
+
+    if( dateStringArray.length == 3 )
+    {
+        createArticleDate = new Date( dateStringArray[2], dateStringArray[1]-1 ,dateStringArray[0] );
+        
+        var datenum = createArticleDate.getDate();
+        var datemonth = createArticleDate.getMonth();
+        var dateyear = createArticleDate.getFullYear();
+
+        if( createArticleDate != null 
+            && actualDateFrom != null 
+            && actualDateTo != null
+            && actualDateFrom <= createArticleDate 
+            && actualDateTo >= createArticleDate )
+        {
+            bIsSetProperDateFilter = true;
+        }
+    }
+
+    return bIsSetProperDateFilter;
 }
 
 function IsProperCategory( categoryName )
