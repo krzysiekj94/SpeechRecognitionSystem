@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Wyszukiwarka artykułów";
 }
 
-<h2>Search</h2>
+<h2>@ViewData["Title"]</h2>
 
 @model SpeechRecognitionThesis.Models.ViewModels.SearchEngineModel
 
@@ -11,23 +11,28 @@
         <input id="search-text-input" class="form-control"
                type="text" placeholder="Wpisz interesującą Cię frazę do wyszukania" aria-label="Search">
     </div>
-    <div class="row">
-        <div class="category-elements col-md-4">
-            <label class="article-category-label" for="article-category">Wybierz filtr kategorii artykułu</label>
-            <br />
-            <select id="search-article-category" size="6"
-                    asp-items="@( new SelectList( Model.ArticleCategoryList,"Id","Name" ) )"></select>
+    <div class="row category-elements-row">
+        <div class="category-elements">
+            <h4>
+                <p><label class="article-category-label" for="article-category">Wybierz filtr kategorii artykułu</label><p>
+                    <select id="search-article-category" size="8"
+                            asp-items="@( new SelectList( Model.ArticleCategoryList,"Id","Name" ) )"></select>
+            </h4>
         </div>
-        <div class="date-picker-article-from col-md-4">
-            Wybierz zakres dat od<input type="text" id="datepicker-article-from">
+    </div>
+    <div class="row datepicker-article-row">
+        <div class="date-picker-article-from">
+            <h4><b>Wybierz zakres dat od</b></h4><input type="text" id="datepicker-article-from">
         </div>
-        <div class="date-picker-article-to col-md-4">
-            Wybierz zakres dat do<input type="text" id="datepicker-article-to">
+    </div>
+    <div class="row datepicker-article-row">
+        <div class="date-picker-article-to">
+            <h4><b>Wybierz zakres dat do</b></h4><input type="text" id="datepicker-article-to">
         </div>
     </div>
     <div class="row articles-result-container">
         <div class="articles-result-container-description">
-            Lista wynikowa:
+            <h2>Lista wynikowa:</h2>
         </div>
         <ul class="list-group articles-result">
             <!-- Dynamic created category list by client side -->

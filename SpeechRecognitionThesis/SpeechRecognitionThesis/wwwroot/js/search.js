@@ -331,15 +331,16 @@ function LoadArticleView(filterValue)
     if(articleArray != null 
         && articleArray.length > 0)
     {
+
+
         articleArray.forEach(function( article ) 
         {
             if( IsProperCategory( article.articleCategory.name ) 
             && IsSetProperlyDateFilter( article.articleModificationDate )
             && IsCompatibilityWithFilter( article,filterValue ) )
             {
-                $articlesResultElement.append( GetArticleHtmlElement( article ) ); 
-
-                    iCounterAddedArticles++;
+                iCounterAddedArticles++;
+                $articlesResultElement.append( GetArticleHtmlElement( article, iCounterAddedArticles ) ); 
             }      
         });
     }
@@ -352,20 +353,68 @@ function LoadArticleView(filterValue)
 
 function GetEmptyArticlesListMessageString()
 {
-    return '<li class="list-group-item article-result">Brak artykułów spełniających kryteria wyszukiwania!</li>';
+    return '<li class="list-group-item article-result"><h4><b>Brak artykułów spełniających kryteria wyszukiwania!</b></h4></li>';
 }
 
-function GetArticleHtmlElement( article )
+function GetArticleHtmlElement( article, iCounterAddedArticles )
 {
    var articleResultHtml = '<li class="list-group-item article-result">'
-                            + 'Temat: '                 + article.subject
-                            + '<br/>Treść: '            + article.content
-                            + '<br/>Kategoria: '        + article.articleCategory.name
-                            + '<br/>Data modyfikacji: ' + article.articleModificationDate
-                            + '<button class="see-article-button btn-success" type="submit" value="' + article.id + '">Zobacz</button>'
-                            '</li>';
+                            + '<div class="row">'
+                            +   '<div class="col-sm-3 text-center">'
+                            +        '<h3>' + article.articleCategory.name + '</h3>'
+                            +        '<img src="' + GetCategoryImage( article.articleCategory.name ) + '" class="img-circle" height="120" width="120" alt="Ikonka kategorii">'
+                            +   '</div>'
+                            + '<div class="col-sm-9 article-result-info">'
+                            +   '<p><h4><b>Temat:</b> '                   + article.subject                             + '</h4></p>'
+                            +   '<p><h4><b>Treść:</b> '                   + CutTextOverLimit( article.content, 500 )    + '</h4></p>'
+                            +   '<p><h4><b>Data ost. modyfikacji:</b> '   + article.articleModificationDate             + '</h4></p>'
+                            +   '<p></p>'
+                            +   '<p><h4>Komenda do przekierowania do strony artykułu: <b>\"Zobacz ' +  iCounterAddedArticles + '\"</b></h4></p>'
+                            +   '<button class="see-article-button btn-success" type="submit" value="' + article.id + '"><h4>Zobacz więcej (' + iCounterAddedArticles + ')</h4></button>'
+                          +   '</div>'  
+                          +  '</div>' 
+                         + '</li>';
 
     return articleResultHtml;
+}
+
+function CutTextOverLimit( modifyString, charsLimit )
+{
+    if( modifyString.length > charsLimit )
+    {
+        modifyString = modifyString.substring(0,charsLimit-1);
+        modifyString += "...";
+    }
+
+    return modifyString;
+}
+
+function GetCategoryImage( categoryNameString )
+{
+    var categoryImagePathString = '/images/category/';
+
+    switch( categoryNameString ) {
+        case "Sport":
+            categoryImagePathString += "ball.jpg";
+            break;
+        case "Nauka":
+            categoryImagePathString += "science.jpg";
+            break;
+        case "Świat":
+            categoryImagePathString += "world.jpg";
+            break;
+        case "Kraj":
+            categoryImagePathString += "poland.jpg";
+            break;
+        case "Popularnonaukowe":
+            categoryImagePathString += "popular_science.jpg";
+            break;
+        default:
+            categoryImagePathString = "";
+            break;
+      }
+
+    return categoryImagePathString;
 }
 
 function GetNumberWithoutSuffixZero( numberWithSuffixZeroString )

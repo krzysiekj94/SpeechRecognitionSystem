@@ -3,11 +3,17 @@
     margin-left: 10px;
     margin-top: 40px;
     margin-bottom: 40px;
+    font-size: 20px;
 }
 
 
 .date-picker-article-from, .date-picker-article-to{
     font-weight: bold;
+    font-size: 20px;
+}
+
+#datepicker-article-from, #datepicker-article-to{
+    text-align: center;
 }
 
 .articles-result-container{
@@ -17,4 +23,35 @@
 .articles-result-container-description{ 
     font-weight: bold;
     margin-left: 20px;
+}
+
+#search-article-category{
+    width: 300px;
+    text-align: center;
+}
+
+.article-result{
+    margin-bottom: 30px;
+}
+
+.article-result{ 
+    border-color: #df5718;
+    margin-right: 20%;
+    border-radius: 5%;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(15,119,221,0) 0%, rgba(0,151,255,0.3561799719887955) 0%, rgba(0,255,81,0) 0%, rgba(0,155,255,0.21332282913165268) 0%, rgba(0,155,255,0.26934523809523814) 80%);
+}
+
+.category-elements-row, .datepicker-article-row{
+    width: 80%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.article-result-info{
+    padding-top: 40px;
+}
+
+.see-article-button{
+    margin-top: 10px;
 }
