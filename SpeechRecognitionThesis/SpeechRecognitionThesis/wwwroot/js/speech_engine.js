@@ -1,5 +1,6 @@
 const artyom = new Artyom();
 var articleCategoryArray = null;
+var valueOfZoomIn = 1.0;
 
 if( !IsSearchPage() )
 {
@@ -124,6 +125,26 @@ function addComandsToArtyom()
                 indexes: ["Rejestracja"],
                 action: function(){
                     window.open("/register","_self");
+                }
+            },
+            {
+                indexes: ["przybliż", "powiększ", "bliżej"],
+                action: function(){
+                    valueOfZoomIn += 0.5;
+                    $('body').css('zoom', valueOfZoomIn );
+                }
+            },
+            {
+                indexes: ["oddal", "zmniejsz", "dalej"],
+                action: function(){
+                    valueOfZoomIn -= 0.5;
+                    $('body').css('zoom', valueOfZoomIn );
+                }
+            },
+            {
+                indexes: ["normalny widok"],
+                action: function(){
+                    $('body').css('zoom', "100%" );
                 }
             },
         ]);
