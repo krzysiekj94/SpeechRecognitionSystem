@@ -147,6 +147,18 @@ function addComandsToArtyom()
                     $('body').css('zoom', "100%" );
                 }
             },
+            {
+                indexes: ["powrót", "poprzednia strona"],
+                action: function(){
+                    window.history.back();
+                }
+            },
+            {
+                indexes: ["powtórz", "następna strona"],
+                action: function(){
+                    window.history.forward();
+                }
+            },
         ]);
     }
 }
