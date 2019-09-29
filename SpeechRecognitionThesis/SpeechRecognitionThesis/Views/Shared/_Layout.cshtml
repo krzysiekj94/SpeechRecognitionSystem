@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string commandsPartialViewNameString = "CommandsPartialView/_SearchEngineCommandsPartialView.cshtml";
+    //string commandsPartialViewNameString = "CommandsPartialView/_MainCommandsPartialView.cshtml";
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -38,8 +43,24 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li>
+                        <a class="open-preview-commands-button">
+                            <span class="glyphicon glyphicon-music"></span>
+                            Podgląd komend głosowych
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Search" asp-action="">
+                            <span class="glyphicon glyphicon-search"></span>
+                            Wyszukiwarka
+                        </a>
+                    </li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">O stronie</a></li>
-                    <li><a asp-area="" asp-controller="Register" asp-action="Register">Rejestracja</a></li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Login" asp-action="Login">Logowanie</a></li>
+                        <li><a asp-area="" asp-controller="Register" asp-action="Register">Rejestracja</a></li>
+                    }
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
                 </ul>
             </div>
@@ -52,15 +73,20 @@
         <div class="sidebar col-md-3">
             <partial name="_SidebarLayout.cshtml" />
         </div>
-        <div class="content col-md-9">
+        <div class="content col-md-8">
             @RenderBody()
-            <hr/>
+            <hr />
             <footer>
                 <p class="text-center">&copy; 2019 - SpeechRecognitionSystem Developed by krzysiekj94</p>
             </footer>
         </div>
-
-    </div>    
+        <div class="col-md-1 show-speech-commands-preview text-center">
+            <div class="speech-commands-preview">
+                <a href="javascript:void(0)" class="close-preview-commands-button">×</a>
+                <partial name="@commandsPartialViewNameString" />
+            </div>
+        </div>
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -68,6 +94,7 @@
         <script src="~/lib/jquery-ui/jquery-datapicker-pl.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/main.js"></script>
         <script src="~/js/artyom/artyom.window.js"></script>
 
         @{

@@ -165,6 +165,12 @@ function addComandsToArtyom()
                     location.reload();
                 }
             },
+            {
+                indexes: ["pokaż komendy"],
+                action: function(){
+                    
+                }
+            },
         ]);
     }
 }
