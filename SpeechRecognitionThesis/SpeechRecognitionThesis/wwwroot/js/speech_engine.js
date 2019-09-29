@@ -159,6 +159,12 @@ function addComandsToArtyom()
                     window.history.forward();
                 }
             },
+            {
+                indexes: ["odśwież", "przeładuj stronę"],
+                action: function(){
+                    location.reload();
+                }
+            },
         ]);
     }
 }
