@@ -1,6 +1,7 @@
 ﻿@{
-    string commandsPartialViewNameString = "CommandsPartialView/_SearchEngineCommandsPartialView.cshtml";
-    //string commandsPartialViewNameString = "CommandsPartialView/_MainCommandsPartialView.cshtml";
+    string commandsPartialViewNameString = SpeechRecognitionThesis.Models.Scripts
+                                           .CommandsManager.GetCommandsPartialViewPathString( 
+                                                            Context.Request.Path.ToString() );
 }
 
 <!DOCTYPE html>

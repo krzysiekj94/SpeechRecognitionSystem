@@ -110,3 +110,7 @@
 /SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.2/Razor/Views/Articles/My.g.cshtml.cs
 /SpeechRecognitionThesis/.vs/SpeechRecognitionThesis/DesignTimeBuild/.dtbcache
 /SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.2/Razor/Views/Articles/Article.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.2/Razor/Views/Shared/CommandsPartialView/_MainCommandsPartialView.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.2/Razor/Views/Shared/CommandsPartialView/_SearchEngineCommandsPartialView.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.2/Razor/Views/Shared/CommandsPartialView/_LoginCommandsPartialView.g.cshtml.cs
+/SpeechRecognitionThesis/SpeechRecognitionThesis/obj/Debug/netcoreapp2.2/Razor/Views/Shared/CommandsPartialView/_RegisterCommandsPartialView.g.cshtml.cs
