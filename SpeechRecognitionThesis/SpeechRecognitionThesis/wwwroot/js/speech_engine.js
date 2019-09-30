@@ -166,9 +166,9 @@ function addComandsToArtyom()
                 }
             },
             {
-                indexes: ["pokaż komendy"],
+                indexes: ["pokaż komendy", "ukryj komendy", "schowaj komendy"],
                 action: function(){
-                    
+                    $(".show-commands-button").click();
                 }
             },
         ]);
