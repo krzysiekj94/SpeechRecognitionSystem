@@ -85,7 +85,6 @@ namespace SpeechRecognitionThesis.Controllers
 
             if(registerUser != null)
             {
-                registerUser.ActiveAccountState = AccountActiveState.Active;
                 bSetActiveFlag = true;
             }
 

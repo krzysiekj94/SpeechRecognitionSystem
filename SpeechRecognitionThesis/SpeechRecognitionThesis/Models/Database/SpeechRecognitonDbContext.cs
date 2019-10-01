@@ -60,8 +60,6 @@ namespace SpeechRecognitionThesis.Models.Database
                 CreateAccountDate = new DateTime(2019, 05, 30).ToString(),
                 LastUpdateAccountDate = new DateTime(2019, 06, 20).ToString(),
                 LastLoggedAccountDate = new DateTime(2019, 08, 24).ToString(),
-                ActiveAccountState = AccountActiveState.Active,
-                IsLogged = true,
                 AvatarId = 1
             },
            new User
@@ -73,8 +71,6 @@ namespace SpeechRecognitionThesis.Models.Database
                CreateAccountDate = new DateTime(2019, 05, 21).ToString(),
                LastUpdateAccountDate = new DateTime(2019, 06, 23).ToString(),
                LastLoggedAccountDate = new DateTime(2019, 08, 23).ToString(),
-               ActiveAccountState = AccountActiveState.Active,
-               IsLogged = false,
                AvatarId = 2
            });
         }
@@ -87,9 +83,8 @@ namespace SpeechRecognitionThesis.Models.Database
                 ArticleCategoryRefId = 1,
                 Subject = "Artykuł 1",
                 Content = "To jest treść artykułu 1",
-                InsertionDate = new DateTime(2017, 04, 25),
-                LastUpdateDate = new DateTime(2018, 05, 11),
                 ArticleModificationDate = DateTime.Now.ToString(),
+                NumberOfViews = 10,
             },
             new Article
             {
@@ -97,9 +92,8 @@ namespace SpeechRecognitionThesis.Models.Database
                 ArticleCategoryRefId = 4,
                 Subject = "Artykuł 2",
                 Content = "To jest artykuł 2",
-                InsertionDate = new DateTime(2019, 05, 05),
-                LastUpdateDate = new DateTime(2019, 05, 05),
                 ArticleModificationDate = DateTime.Now.ToString(),
+                NumberOfViews = 20,
             });
         }
 

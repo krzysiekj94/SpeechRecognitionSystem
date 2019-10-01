@@ -42,7 +42,6 @@ namespace SpeechRecognitionThesis.Models.Repository
                 return false;
             }
 
-            loggedUser.IsLogged = true;
             loggedUser.LastLoggedAccountDate = DateTime.Now.ToString();
             
             Update( loggedUser );

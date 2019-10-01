@@ -30,10 +30,6 @@ namespace SpeechRecognitionThesis.Models
         [DataType(DataType.DateTime)]
         public string LastLoggedAccountDate { get; set; }
 
-        public AccountActiveState ActiveAccountState { get; set; }
-
-        public bool IsLogged { get; set; }
-
         public int AvatarId { get; set; }
     }
 }

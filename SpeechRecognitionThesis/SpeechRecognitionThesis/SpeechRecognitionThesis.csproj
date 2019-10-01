@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20190907121818_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
     <Compile Remove="Migrations\20190911222122_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
     <Compile Remove="Migrations\20190911222122_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20190913221240_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20190913221240_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

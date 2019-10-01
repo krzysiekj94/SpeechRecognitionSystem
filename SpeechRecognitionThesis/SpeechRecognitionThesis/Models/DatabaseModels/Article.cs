@@ -12,9 +12,6 @@ namespace SpeechRecognitionThesis.Models
         public long Id { get; set; }
         public string Subject { get; set; }
         public string Content { get; set; }
-        public DateTime InsertionDate { get; set; }
-        public DateTime LastUpdateDate { get; set; }
-        public bool AvailabilityStatus { get; set; }
 
         [ForeignKey("ArticleCategory")]
         public long ArticleCategoryRefId { get; set; }
@@ -22,5 +19,6 @@ namespace SpeechRecognitionThesis.Models
 
         [DataType(DataType.DateTime)]
         public string ArticleModificationDate { get; set; }
+        public long NumberOfViews { get; set; }
     }
 }

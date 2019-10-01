@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SpeechRecognitionThesis.Migrations
@@ -33,8 +32,6 @@ namespace SpeechRecognitionThesis.Migrations
                     CreateAccountDate = table.Column<string>(nullable: true),
                     LastUpdateAccountDate = table.Column<string>(nullable: true),
                     LastLoggedAccountDate = table.Column<string>(nullable: true),
-                    ActiveAccountState = table.Column<int>(nullable: false),
-                    IsLogged = table.Column<bool>(nullable: false),
                     AvatarId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -50,11 +47,9 @@ namespace SpeechRecognitionThesis.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Subject = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: true),
-                    InsertionDate = table.Column<DateTime>(nullable: false),
-                    LastUpdateDate = table.Column<DateTime>(nullable: false),
-                    AvailabilityStatus = table.Column<bool>(nullable: false),
                     ArticleCategoryRefId = table.Column<long>(nullable: false),
-                    ArticleModificationDate = table.Column<string>(nullable: true)
+                    ArticleModificationDate = table.Column<string>(nullable: true),
+                    NumberOfViews = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,22 +102,22 @@ namespace SpeechRecognitionThesis.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "ActiveAccountState", "AvatarId", "CreateAccountDate", "Email", "IsLogged", "LastLoggedAccountDate", "LastUpdateAccountDate", "NickName", "Password" },
+                columns: new[] { "Id", "AvatarId", "CreateAccountDate", "Email", "LastLoggedAccountDate", "LastUpdateAccountDate", "NickName", "Password" },
                 values: new object[,]
                 {
-                    { 1L, 1, 1, "30.05.2019 00:00:00", "guest@speechrecognition.com", true, "24.08.2019 00:00:00", "20.06.2019 00:00:00", "Guest", "cc5ec2b61fbbdd18d85dd14ab60db397b21b5548999a6afd3ce9557b19c300494a5fd29987e03a6f06677c209b88de47684388de8250671cdd778799eecd018a" },
-                    { 2L, 1, 2, "21.05.2019 00:00:00", "robert@mail.com", false, "23.08.2019 00:00:00", "23.06.2019 00:00:00", "RobertSon", "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828" }
+                    { 1L, 1, "30.05.2019 00:00:00", "guest@speechrecognition.com", "24.08.2019 00:00:00", "20.06.2019 00:00:00", "Guest", "cc5ec2b61fbbdd18d85dd14ab60db397b21b5548999a6afd3ce9557b19c300494a5fd29987e03a6f06677c209b88de47684388de8250671cdd778799eecd018a" },
+                    { 2L, 2, "21.05.2019 00:00:00", "robert@mail.com", "23.08.2019 00:00:00", "23.06.2019 00:00:00", "RobertSon", "5e50a8d4e3897e2da8f3ddef3f6d75d1c327724acf408be827e6b2115d1d0d85e9f9dbadc14387b5622405d81763029cf610422bbe4e343bb9414bba4aa38828" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Articles",
-                columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
-                values: new object[] { 1L, 1L, "14.09.2019 00:12:40", false, "To jest treść artykułu 1", new DateTime(2017, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 1" });
+                columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "Content", "NumberOfViews", "Subject" },
+                values: new object[] { 1L, 1L, "01.10.2019 21:18:40", "To jest treść artykułu 1", 10L, "Artykuł 1" });
 
             migrationBuilder.InsertData(
                 table: "Articles",
-                columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "AvailabilityStatus", "Content", "InsertionDate", "LastUpdateDate", "Subject" },
-                values: new object[] { 2L, 4L, "14.09.2019 00:12:40", false, "To jest artykuł 2", new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artykuł 2" });
+                columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "Content", "NumberOfViews", "Subject" },
+                values: new object[] { 2L, 4L, "01.10.2019 21:18:40", "To jest artykuł 2", 20L, "Artykuł 2" });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",
