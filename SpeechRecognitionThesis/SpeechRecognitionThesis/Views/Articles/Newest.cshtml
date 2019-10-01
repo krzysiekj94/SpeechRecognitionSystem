@@ -1,6 +1,22 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.NewestArticlesModel
+
 @{
-    ViewData["Title"] = "Newest";
+    ViewData["Title"] = "Najnowsze artykuły";
 }
 
-<h2>Newest</h2>
+<h2>Najnowsze artykuły</h2>
+
+<div class="row newest-articles-result">
+    @foreach( var userArticle in Model.NewestArticlesList )
+    {
+        <div class="newest-article-result">
+            @userArticle.Id
+            <br/>
+            @userArticle.Subject
+            <br/>
+            @userArticle.Content
+            <br/>
+            @userArticle.InsertionDate
+        </div>
+    }
+</div>

@@ -29,8 +29,8 @@ namespace SpeechRecognitionThesis.Models.Repository
         {
             List<Article> userArticleList = new List<Article>();
             userArticlesEnumerable.ToList().ForEach( 
-                element => userArticleList.Add( 
-                           FindAll().FirstOrDefault( article => article.Id == element.ArticleRefId ) ) );
+                element => userArticleList.Add( FindAll()
+                                                .FirstOrDefault( article => article.Id == element.ArticleRefId ) ) );
 
             return userArticleList;
         }
@@ -38,18 +38,28 @@ namespace SpeechRecognitionThesis.Models.Repository
         public Article GetLastAddedArticle()
         {
             return FindAll()
-                .OrderByDescending( article => article.Id )
-                .FirstOrDefault();
+                   .OrderByDescending( article => article.Id )
+                   .FirstOrDefault();
         }
 
         public List<Article> GetUserArticles()
         {
-            return FindAll().ToList();
+            return FindAll()
+                   .ToList();
         }
 
         public Article GetArticle( long lArticleId )
         {
-            return FindAll().FirstOrDefault( article => article.Id == lArticleId );
+            return FindAll()
+                   .FirstOrDefault( article => article.Id == lArticleId );
+        }
+
+        public List<Article> GetNewestArticles( int iAmountArticles )
+        {
+            return FindAll()
+                   .OrderByDescending(article => article.Id)
+                   .Take( iAmountArticles )
+                   .ToList();
         }
     }
 }

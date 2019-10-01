@@ -31,7 +31,13 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("Newest")]
         public IActionResult GetNewestArticlesContent()
         {
-            return View("Newest");
+            const int iNumberOfArticlesResult = 10;
+            NewestArticlesModel newestArticlesModel = new NewestArticlesModel();
+
+            newestArticlesModel.NewestArticlesList = _repositoryWrapper.Articles.GetNewestArticles( iNumberOfArticlesResult );
+            SetCategoryForUserArticles( newestArticlesModel.NewestArticlesList );
+
+            return View( "Newest", newestArticlesModel );
         }
 
         [AllowAnonymous]
@@ -40,14 +46,6 @@ namespace SpeechRecognitionThesis.Controllers
         public IActionResult GetTopArticlesContent()
         {
             return View("Top");
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("Recommended")]
-        public IActionResult GetRecommendedArticlesContent()
-        {
-            return View("Recommended");
         }
 
         [AllowAnonymous]
