@@ -44,10 +44,15 @@ namespace SpeechRecognitionThesis.Models.Repository
                 userArticle.ArticleRefId == lArticleId && userArticle.UserRefId == lUserId );
         }
 
-        public UserArticles GetUserArticle(long lArticleId)
+        public UserArticles GetUserArticle( long lArticleId )
         {
             return FindAll().FirstOrDefault(userArticle =>
                userArticle.ArticleRefId == lArticleId);
+        }
+
+        public UserArticles GetUserArticle( Article article )
+        {
+            return FindAll().FirstOrDefault( userArticle => userArticle.ArticleRefId == article.Id );
         }
     }
 }

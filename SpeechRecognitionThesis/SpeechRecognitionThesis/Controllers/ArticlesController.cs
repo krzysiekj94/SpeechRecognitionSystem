@@ -31,13 +31,51 @@ namespace SpeechRecognitionThesis.Controllers
         [Route("Newest")]
         public IActionResult GetNewestArticlesContent()
         {
+            NewestArticlesModel newestArticleModel = new NewestArticlesModel();
+            List<NewestArticle> newestArticlesList = GetNewestArticlesList();
+
+            newestArticleModel.NewestArticleList = newestArticlesList;
+
+            return View( "Newest", newestArticleModel );
+        }
+
+        private List<NewestArticle> GetNewestArticlesList()
+        {
             const int iNumberOfArticlesResult = 10;
-            NewestArticlesModel newestArticlesModel = new NewestArticlesModel();
+            List<NewestArticle> newestArticleList = new List<NewestArticle>();
+            List<Article> newestArticles = _repositoryWrapper.Articles.GetNewestArticles( iNumberOfArticlesResult );
+            UserArticles userArticle = null;
+            User user = null;
 
-            newestArticlesModel.NewestArticlesList = _repositoryWrapper.Articles.GetNewestArticles( iNumberOfArticlesResult );
-            SetCategoryForUserArticles( newestArticlesModel.NewestArticlesList );
+            foreach( var article in newestArticles )
+            {
+                article.ArticleCategory = _repositoryWrapper.ArticlesCategory.GetCategory( article.ArticleCategoryRefId );
+                userArticle = _repositoryWrapper.UserArticles.GetUserArticle( article );
 
-            return View( "Newest", newestArticlesModel );
+                if( userArticle != null )
+                {
+                    user = _repositoryWrapper.Account.GetUser( userArticle.UserRefId );
+
+                    if( user != null )
+                    {
+                        newestArticleList.Add(new NewestArticle()
+                        {
+                            Article = article,
+                            User = user
+                        });
+                    }
+                }
+            }
+
+            return newestArticleList;
+        }
+
+        private User GetUserFromArticle( Article article )
+        {
+            UserArticles userArticle = _repositoryWrapper.UserArticles.GetUserArticle( article );
+            User userFromArticle = _repositoryWrapper.Account.GetUser( userArticle.UserRefId );
+
+            return userFromArticle;
         }
 
         [AllowAnonymous]

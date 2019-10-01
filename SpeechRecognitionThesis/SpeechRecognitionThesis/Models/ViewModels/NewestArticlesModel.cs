@@ -7,6 +7,6 @@ namespace SpeechRecognitionThesis.Models.ViewModels
 {
     public class NewestArticlesModel
     {
-        public List<Article> NewestArticlesList { get; set; }
+        public List<NewestArticle> NewestArticleList { get; set; }
     }
 }
