@@ -24,27 +24,27 @@ namespace SpeechRecognitionThesis.Models.Database
         {
             modelBuilder.Entity<ArticleCategory>().HasData(new ArticleCategory
             {
-                Id = 1,
+                Id = (long)CategoryId.SPORT_CATEGORY_ID,
                 Name = "Sport"
             },
             new ArticleCategory
             {
-                Id = 2,
+                Id = (long)CategoryId.SCIENCE_CATEGORY_ID,
                 Name = "Nauka"
             },
             new ArticleCategory
             {
-                Id = 3,
+                Id = (long)CategoryId.WORLD_CATEGORY_ID,
                 Name = "Świat"
             },
             new ArticleCategory
             {
-                Id = 4,
+                Id = (long)CategoryId.COUNTRY_CATEGORY_ID,
                 Name = "Kraj"
             },
             new ArticleCategory
             {
-                Id = 5,
+                Id = (long)CategoryId.POPULAR_SCIENCE_CATEGORY_ID,
                 Name = "Popularnonaukowe"
             });
         }
