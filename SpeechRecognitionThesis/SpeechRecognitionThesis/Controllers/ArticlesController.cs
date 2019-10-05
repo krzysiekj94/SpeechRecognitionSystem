@@ -32,40 +32,39 @@ namespace SpeechRecognitionThesis.Controllers
         public IActionResult GetNewestArticlesContent()
         {
             NewestArticlesModel newestArticleModel = new NewestArticlesModel();
-            List<NewestArticle> newestArticlesList = GetNewestArticlesList();
+            List<ArticleUserPair> newestArticlesList = GetNewestArticlesList();
 
             newestArticleModel.NewestArticleList = newestArticlesList;
 
             return View( "Newest", newestArticleModel );
         }
 
-        private List<NewestArticle> GetNewestArticlesList()
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Category/{lCategoryId}")]
+        public IActionResult GetArticlesFromCategory( [FromRoute] long lCategoryId )
+        {
+            ArticlesFromCategoryModel articlesFromCategoryModel = new ArticlesFromCategoryModel();
+            List<ArticleUserPair> articleUserList = GetArticlesFromCategoryList( lCategoryId );
+            articlesFromCategoryModel.ArticleUser = articleUserList;
+            articlesFromCategoryModel.CategoryName = _repositoryWrapper.ArticlesCategory.GetCategoryName( lCategoryId );
+
+            return View( "Category", articlesFromCategoryModel );
+        }
+
+        private List<ArticleUserPair> GetNewestArticlesList()
         {
             const int iNumberOfArticlesResult = 10;
-            List<NewestArticle> newestArticleList = new List<NewestArticle>();
             List<Article> newestArticles = _repositoryWrapper.Articles.GetNewestArticles( iNumberOfArticlesResult );
-            UserArticles userArticle = null;
-            User user = null;
+            List<ArticleUserPair> newestArticleList = UserTools.GetUserArticlePair( _repositoryWrapper, newestArticles );
 
-            foreach( var article in newestArticles )
-            {
-                article.ArticleCategory = _repositoryWrapper.ArticlesCategory.GetCategory( article.ArticleCategoryRefId );
-                userArticle = _repositoryWrapper.UserArticles.GetUserArticle( article );
+            return newestArticleList;
+        }
 
-                if( userArticle != null )
-                {
-                    user = _repositoryWrapper.Account.GetUser( userArticle.UserRefId );
-
-                    if( user != null )
-                    {
-                        newestArticleList.Add(new NewestArticle()
-                        {
-                            Article = article,
-                            User = user
-                        });
-                    }
-                }
-            }
+        private List<ArticleUserPair> GetArticlesFromCategoryList( long lCategoryId )
+        {
+            List<Article> articleFromCategory = _repositoryWrapper.Articles.GetArticlesFromCategory( lCategoryId );
+            List<ArticleUserPair> newestArticleList = UserTools.GetUserArticlePair(_repositoryWrapper, articleFromCategory);
 
             return newestArticleList;
         }

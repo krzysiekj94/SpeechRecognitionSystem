@@ -75,14 +75,14 @@
         <div class="sidebar col-md-3">
             <partial name="_SidebarLayout.cshtml" />
         </div>
-        <div class="content col-md-8">
+        <div class="content col-md-9">
             @RenderBody()
             <hr />
             <footer>
                 <p class="text-center">&copy; 2019 - SpeechRecognitionSystem Developed by krzysiekj94</p>
             </footer>
         </div>
-        <div class="col-md-1 show-speech-commands-preview text-center">
+        <div class="show-speech-commands-preview text-center">
             <div class="speech-commands-preview">
                 <a href="javascript:void(0)" class="close-preview-commands-button">×</a>
                 <partial name="@commandsPartialViewNameString" />

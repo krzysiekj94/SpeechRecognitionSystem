@@ -1,5 +1,5 @@
 .article-author-p{
-    margin-bottom: -10%;
+    margin-bottom: -5%;
 }
 
 .category-article-content-p{
@@ -12,4 +12,9 @@
 
 .category-article-content-span{
     margin-left: 20px;
+}
+
+.newest-articles-result{
+    padding-right: 5%;
+    padding-left:  5%;
 }

@@ -61,5 +61,11 @@ namespace SpeechRecognitionThesis.Models.Repository
                    .Take( iAmountArticles )
                    .ToList();
         }
+
+        public List<Article> GetArticlesFromCategory( long lCategoryId )
+        {
+            return FindAll()
+                    .Where( article => article.ArticleCategoryRefId == lCategoryId ).ToList();
+        }
     }
 }

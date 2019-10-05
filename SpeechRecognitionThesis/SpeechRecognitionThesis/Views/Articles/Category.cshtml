@@ -1,0 +1,12 @@
+﻿@model SpeechRecognitionThesis.Models.ViewModels.ArticlesFromCategoryModel
+
+@{
+    ViewData["Title"] = "Artykuły z kategorii \"" + Model.CategoryName  + "\"";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@foreach (var articleUser in Model.ArticleUser)
+{
+    <div><b>Temat: </b> @articleUser.Article.Subject</div>
+}

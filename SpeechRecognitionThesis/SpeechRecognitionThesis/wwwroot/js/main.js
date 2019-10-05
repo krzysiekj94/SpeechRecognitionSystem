@@ -1,5 +1,5 @@
-var showSpeechCommands = "Pokaż komendy głosowe";
-var hideSpeechCommands = "Ukryj komendy głosowe";
+var showSpeechCommands = "Pokaż komendy";
+var hideSpeechCommands = "Ukryj komendy";
 
 $( ".close-preview-commands-button" ).click(function() {
     $('.speech-commands-preview').css('width', '0');

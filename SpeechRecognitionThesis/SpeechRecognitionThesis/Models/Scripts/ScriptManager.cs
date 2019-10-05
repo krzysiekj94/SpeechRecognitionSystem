@@ -20,12 +20,14 @@ namespace SpeechRecognitionThesis.Models.Scripts
         const string LOGIN_USER_RELATIVE_PATH_STRING                    = "/login";
         const string LOGIN_SCRIPT_RELATIVE_PATH_STRING                  = "/js/login.js";
         const string ACCOUNT_RELATIVE_PATH_STRING                       = "/account";
+        const string NEWEST_RELATIVE_PATH_STRING                        = "/articles/newest";
+        const string NEWEST_SCRIPT_RELATIVE_PATH_STRING                 = "/js/newest.js";
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
             string urlPathString = SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING;
 
-            if( urlRelativePathString.Any(char.IsDigit) 
+            if( urlRelativePathString.Any( char.IsDigit ) 
                 && urlRelativePathString.Contains("articles")
                 && urlRelativePathString.Contains("edit") )
             {
@@ -51,6 +53,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
                     break;
                 case SEARCH_RELATIVE_PATH_STRING:
                     urlPathString = SEARCH_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
+                case NEWEST_RELATIVE_PATH_STRING:
+                    urlPathString = NEWEST_SCRIPT_RELATIVE_PATH_STRING;
                     break;
                 default:
                     break;

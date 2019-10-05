@@ -12,15 +12,23 @@ namespace SpeechRecognitionThesis.Models.Repository
     {
         RepositoryContext _repositoryContext;
 
-        public ArticleCategoryRepository(RepositoryContext repositoryContext)
-            : base(repositoryContext)
+        public ArticleCategoryRepository( RepositoryContext repositoryContext )
+            : base( repositoryContext )
         {
             _repositoryContext = repositoryContext;
         }
 
-        public ArticleCategory GetCategory(long articleCategoryRefId)
+        public ArticleCategory GetCategory( long lArticleCategoryId )
         {
-            return FindAll().FirstOrDefault(category => category.Id == articleCategoryRefId);
+            return FindAll()
+                   .FirstOrDefault( category => category.Id == lArticleCategoryId );
+        }
+
+        public string GetCategoryName( long lArticleCategoryId )
+        {
+            ArticleCategory articleCategory = GetCategory( lArticleCategoryId );
+
+            return ( articleCategory != null ) ? articleCategory.Name : string.Empty;
         }
     }
 }

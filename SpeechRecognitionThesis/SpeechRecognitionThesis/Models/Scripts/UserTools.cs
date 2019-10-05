@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SpeechRecognitionThesis.Models.DatabaseModels;
+using SpeechRecognitionThesis.Models.Repository;
+using SpeechRecognitionThesis.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,6 +46,41 @@ namespace SpeechRecognitionThesis.Models.Scripts
         {
             return (loginUser != null)
                     && UserTools.ConvertPasswordToSha512(loginUser);
+        }
+
+        static public List<ArticleUserPair> GetUserArticlePair( IRespositoryWrapper repositoryWrapper, 
+                                                                List<Article> articleList )
+        {
+            if( repositoryWrapper == null || articleList == null )
+            {
+                return null;
+            }
+
+            List<ArticleUserPair> articleUserPairList = new List<ArticleUserPair>();
+            UserArticles userArticle = null;
+            User tempUser = null;
+
+            foreach( var article in articleList )
+            {
+                article.ArticleCategory = repositoryWrapper.ArticlesCategory.GetCategory(article.ArticleCategoryRefId);
+                userArticle = repositoryWrapper.UserArticles.GetUserArticle(article);
+
+                if( userArticle != null )
+                {
+                    tempUser = repositoryWrapper.Account.GetUser(userArticle.UserRefId);
+
+                    if( tempUser != null )
+                    {
+                        articleUserPairList.Add(new ArticleUserPair()
+                        {
+                            Article = article,
+                            User = tempUser
+                        });
+                    }
+                }
+            }
+
+            return articleUserPairList;
         }
 
         static public string GetCategoryImagePath( long iCategoryId )

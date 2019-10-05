@@ -33,7 +33,7 @@
                         <b>Kategoria: </b>
                         <span class="category-article-content-span">
                             <img src="@categoryImagePathString" class="img-circle" height="60" width="60" alt="Kategoria artykułu">
-                            <i class="article-name-p">[@userArticle.Article.ArticleCategory.Name]</i>
+                            <a href="category/@userArticle.Article.ArticleCategoryRefId"><i class="article-name-p">[@userArticle.Article.ArticleCategory.Name]</i></a>
                         </span>
                      </p>
                     <button class="see-article-button btn-success" type="submit" value="@userArticle.Article.Id"><h4>Zobacz więcej ( @newestArticleCounter.ToString() )</h4></button>

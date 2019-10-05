@@ -8,6 +8,7 @@ namespace SpeechRecognitionThesis.Models.Repository.Interfaces
 {
     public interface IArticleCategoryRepository : IDataRepository<ArticleCategory>
     {
-        ArticleCategory GetCategory( long articleCategoryRefId );
+        ArticleCategory GetCategory( long lCategoryId );
+        string GetCategoryName( long lCategoryId );
     }
 }

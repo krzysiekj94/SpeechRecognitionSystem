@@ -13,5 +13,6 @@ namespace SpeechRecognitionThesis.Models.Repository
         List<Article> GetArticles(IEnumerable<UserArticles> userArticlesEnumerable);
         Article GetArticle( long lArticleId );
         List<Article> GetNewestArticles( int iAmountArticles );
+        List<Article> GetArticlesFromCategory( long lCategoryId );
     }
 }
