@@ -13,7 +13,8 @@
     @foreach ( var userArticle in Model.NewestArticleList )
     {
         newestArticleCounter++;
-        tempArticleUserImagePathString = "/images/" + (userArticle.User.AvatarId + 1).ToString() + ".png";
+
+        tempArticleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetUserImagePath( userArticle.User.AvatarId );
         categoryImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetCategoryImagePath( userArticle.Article.ArticleCategory.Id );
 
         <div class="list-group-item newest-article-result">

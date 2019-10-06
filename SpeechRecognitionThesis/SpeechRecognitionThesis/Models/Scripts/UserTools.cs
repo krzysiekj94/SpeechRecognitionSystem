@@ -83,6 +83,11 @@ namespace SpeechRecognitionThesis.Models.Scripts
             return articleUserPairList;
         }
 
+        static public string GetUserImagePath( int iAvatarId )
+        {
+            return "/images/" + (iAvatarId + 1).ToString() + ".png";
+        }
+
         static public string GetCategoryImagePath( long iCategoryId )
         {
             string categoryImagePathString = "/images/category/";
