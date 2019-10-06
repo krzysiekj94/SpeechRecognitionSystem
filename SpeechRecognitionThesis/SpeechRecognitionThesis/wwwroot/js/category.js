@@ -1,8 +1,7 @@
-var articlePageCommandsArray = [];
-var articleCategoryCommandArray = [];
-
 $(document).ready(function() {
     
+    var articlePageCommandsArray = [];
+
     $( ".see-article-button" ).click(function() {
         var idArticle = $(this).val();
         window.open( "/articles/" + idArticle.toString(), "_self" );
@@ -10,12 +9,9 @@ $(document).ready(function() {
 
     $.getScript("/js/speech_engine.js", function(){
     
-        articleCategoryCommandArray = LoadCategoryCommandFromDb();
-
         setTimeout(function(){
-            LoadCategoryCommands();
             LoadPageVoiceControlCommands();
-        },1500);
+        },1000);
 
         /////////////////FUNCTIONS/////////////////
 
@@ -29,7 +25,7 @@ $(document).ready(function() {
                {
                    indexes: articlePageCommandsArray,
                    action: function( indexOfArray ){
-                       $( ".newest-articles-result .newest-article-result .article-result-info .see-article-button" ).eq( indexOfArray ).click();
+                       $( ".category-articles-result .category-article-result .article-result-info .see-article-button" ).eq( indexOfArray ).click();
                    }
                },
                ]);
@@ -38,7 +34,7 @@ $(document).ready(function() {
        
        function ReadArticlePageCommandsArray()
        {
-           var countOfArticles = $(".newest-article-result").length;
+           var countOfArticles = $(".category-article-result").length;
        
            for( var iCounter = 1; iCounter <= countOfArticles; iCounter++ )
            {
@@ -46,20 +42,5 @@ $(document).ready(function() {
            }
        }
 
-       function LoadCategoryCommands()
-       {   
-           if( artyom != null )
-           {
-                artyom.addCommands([
-                {
-                    indexes: articleCategoryCommandArray,
-                    action: function(indexOfArray){
-                         var idCategory = categoriesArray[ indexOfArray ];
-                         window.open( "/articles/category/" + idCategory.id.toString(), "_self" );
-                    }
-                },
-                ]);
-           }      
-       }
     });
  });

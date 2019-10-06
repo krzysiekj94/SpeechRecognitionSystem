@@ -1,24 +1,30 @@
 ﻿@model SpeechRecognitionThesis.Models.ViewModels.ArticlesFromCategoryModel
 
 @{
-    ViewData["Title"] = "Artykuły z kategorii \"" + Model.CategoryName  + "\"";
+    ViewData["Title"] = "Artykuły z kategorii \"" + Model.Category.Name + "\"";
+    ViewData["CategoryImagePath"] = SpeechRecognitionThesis.Models.Scripts.UserTools.GetCategoryImagePath( Model.Category.Id );
 
     int iArticleFromCategoryCounter = 0;
     string tempArticleUserImagePathString = string.Empty;
     string categoryImagePathString = string.Empty;
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="row category-title-row">
+    <h2 class="category-articles-title">Artykuły z kategorii <b>@Model.Category.Name</b></h2>
+    <span class="category-article-content-span">
+        <img src="@ViewData["CategoryImagePath"]" class="img-circle" height="120" width="120" alt="Kategoria artykułu">
+    </span>
+</div>
 
-<div class="row newest-articles-result">
-    @foreach( var userArticle in Model.ArticleUser )
+<div class="row category-articles-result">
+    @foreach (var userArticle in Model.ArticleUser)
     {
         iArticleFromCategoryCounter++;
 
         tempArticleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetUserImagePath(userArticle.User.AvatarId);
         categoryImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetCategoryImagePath(userArticle.Article.ArticleCategory.Id);
 
-        <div class="list-group-item newest-article-result">
+        <div class="list-group-item category-article-result">
             <div class="row">
                 <div class="col-sm-3 text-center">
                     <p class="article-author-p">Autor</p>
@@ -29,15 +35,9 @@
                     <p><h4><b>Temat: </b> @userArticle.Article.Subject</h4></p>
                     <p><h4><b>Treść: </b> @userArticle.Article.Content</h4></p>
                     <p><h4><b>Data ost. modyfikacji: </b>@userArticle.Article.ArticleModificationDate</h4></p>
+                    <p><h4><b>Liczba wyświetleń: </b>@userArticle.Article.NumberOfViews</h4></p>
                     <p></p>
                     <p><h4>Komenda do przekierowania do strony artykułu: <b>"Zobacz @iArticleFromCategoryCounter.ToString() "</b></h4></p>
-                    <p class="category-article-content-p">
-                        <b>Kategoria: </b>
-                        <span class="category-article-content-span">
-                            <img src="@categoryImagePathString" class="img-circle" height="60" width="60" alt="Kategoria artykułu">
-                            <a href="category/@userArticle.Article.ArticleCategoryRefId"><i class="article-name-p">[@userArticle.Article.ArticleCategory.Name]</i></a>
-                        </span>
-                    </p>
                     <button class="see-article-button btn-success" type="submit" value="@userArticle.Article.Id"><h4>Zobacz więcej ( @iArticleFromCategoryCounter.ToString() )</h4></button>
                 </div>
             </div>

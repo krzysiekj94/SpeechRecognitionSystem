@@ -29,14 +29,15 @@
                     <p><h4><b>Treść: </b> @userArticle.Article.Content</h4></p>
                     <p><h4><b>Data ost. modyfikacji: </b>@userArticle.Article.ArticleModificationDate</h4></p>
                     <p></p>
-                    <p><h4>Komenda do przekierowania do strony artykułu: <b>"Zobacz @newestArticleCounter.ToString() "</b></h4></p>
                     <p class="category-article-content-p">
                         <b>Kategoria: </b>
                         <span class="category-article-content-span">
                             <img src="@categoryImagePathString" class="img-circle" height="60" width="60" alt="Kategoria artykułu">
                             <a href="category/@userArticle.Article.ArticleCategoryRefId"><i class="article-name-p">[@userArticle.Article.ArticleCategory.Name]</i></a>
                         </span>
-                     </p>
+                    </p>
+                    <p><h4>Komenda do przekierowania do strony artykułu: <b>"Zobacz @newestArticleCounter.ToString() "</b></h4></p>
+                    <p><h4>Komenda do przekierowania do strony kategorii: <b>"Wybierz @userArticle.Article.ArticleCategory.Name.ToString()"</b></h4></p>
                     <button class="see-article-button btn-success" type="submit" value="@userArticle.Article.Id"><h4>Zobacz więcej ( @newestArticleCounter.ToString() )</h4></button>
                 </div>
              </div>

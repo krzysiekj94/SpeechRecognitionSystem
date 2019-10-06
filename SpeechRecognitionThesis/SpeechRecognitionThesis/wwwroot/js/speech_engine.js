@@ -1,5 +1,7 @@
 const artyom = new Artyom();
 var articleCategoryArray = null;
+var categoriesArray = [];
+var articleCategorySidebarCommandArray = [];
 var valueOfZoomIn = 1.0;
 
 if( !IsSearchPage() )
@@ -12,6 +14,7 @@ else
 }
 
 addComandsToArtyom();
+AddCategorySidebarCommands();
 
 function initializeArtyomForSearch()
 {
@@ -349,8 +352,42 @@ function AddCategoryToArray(categories)
 {
   if(categories != null)
   {
+    categoriesArray = categories;
+
     categories.forEach(function(category){            
       articleCategoryArray.push("Wybierz " + category.name);
       });
   }
 }
+
+function AddCategorySidebarCommands()
+{
+    if( artyom != null 
+        && categoriesArray != null )
+    {
+        if( categoriesArray.length <= 0 )
+        {
+            LoadCategoryFromDb();
+        }
+
+        setTimeout(function(){
+            categoriesArray.forEach(function(category){            
+                articleCategorySidebarCommandArray.push("Kategoria " + category.name);
+            }); 
+    
+            artyom.addCommands([
+                {
+                    indexes: articleCategorySidebarCommandArray,
+                    action: function( indexOfArray ){
+                        $( ".article-categories-list .category-sidebar-element" ).eq( indexOfArray ).click();;
+                    }
+                },
+            ]);
+        },250);
+    }
+}
+
+$(document).on( 'click', '.category-sidebar-element', function(){
+    var categoryLinkString = $(this).attr('href');
+    window.open( categoryLinkString, "_self" );
+});

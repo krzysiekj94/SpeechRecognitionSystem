@@ -1,0 +1,14 @@
+.category-articles-title{
+    float: left;
+}
+
+.category-title-row{
+    margin-top: 5%;
+}
+
+.category-articles-result{
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-left:  5%;
+    width:90%;
+}

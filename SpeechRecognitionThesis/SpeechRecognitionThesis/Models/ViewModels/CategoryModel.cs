@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognitionThesis.Models.ViewModels
 {
-    public class ArticlesFromCategoryModel
+    public class CategoryModel
     {
-        public List<ArticleUserPair> ArticleUser { get; set; }
-        public ArticleCategory Category { get; set; }
+        public List<ArticleCategory> CategoryList { get; set; }
     }
 }

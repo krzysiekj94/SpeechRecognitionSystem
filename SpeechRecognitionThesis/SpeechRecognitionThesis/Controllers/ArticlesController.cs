@@ -47,7 +47,7 @@ namespace SpeechRecognitionThesis.Controllers
             ArticlesFromCategoryModel articlesFromCategoryModel = new ArticlesFromCategoryModel();
             List<ArticleUserPair> articleUserList = GetArticlesFromCategoryList( lCategoryId );
             articlesFromCategoryModel.ArticleUser = articleUserList;
-            articlesFromCategoryModel.CategoryName = _repositoryWrapper.ArticlesCategory.GetCategoryName( lCategoryId );
+            articlesFromCategoryModel.Category = _repositoryWrapper.ArticlesCategory.GetCategory( lCategoryId );
 
             return View( "Category", articlesFromCategoryModel );
         }

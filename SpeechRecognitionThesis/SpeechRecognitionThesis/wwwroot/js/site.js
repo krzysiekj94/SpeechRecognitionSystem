@@ -1,4 +1,33 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿articleCategorySidebarArray = [];
 
-// Write your JavaScript code.
+$(document).ready(function() {
+    
+    LoadCategoryListFromDb();
+
+    setTimeout(function(){
+        InitCategorySidebarView();
+    },250);
+
+});
+
+function InitCategorySidebarView()
+{
+    articleCategorySidebarArray.forEach(function(category){            
+        $(".article-categories-list").append( '<a href="/articles/category/' + category.id 
+                                                + '" class="list-group-item sidebar-element category-sidebar-element">' + category.name + '</a>' );
+    });
+}
+
+function LoadCategoryListFromDb()
+{
+    articleCategorySidebarArray = new Array();
+
+    $.ajax({
+        url           :     '/category/results',
+        type          :     'GET',
+        contentType   :     'application/json; charset=utf-8',
+     })
+     .done(function(categories) {
+        articleCategorySidebarArray = categories;
+     });
+}
