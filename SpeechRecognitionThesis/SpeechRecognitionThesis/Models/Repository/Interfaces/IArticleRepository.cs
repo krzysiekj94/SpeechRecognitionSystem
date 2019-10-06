@@ -14,5 +14,6 @@ namespace SpeechRecognitionThesis.Models.Repository
         Article GetArticle( long lArticleId );
         List<Article> GetNewestArticles( int iAmountArticles );
         List<Article> GetArticlesFromCategory( long lCategoryId );
+        List<Article> GetMostViewedArticles( int iAmountArticles );
     }
 }

@@ -1,8 +1,48 @@
-﻿
+﻿@model SpeechRecognitionThesis.Models.ViewModels.MostViewedModel
+
 @{
     ViewData["Title"] = "Najczęściej wyświetlane artykuły";
+    int mostViewedArticleCounter = 0;
+    string tempArticleUserImagePathString = string.Empty;
+    string categoryImagePathString = string.Empty;
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<!--#TODO-->
+
+<div class="row most-viewed-articles-result">
+    @foreach( var userArticle in Model.MostViewedArticleList )
+    {
+        mostViewedArticleCounter++;
+
+        tempArticleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetUserImagePath(userArticle.User.AvatarId);
+        categoryImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetCategoryImagePath(userArticle.Article.ArticleCategory.Id);
+
+        <div class="list-group-item newest-article-result">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <p class="article-author-p">Autor</p>
+                    <h3>@userArticle.User.NickName</h3>
+                    <img src="@tempArticleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar użytkownika">
+                </div>
+                <div class="col-sm-9 article-result-info">
+                    <p><h4><b>Temat: </b> @userArticle.Article.Subject</h4></p>
+                    <p><h4><b>Treść: </b> @userArticle.Article.Content</h4></p>
+                    <p><h4><b>Data ost. modyfikacji: </b>@userArticle.Article.ArticleModificationDate</h4></p>
+                    <p><h4><b>Liczba wyświetleń: </b>@userArticle.Article.NumberOfViews</h4></p>
+                    <p></p>
+                    <p class="category-article-content-p">
+                        <b>Kategoria: </b>
+                        <span class="category-article-content-span">
+                            <img src="@categoryImagePathString" class="img-circle" height="60" width="60" alt="Kategoria artykułu">
+                            <a href="category/@userArticle.Article.ArticleCategoryRefId"><i class="article-name-p">[@userArticle.Article.ArticleCategory.Name]</i></a>
+                        </span>
+                    </p>
+                    <p><h4>Komenda do przekierowania do strony artykułu: <b>"Zobacz @mostViewedArticleCounter.ToString() "</b></h4></p>
+                    <p><h4>Komenda do przekierowania do strony kategorii: <b>"Wybierz @userArticle.Article.ArticleCategory.Name.ToString()"</b></h4></p>
+                    <button class="see-article-button btn-success" type="submit" value="@userArticle.Article.Id"><h4>Zobacz więcej ( @mostViewedArticleCounter.ToString() )</h4></button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

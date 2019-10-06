@@ -67,5 +67,13 @@ namespace SpeechRecognitionThesis.Models.Repository
             return FindAll()
                     .Where( article => article.ArticleCategoryRefId == lCategoryId ).ToList();
         }
+
+        public List<Article> GetMostViewedArticles(int iAmountArticles)
+        {
+            return FindAll()
+                    .OrderByDescending( article => article.NumberOfViews )
+                    .Take( iAmountArticles )
+                    .ToList();
+        }
     }
 }

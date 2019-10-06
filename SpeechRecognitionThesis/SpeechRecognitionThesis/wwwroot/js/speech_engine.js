@@ -85,7 +85,7 @@ function addComandsToArtyom()
             {
                 indexes: ["top", "rekomendowane", "polecane"],
                 action: function(){
-                    window.open("/articles/top-5","_self");
+                    window.open("/articles/top-10","_self");
                 }
             },
             {

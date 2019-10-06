@@ -79,10 +79,16 @@ namespace SpeechRecognitionThesis.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("Top-5")]
+        [Route("Top-10")]
         public IActionResult GetTopArticlesContent()
         {
-            return View("Top");
+            MostViewedModel mostViewedModel = new MostViewedModel();
+            List<Article> mostViewedArticleList = _repositoryWrapper.Articles.GetMostViewedArticles( 10 );
+            List<ArticleUserPair> articleUserPairList = UserTools.GetUserArticlePair( _repositoryWrapper, mostViewedArticleList );
+
+            mostViewedModel.MostViewedArticleList = articleUserPairList;
+
+            return View("Top", mostViewedModel );
         }
 
         [AllowAnonymous]
