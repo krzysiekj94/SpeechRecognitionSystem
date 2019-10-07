@@ -1,0 +1,13 @@
+﻿@model SpeechRecognitionThesis.Models.ViewModels.UserArticlesModel
+
+@{
+    ViewData["Title"] = "Artykuły użytkownika \"" + Model.User.NickName + "\"";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@foreach( var article in Model.UserArticlesList )
+{
+    <div>Artykuł: id->@article.Id, temat: @article.Subject</div>
+}
+

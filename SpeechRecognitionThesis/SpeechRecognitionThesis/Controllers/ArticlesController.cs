@@ -154,6 +154,42 @@ namespace SpeechRecognitionThesis.Controllers
             return View( "Article", concreteArticleModel );
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("user/{lUserId}")]
+        public IActionResult GetUserArticlesView( [FromRoute] long lUserId )
+        {
+            UserArticlesModel userArticlesModel = new UserArticlesModel();
+            FIllUserArticlesModel( userArticlesModel, lUserId );
+
+            return View( "User", userArticlesModel );
+        }
+
+        private void FIllUserArticlesModel(UserArticlesModel userArticlesModel, long lUserId )
+        {
+            User userFromDb = _repositoryWrapper.Account.GetUser(lUserId);
+            IEnumerable<UserArticles> userArticlesList = null;
+            List<Article> articleList = null;
+
+            if( userArticlesModel != null
+                && userFromDb != null )
+            {
+                userFromDb.Password = string.Empty;
+                userFromDb.Id = -1;
+
+                userArticlesModel.User = userFromDb;
+                userArticlesList = _repositoryWrapper.UserArticles.GetUserArticles( lUserId );
+
+                if( userArticlesList != null
+                    && userArticlesList.Count() > 0 )
+                {
+                    articleList = _repositoryWrapper.Articles.GetArticles( userArticlesList );
+                    SetCategoryForUserArticles( articleList );
+                    userArticlesModel.UserArticlesList = articleList;
+                }
+            }
+        }
+
         private void UpdateVisitedNumberDb( long lArticleId )
         {
             Article articleFromDb = null;
