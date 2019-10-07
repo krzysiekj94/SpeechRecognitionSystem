@@ -83,7 +83,7 @@ function addComandsToArtyom()
                 }
             },
             {
-                indexes: ["top", "rekomendowane", "polecane"],
+                indexes: ["top", "rekomendowane", "polecane", "najczęściej"],
                 action: function(){
                     window.open("/articles/top-10","_self");
                 }

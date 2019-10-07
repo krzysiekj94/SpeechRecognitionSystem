@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     setTimeout(function(){
         InitCategorySidebarView();
-    },250);
+    },500);
 
 });
 

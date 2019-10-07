@@ -24,6 +24,8 @@ namespace SpeechRecognitionThesis.Models.Scripts
         const string NEWEST_SCRIPT_RELATIVE_PATH_STRING                 = "/js/newest.js";
         const string CATEGORY_RELATIVE_PATH_STRING                      = "/articles/category";
         const string CATEGORY_SCRIPT_RELATIVE_PATH_STRING               = "/js/category.js";
+        const string TOP_RELATIVE_PATH_STRING                           = "/articles/top-10";
+        const string TOP_SCRIPT_RELATIVE_PATH_STRING                    = "/js/most-viewed.js";
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
@@ -67,6 +69,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
                     break;
                 case CATEGORY_RELATIVE_PATH_STRING:
                     urlPathString = CATEGORY_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
+                case TOP_RELATIVE_PATH_STRING:
+                    urlPathString = TOP_SCRIPT_RELATIVE_PATH_STRING;
                     break;
                 default:
                     break;
