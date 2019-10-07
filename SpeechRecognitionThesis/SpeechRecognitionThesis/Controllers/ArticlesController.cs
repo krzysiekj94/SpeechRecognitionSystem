@@ -149,8 +149,26 @@ namespace SpeechRecognitionThesis.Controllers
         {
             ConcreteArticleModel concreteArticleModel = new ConcreteArticleModel();
             FillConcreteArticleModel( concreteArticleModel, lArticleId, -1 );
+            UpdateVisitedNumberDb( lArticleId );
 
             return View( "Article", concreteArticleModel );
+        }
+
+        private void UpdateVisitedNumberDb( long lArticleId )
+        {
+            Article articleFromDb = null;
+
+            if( lArticleId > -1 )
+            {
+                articleFromDb = _repositoryWrapper.Articles.GetArticle( lArticleId );
+
+                if( articleFromDb != null )
+                {
+                    articleFromDb.NumberOfViews++;
+                    _repositoryWrapper.Articles.Update( articleFromDb );
+                    _repositoryWrapper.Save();
+                }
+            }
         }
 
         private void FillConcreteArticleModel(ConcreteArticleModel concreteArticleModel, long lArticleId, long lUserId )
