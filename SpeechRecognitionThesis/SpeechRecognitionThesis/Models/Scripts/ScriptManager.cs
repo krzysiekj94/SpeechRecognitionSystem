@@ -26,22 +26,32 @@ namespace SpeechRecognitionThesis.Models.Scripts
         const string CATEGORY_SCRIPT_RELATIVE_PATH_STRING               = "/js/category.js";
         const string TOP_RELATIVE_PATH_STRING                           = "/articles/top-10";
         const string TOP_SCRIPT_RELATIVE_PATH_STRING                    = "/js/most-viewed.js";
+        const string CONCRETE_ARTICLE_RELATIVE_PATH_STRING              = "/articles";
+        const string CONCRETE_ARTICLE_SCRIPT_RELATIVE_PATH_STRING       = "/js/articles.js";
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
             string urlPathString = SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING;
 
             if( urlRelativePathString.Any( char.IsDigit ) 
-                && urlRelativePathString.Contains("articles")
-                && urlRelativePathString.Contains("edit") )
+                && urlRelativePathString.ToLower().Contains("articles")
+                && urlRelativePathString.ToLower().Contains("edit") )
             {
                 urlRelativePathString = ADD_ARTICLES_RELATIVE_PATH_STRING;
             }
             else if( urlRelativePathString.Any( char.IsDigit ) 
-                && urlRelativePathString.Contains("articles")
-                && urlRelativePathString.Contains("category") )
+                && urlRelativePathString.ToLower().Contains("articles")
+                && urlRelativePathString.ToLower().Contains("category") )
             {
                 urlRelativePathString = CATEGORY_RELATIVE_PATH_STRING;
+            }
+            else if( urlRelativePathString.Any( char.IsDigit ) 
+                && !urlRelativePathString.ToLower().Contains("top")
+                && !urlRelativePathString.ToLower().Contains("category")
+                && !urlRelativePathString.ToLower().Contains("edit")
+                && urlRelativePathString.ToLower().Contains("articles") )
+            {
+                urlRelativePathString = CONCRETE_ARTICLE_RELATIVE_PATH_STRING;
             }
 
             switch( urlRelativePathString.ToLower() )
@@ -72,6 +82,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
                     break;
                 case TOP_RELATIVE_PATH_STRING:
                     urlPathString = TOP_SCRIPT_RELATIVE_PATH_STRING;
+                    break;
+                case CONCRETE_ARTICLE_RELATIVE_PATH_STRING:
+                    urlPathString = CONCRETE_ARTICLE_SCRIPT_RELATIVE_PATH_STRING;
                     break;
                 default:
                     break;

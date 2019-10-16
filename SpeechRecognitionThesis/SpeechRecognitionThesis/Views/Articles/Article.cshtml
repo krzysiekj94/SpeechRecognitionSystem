@@ -38,15 +38,6 @@
             <h4><b>Data modyfikacji:</b> @Model.Article.ArticleModificationDate</h4>
             <h4><b>Liczba wyświetleń strony:</b> @Model.Article.NumberOfViews</h4>
             <p><h4>Komenda do przekierowania do strony kategorii: <b>"Wybierz @Model.Article.ArticleCategory.Name.ToString()"</b></h4></p>
-
-            @if (lLoggedUserId == Model.UserArticle.User.Id)
-            {
-                <form action="/articles/@Model.Article.Id" method="get">
-                    <h4>
-                        <input class="news-see-more-button btn-danger" type="submit" value="Edytuj" />
-                    </h4>
-                </form>
-            }
         </div>
     </div>
 </div>
