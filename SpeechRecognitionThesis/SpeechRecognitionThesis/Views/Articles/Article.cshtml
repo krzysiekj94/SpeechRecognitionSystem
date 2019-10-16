@@ -6,6 +6,7 @@
     int iImageNumber = int.Parse(@Html.ValueFor(model => model.UserArticle.User.AvatarId)) + 1;
     string mainAccountAvatar = "/images/" + iImageNumber.ToString() + ".png";
     long lLoggedUserId = TokenProvider.GetLoggedUserId( User.Identity );
+    string categoryImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools.GetCategoryImagePath(Model.Article.ArticleCategory.Id);
 }
 
 <h2>Karta artykułu</h2>
@@ -14,20 +15,35 @@
     <div class="row my-article">
         <div class="col-sm-3">
             <div class="text-center">
+                <p><h4>Autor</h4></p>
                 <p><h3>@Model.UserArticle.User.NickName</h3></p>
                 <img src="@mainAccountAvatar" class="img-circle" height="120" width="120" alt="Avatar użytkownika">
             </div>
         </div>
         <div class="col-sm-9">
             <h2>@Model.Article.Subject</h2>
-            <h4 maxlength="100" readonly>@Model.Article.Content</h4>
-            <h3>Kategoria: @Model.Article.ArticleCategory.Name</h3>
-            <h3>Data modyfikacji: @Model.Article.ArticleModificationDate</h3>
+            <br />
+            <h4>@Model.Article.Content</h4>
+            <br />
+            <p class="category-article-content-p">
+                <h3>
+                    <b>Kategoria: </b>
+                    <span class="category-article-content-span">
+                        <img src="@categoryImagePathString" class="img-circle" height="100" width="100" alt="Kategoria artykułu">
+                        <a href="category/@Model.Article.ArticleCategoryRefId"><i class="article-name-p">[@Model.Article.ArticleCategory.Name]</i></a>
+                    </span>
+                </h3>
+            </p>
+            <br/>
+            <h4><b>Data modyfikacji:</b> @Model.Article.ArticleModificationDate</h4>
+            <h4><b>Liczba wyświetleń strony:</b> @Model.Article.NumberOfViews</h4>
+            <p><h4>Komenda do przekierowania do strony kategorii: <b>"Wybierz @Model.Article.ArticleCategory.Name.ToString()"</b></h4></p>
+
             @if (lLoggedUserId == Model.UserArticle.User.Id)
             {
                 <form action="/articles/@Model.Article.Id" method="get">
                     <h4>
-                        <input class="news-see-more-button btn-danger" type="submit" value="Zobacz więcej" />
+                        <input class="news-see-more-button btn-danger" type="submit" value="Edytuj" />
                     </h4>
                 </form>
             }
