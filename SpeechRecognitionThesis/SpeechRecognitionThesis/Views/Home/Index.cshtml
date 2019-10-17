@@ -1,77 +1,88 @@
-﻿@{
-    ViewData["Title"] = "Main Page";
+﻿@model SpeechRecognitionThesis.Models.ViewModels.IndexArticlesModel
+
+@{
+    ViewData["Title"] = "Strona główna";
 }
 
 <div class="row menu-news-content">
-
     <div class="row news-header">
         <h1>Polecane</h1>
     </div>
     <div class="row most-popular-articles">
-        <div class="col-md-4 col-sm-3 most-popular-article">
-            <img class="most-popular-article-image" src="~/images/bird.jpg" alt="Avatar">
-            <div class="most-popular-article-content">To jest opis jednego z polecanych artykułów</div>
-        </div>
-        <div class="col-md-4 col-sm-3 most-popular-article">
-            <img class="most-popular-article-image" src="~/images/bird.jpg" alt="Avatar">
-            <div class="most-popular-article-content">To jest kolejny opis jednego z polecanych artykułów</div>
-        </div>
-        <div class="col-md-4 col-sm-3 most-popular-article">
-            <img class="most-popular-article-image" src="~/images/bird.jpg" alt="Avatar">
-            <div class="most-popular-article-content">To jest ostatni opis jednego z polecanych artykułów</div>
-        </div>
+        @foreach( var mostViewedArticle in Model.MostViewedUserArticlePairList )
+        {
+            <div class="col-md-4 col-sm-3 most-popular-article">
+                <h4><b>@mostViewedArticle.Article.Subject</b></h4>
+                <img class="most-popular-article-image" src="~/images/bird.jpg" alt="Avatar">
+                <div class="most-popular-article-content">@mostViewedArticle.Article.Content</div>
+            </div>
+        }
     </div>
-
-    <!-- TODO Template for all types articles -->
     <div class="row news-header">
         <h1>Najnowsze artykuły</h1>
     </div>
-    <div class="row newest-news-body">
-        <div class="col-sm-3">
-            <div class="text-center">
-                <p><h3>John</h3></p>
-                <img src="~/images/bird.jpg" class="img-circle" height="120" width="120" alt="Avatar">
+
+    @foreach (var newestUserArticlePair in Model.NewestArticleUserPairList)
+    {
+        <div class="row newest-news-body">
+            <div class="col-sm-3">
+                <div class="text-center">
+                    <p><h3>@newestUserArticlePair.User.NickName</h3></p>
+                    <img src="~/images/bird.jpg" class="img-circle" height="120" width="120" alt="Avatar">
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <h2>@newestUserArticlePair.Article.Subject</h2>
+                <h4>@newestUserArticlePair.Article.Content</h4>
+                <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
             </div>
         </div>
-        <div class="col-sm-9">
-            <h2>Tytuł artykułu</h2>
-            <h4>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</h4>
-            <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
-        </div>
-    </div>
+    }
 
     <div class="row news-header">
-        <h1>Top 5 artykułów</h1>
-    </div>
-    <div class="row newest-news-body">
-        <div class="col-sm-3">
-            <div class="text-center">
-                <p><h3>John</h3></p>
-                <img src="~/images/bird.jpg" class="img-circle" height="120" width="120" alt="Avatar">
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <h2>Tytuł artykułu</h2>
-            <h4>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</h4>
-            <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
-        </div>
+        <h1>Najwięcej wyświetleń</h1>
     </div>
 
-    <div class="row news-header">
-        <h1>Twoje artykuły</h1>
-    </div>
-    <div class="row newest-news-body">
-        <div class="col-sm-3">
-            <div class="text-center">
-                <p><h3>John</h3></p>
-                <img src="~/images/bird.jpg" class="img-circle" height="120" width="120" alt="Avatar">
+    @foreach (var mostViewedUserArticlePair in Model.MostViewedUserArticlePairList)
+    {
+        <div class="row newest-news-body">
+            <div class="col-sm-3">
+                <div class="text-center">
+                    <p><h3>@mostViewedUserArticlePair.User.NickName</h3></p>
+                    <img src="~/images/bird.jpg" class="img-circle" height="120" width="120" alt="Avatar">
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <h2>@mostViewedUserArticlePair.Article.Subject</h2>
+                <h4>@mostViewedUserArticlePair.Article.Content</h4>
+                <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
             </div>
         </div>
-        <div class="col-sm-9">
-            <h2>Tytuł artykułu</h2>
-            <h4>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</h4>
-            <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
-        </div>
-    </div>
+    }
 
+    @if( User.Identity.IsAuthenticated 
+         && Model.MyArticleList.Count > 0 )
+    {
+
+        <div class="row news-header">
+            <h1>Twoje artykuły</h1>
+        </div>
+
+        @foreach( var myArticle in Model.MyArticleList )
+        {
+            <div class="row newest-news-body">
+                <div class="col-sm-3">
+                    <div class="text-center">
+                        <p><h3>@Model.CurrentUser.NickName</h3></p>
+                        <img src="~/images/bird.jpg" class="img-circle" height="120" width="120" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <h2>@myArticle.Subject</h2>
+                    <h4>@myArticle.Content</h4>
+                    <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                </div>
+            </div>
+        }
+    }
 </div>
