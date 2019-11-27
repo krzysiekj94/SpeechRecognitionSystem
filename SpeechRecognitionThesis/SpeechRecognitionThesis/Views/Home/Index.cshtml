@@ -5,6 +5,10 @@
 
     string articleUserImagePathString = string.Empty;
     string articleUserCategoryPathString = string.Empty;
+
+    int mostViewedArticleCounter = 1;
+    int newestArticleCounter = 1;
+    int mostPopularCounter = 1;
 }
 
 <div class="row menu-news-content">
@@ -17,11 +21,14 @@
             articleUserCategoryPathString = SpeechRecognitionThesis.Models.Scripts.UserTools
                                             .GetCategoryImagePath( mostViewedArticle.Article.ArticleCategory.Id );
 
-            <div class="col-md-4 col-sm-3 most-popular-article">
-                <h4><b>@mostViewedArticle.Article.Subject</b></h4>
-                <img class="most-popular-article-image" src="@articleUserCategoryPathString" alt="Avatar">
-                <div class="most-popular-article-content">@mostViewedArticle.Article.Content</div>
-            </div>
+        <div class="col-md-4 col-sm-3 most-popular-article">
+            <h2><b>@mostViewedArticle.Article.Subject</b></h2>
+            <img class="most-popular-article-image" src="@articleUserCategoryPathString" alt="Avatar">
+            <div class="most-popular-article-content"><h5>@mostViewedArticle.Article.Content</h5></div>
+            <h4><b>Komenda:</b> Polecany @mostViewedArticleCounter</h4>
+            <button class="btn-success text-center" type="submit" value="@mostViewedArticle.Article.Id.ToString()"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
+        </div>
+            mostViewedArticleCounter++;
         }
     </div>
     <div class="row news-header">
@@ -36,40 +43,44 @@
         <div class="row newest-news-body">
             <div class="col-sm-3">
                 <div class="text-center">
-                    <p><h3>@newestUserArticlePair.User.NickName</h3></p>
+                    <p><b><h3>@newestUserArticlePair.User.NickName</h3></b></p>
                     <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
                 </div>
             </div>
             <div class="col-sm-9">
-                <h2>@newestUserArticlePair.Article.Subject</h2>
-                <h4>@newestUserArticlePair.Article.Content</h4>
-                <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                <h2><b>Temat: </b> @newestUserArticlePair.Article.Subject</h2>
+                <h3><b>Treść: </b> @newestUserArticlePair.Article.Content</h3>
+                <p><h4><b>Data ost. modyfikacji: </b>@newestUserArticlePair.Article.ArticleModificationDate</h4></p>
+                <p><h3>Komenda: <b>"Polecany @newestArticleCounter.ToString()"</b></h3></p>
+                <button class="news-see-more-button btn-danger" type="submit" value="@newestUserArticlePair.Article.Id.ToString()"><h4>Zobacz polecany ( @newestArticleCounter.ToString() )</h4></button>
             </div>
         </div>
+        newestArticleCounter++;
     }
 
     <div class="row news-header">
-        <h1>Najwięcej wyświetleń</h1>
+        <h1>Najbardziej popularne</h1>
     </div>
 
-    @foreach (var mostViewedUserArticlePair in Model.MostViewedUserArticlePairList)
+    @foreach (var mostPopularArticle in Model.MostViewedUserArticlePairList)
     {
         articleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools
-                                     .GetUserImagePath( mostViewedUserArticlePair.User.AvatarId );
+                                     .GetUserImagePath(mostPopularArticle.User.AvatarId );
 
         <div class="row newest-news-body">
             <div class="col-sm-3">
                 <div class="text-center">
-                    <p><h3>@mostViewedUserArticlePair.User.NickName</h3></p>
+                    <p><h3>@mostPopularArticle.User.NickName</h3></p>
                     <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
                 </div>
             </div>
             <div class="col-sm-9">
-                <h2>@mostViewedUserArticlePair.Article.Subject</h2>
-                <h4>@mostViewedUserArticlePair.Article.Content</h4>
-                <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                <h2>@mostPopularArticle.Article.Subject</h2>
+                <h4>@mostPopularArticle.Article.Content</h4>
+                <button class="news-see-more-button btn-danger" type="submit" value="@mostPopularArticle.Article.Id.ToString()"><h4>Zobacz popularny ( @mostPopularCounter.ToString() )</h4></button>
             </div>
         </div>
+        mostPopularCounter++;
     }
 
     @if( User.Identity.IsAuthenticated 
