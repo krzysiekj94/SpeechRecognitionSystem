@@ -11,15 +11,15 @@ namespace SpeechRecognitionThesis.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
+        [ForeignKey("ArticleCategory")]
+        public long ArticleCategoryRefId { get; set; }
+        public ArticleCategory ArticleCategory { get; set; }
+
         [StringLength(200)]
         public string Subject { get; set; }
 
         [StringLength(4000)]
         public string Content { get; set; }
-        
-        [ForeignKey("ArticleCategory")]
-        public long ArticleCategoryRefId { get; set; }
-        public ArticleCategory ArticleCategory { get; set; }
 
         [StringLength(50)]
         [DataType(DataType.DateTime)]
