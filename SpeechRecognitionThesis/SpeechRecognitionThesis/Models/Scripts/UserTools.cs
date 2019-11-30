@@ -48,7 +48,7 @@ namespace SpeechRecognitionThesis.Models.Scripts
                     && UserTools.ConvertPasswordToSha512(loginUser);
         }
 
-        static public List<ArticleUserPair> GetUserArticlePair( IRespositoryWrapper repositoryWrapper, 
+        static public List<ArticleUserPair> GetUserArticlePair( IRepositoryWrapper repositoryWrapper, 
                                                                 List<Article> articleList )
         {
             if( repositoryWrapper == null || articleList == null )

@@ -19,9 +19,9 @@ namespace SpeechRecognitionThesis.Controllers
     [Route("Register")]
     public class RegisterController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public RegisterController( IRespositoryWrapper repositoryWrapper )
+        public RegisterController( IRepositoryWrapper repositoryWrapper )
         {
             _repositoryWrapper = repositoryWrapper;
         }

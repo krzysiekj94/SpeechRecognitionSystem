@@ -13,9 +13,9 @@ namespace SpeechRecognitionThesis.Controllers
     [ApiController]
     public class CategoryController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public CategoryController(IRespositoryWrapper repositoryWrapper)
+        public CategoryController(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }

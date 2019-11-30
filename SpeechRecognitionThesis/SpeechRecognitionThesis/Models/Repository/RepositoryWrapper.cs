@@ -3,7 +3,7 @@ using SpeechRecognitionThesis.Models.Repository.Interfaces;
 
 namespace SpeechRecognitionThesis.Models.Repository
 {
-    public class RepositoryWrapper : IRespositoryWrapper
+    public class RepositoryWrapper : IRepositoryWrapper
     {
         private RepositoryContext   _repositoryContext;
         private RepositoryManager   _repositoryManager;

@@ -19,14 +19,18 @@ namespace SpeechRecognitionThesis.Models
         public string Password { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [StringLength(50)]
         public string Email { get; set; }
 
         [DataType(DataType.DateTime)]
+        [StringLength(50)]
         public string CreateAccountDate { get; set; }
 
+        [StringLength(50)]
         [DataType(DataType.DateTime)]
         public string LastUpdateAccountDate { get; set; }
 
+        [StringLength(50)]
         [DataType(DataType.DateTime)]
         public string LastLoggedAccountDate { get; set; }
 

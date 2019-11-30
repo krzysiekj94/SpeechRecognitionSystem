@@ -9,7 +9,7 @@ using SpeechRecognitionThesis.Models.Database;
 namespace SpeechRecognitionThesis.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20191001191840_SpeechRecognitionThesis.Models.Database.RepositoryContext")]
+    [Migration("20191130213721_SpeechRecognitionThesis.Models.Database.RepositoryContext")]
     partial class SpeechRecognitionThesisModelsDatabaseRepositoryContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,13 +28,16 @@ namespace SpeechRecognitionThesis.Migrations
 
                     b.Property<long>("ArticleCategoryRefId");
 
-                    b.Property<string>("ArticleModificationDate");
+                    b.Property<string>("ArticleModificationDate")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("Content");
+                    b.Property<string>("Content")
+                        .HasMaxLength(4000);
 
                     b.Property<long>("NumberOfViews");
 
-                    b.Property<string>("Subject");
+                    b.Property<string>("Subject")
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -47,7 +50,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 1L,
                             ArticleCategoryRefId = 1L,
-                            ArticleModificationDate = "01.10.2019 21:18:40",
+                            ArticleModificationDate = "30.11.2019 22:37:21",
                             Content = "To jest treść artykułu 1",
                             NumberOfViews = 10L,
                             Subject = "Artykuł 1"
@@ -56,7 +59,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 2L,
                             ArticleCategoryRefId = 4L,
-                            ArticleModificationDate = "01.10.2019 21:18:40",
+                            ArticleModificationDate = "30.11.2019 22:37:21",
                             Content = "To jest artykuł 2",
                             NumberOfViews = 20L,
                             Subject = "Artykuł 2"
@@ -69,7 +72,8 @@ namespace SpeechRecognitionThesis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -150,13 +154,17 @@ namespace SpeechRecognitionThesis.Migrations
 
                     b.Property<int>("AvatarId");
 
-                    b.Property<string>("CreateAccountDate");
+                    b.Property<string>("CreateAccountDate")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("LastLoggedAccountDate");
+                    b.Property<string>("LastLoggedAccountDate")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("LastUpdateAccountDate");
+                    b.Property<string>("LastUpdateAccountDate")
+                        .HasMaxLength(50);
 
                     b.Property<string>("NickName")
                         .IsRequired()

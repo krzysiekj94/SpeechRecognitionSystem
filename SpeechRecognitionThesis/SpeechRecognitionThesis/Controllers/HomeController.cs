@@ -16,9 +16,9 @@ namespace SpeechRecognitionThesis.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public HomeController(IRespositoryWrapper repositoryWrapper)
+        public HomeController(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }

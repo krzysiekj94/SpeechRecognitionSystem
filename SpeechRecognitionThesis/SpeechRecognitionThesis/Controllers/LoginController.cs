@@ -20,9 +20,9 @@ namespace SpeechRecognitionThesis.Controllers
     [Route("Login")]
     public class LoginController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public LoginController(IRespositoryWrapper repositoryWrapper)
+        public LoginController(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }

@@ -15,9 +15,9 @@ namespace SpeechRecognitionThesis.Controllers
     [ApiController]
     public class SearchEngineController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public SearchEngineController(IRespositoryWrapper repositoryWrapper)
+        public SearchEngineController(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }

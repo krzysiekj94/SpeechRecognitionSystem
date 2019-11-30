@@ -17,9 +17,9 @@ namespace SpeechRecognitionThesis.Controllers
     [Route("Account")]
     public class AccountController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public AccountController( IRespositoryWrapper repositoryWrapper )
+        public AccountController( IRepositoryWrapper repositoryWrapper )
         {
             _repositoryWrapper = repositoryWrapper;
         }

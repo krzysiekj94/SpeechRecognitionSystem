@@ -12,6 +12,8 @@ namespace SpeechRecognitionThesis.Models.DatabaseModels
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
+        [StringLength(50)]
         public string Name { get; set; }
     }
 }

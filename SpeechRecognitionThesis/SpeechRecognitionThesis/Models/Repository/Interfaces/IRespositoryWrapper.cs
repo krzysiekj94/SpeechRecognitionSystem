@@ -2,7 +2,7 @@
 
 namespace SpeechRecognitionThesis.Models.Repository
 {
-    public interface IRespositoryWrapper
+    public interface IRepositoryWrapper
     {
         IAccountRepository Account  { get; }
         IArticleRepository Articles { get; }

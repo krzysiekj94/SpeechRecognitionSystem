@@ -13,9 +13,9 @@ namespace SpeechRecognitionThesis.Controllers
     [Route("Logout")]
     public class LogoutController : Controller
     {
-        private readonly IRespositoryWrapper _repositoryWrapper;
+        private readonly IRepositoryWrapper _repositoryWrapper;
 
-        public LogoutController(IRespositoryWrapper repositoryWrapper)
+        public LogoutController(IRepositoryWrapper repositoryWrapper)
         {
             _repositoryWrapper = repositoryWrapper;
         }

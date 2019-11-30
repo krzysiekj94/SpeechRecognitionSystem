@@ -15,6 +15,12 @@
     <Compile Remove="Migrations\20190911222122_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
     <Compile Remove="Migrations\20190913221240_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
     <Compile Remove="Migrations\20190913221240_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20191001191840_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20191001191840_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20191130212509_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20191130212509_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20191130213444_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20191130213444_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
