@@ -27,7 +27,7 @@ namespace SpeechRecognitionThesis.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NickName = table.Column<string>(maxLength: 20, nullable: false),
-                    Password = table.Column<string>(maxLength: 512, nullable: true),
+                    Password = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: true),
                     CreateAccountDate = table.Column<string>(maxLength: 50, nullable: true),
                     LastUpdateAccountDate = table.Column<string>(maxLength: 50, nullable: true),
@@ -112,12 +112,12 @@ namespace SpeechRecognitionThesis.Migrations
             migrationBuilder.InsertData(
                 table: "Articles",
                 columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "Content", "NumberOfViews", "Subject" },
-                values: new object[] { 1L, 1L, "30.11.2019 22:37:21", "To jest treść artykułu 1", 10L, "Artykuł 1" });
+                values: new object[] { 1L, 1L, "30.11.2019 22:50:35", "To jest treść artykułu 1", 10L, "Artykuł 1" });
 
             migrationBuilder.InsertData(
                 table: "Articles",
                 columns: new[] { "Id", "ArticleCategoryRefId", "ArticleModificationDate", "Content", "NumberOfViews", "Subject" },
-                values: new object[] { 2L, 4L, "30.11.2019 22:37:21", "To jest artykuł 2", 20L, "Artykuł 2" });
+                values: new object[] { 2L, 4L, "30.11.2019 22:50:35", "To jest artykuł 2", 20L, "Artykuł 2" });
 
             migrationBuilder.InsertData(
                 table: "UserArticles",

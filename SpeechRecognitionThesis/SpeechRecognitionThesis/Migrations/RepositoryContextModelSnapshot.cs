@@ -48,7 +48,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 1L,
                             ArticleCategoryRefId = 1L,
-                            ArticleModificationDate = "30.11.2019 22:37:21",
+                            ArticleModificationDate = "30.11.2019 22:50:35",
                             Content = "To jest treść artykułu 1",
                             NumberOfViews = 10L,
                             Subject = "Artykuł 1"
@@ -57,7 +57,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 2L,
                             ArticleCategoryRefId = 4L,
-                            ArticleModificationDate = "30.11.2019 22:37:21",
+                            ArticleModificationDate = "30.11.2019 22:50:35",
                             Content = "To jest artykuł 2",
                             NumberOfViews = 20L,
                             Subject = "Artykuł 2"
@@ -169,7 +169,7 @@ namespace SpeechRecognitionThesis.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("Password")
-                        .HasMaxLength(512);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 

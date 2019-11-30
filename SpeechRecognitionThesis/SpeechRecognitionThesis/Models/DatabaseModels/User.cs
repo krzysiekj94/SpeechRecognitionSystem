@@ -14,7 +14,7 @@ namespace SpeechRecognitionThesis.Models
         [StringLength(20)]
         public string NickName { get; set; }
 
-        [StringLength(512)]
+        [StringLength(256)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
