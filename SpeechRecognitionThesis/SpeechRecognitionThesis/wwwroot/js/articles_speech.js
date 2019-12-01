@@ -223,18 +223,18 @@ class ArticleSpeechRecognizer {
                 if( IsSetFocus("article-content") )
                 {
                   this.finalArticleContentTranscript += transcript;  
-				  console.log( "Phrase: " + transcript + "confidence: " + event.results[i][0].confidence );
+				          console.log( "Phrase: " + transcript + "confidence: " + event.results[i][0].confidence );
                 }
                 else if( IsSetFocus("article-subject") )
                 {
                   this.finalArticleSubjectTranscript += transcript;
-				  console.log( "Phrase: " + transcript + "confidence: " + event.results[i][0].confidence );
+				          console.log( "Phrase: " + transcript + "confidence: " + event.results[i][0].confidence );
                 }    
               } 
               else 
               {
                 interimTranscript += transcript;
-				console.log( "Phrase: " + transcript + "confidence: " + event.results[i][0].confidence );
+				        console.log( "Phrase: " + transcript + "confidence: " + event.results[i][0].confidence );
               }
             }
 

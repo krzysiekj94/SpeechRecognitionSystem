@@ -80,7 +80,7 @@ $(".delete-article-button").click(function(event){
                         showConfirmButton: true,
                         timer: 3000
                       }).then(function(){
-                        
+                         location.reload();
                       });
                 },
             400: 

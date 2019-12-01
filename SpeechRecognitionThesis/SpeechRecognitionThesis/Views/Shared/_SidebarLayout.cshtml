@@ -13,7 +13,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <a href="/articles/my" class="list-group-item sidebar-element">Moje artykuły</a>
-        <a href="/account" class="list-group-item sidebar-element">Moje konto</a>
+        <a href="/account" class="list-group-item sidebar-element">Moje konto ( @User.Identity.Name )</a>
         <a href="/logout" class="list-group-item sidebar-element">Wyloguj</a>
     }
     else
