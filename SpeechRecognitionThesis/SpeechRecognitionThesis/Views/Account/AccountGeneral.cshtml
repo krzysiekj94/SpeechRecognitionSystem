@@ -22,29 +22,29 @@
                 <img class="main-user-icon" src="@mainAccountAvatar" />
             </div>
             <div class="account-controls">
-                <button id="change-account-icon">Zmień obrazek</button>
+                <button id="change-account-icon" class="btn btn-info"><h4>Zmień obrazek</h4></button>
             </div>
             <div class="account-controls">
-                <div class="user-nick"> @Html.ValueFor(model => model.User.NickName)</div>
+                <div class="user-nick"><h3>@Html.ValueFor(model => model.User.NickName)</h3></div>
             </div>
             <div class="account-controls">
-                <div class="register-date">Zarejestrowany: @Html.DisplayFor(model => model.User.CreateAccountDate) </div>
+                <div class="register-date"><h4><b>Zarejestrowany:</b> <i>@Html.DisplayFor(model => model.User.CreateAccountDate)</i></h4></div>
             </div>
             <div class="account-controls">
-                <div class="add-articles-info">Dodał: @Html.DisplayFor(model => model.iAmountOfArticles) artykuły</div>
+                <div class="add-articles-info"><h4><b>Dodał:</b> <i>@Html.DisplayFor(model => model.iAmountOfArticles) artykuły/ów</i></h4></div>
             </div>
             <div class="account-controls">
-                <div class="last-logged-date">Ostatnio zalogowany: @Html.DisplayFor(model => model.User.LastLoggedAccountDate)</div>
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="account-controls">
-                <button class="your-articles-button btn btn-danger" type="submit">Moje artykuły</button>
+                <div class="last-logged-date"><h4><b>Ostatnio zalogowany:</b> <i>@Html.DisplayFor(model => model.User.LastLoggedAccountDate)</i></h4></div>
             </div>
         </div>
         <div class="control-group">
             <div class="account-controls">
-                <button id="delete-account" class="btn btn-danger" type="submit">Usuń swoje konto!</button>
+                <button class="your-articles-button btn btn-warning" type="submit"><h4>Moje artykuły</h4></button>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="account-controls">
+                <button id="delete-account" class="btn btn-danger" type="submit"><h4>Usuń swoje konto!</h4></button>
             </div>
         </div>
     </div>
@@ -53,36 +53,35 @@
         <form id="change-data-form" class="form-horizontal">
             <fieldset>
                 <div class="control-group">
-                    <label class="control-label" for="username">Nazwa użytkownika</label>
+                    <label class="control-label edit-account-description" for="username">Nazwa użytkownika</label>
                     <div class="account-controls">
                         <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge">
                         <p class="help-block">@ViewData["LoginHelpBlock"]</p>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="password">Hasło</label>
+                    <label class="control-label edit-account-description" for="password">Hasło</label>
                     <div class="account-controls">
                         <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
                         <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="password_confirm">Hasło (potwierdzenie)</label>
+                    <label class="control-label edit-account-description" for="password_confirm">Hasło (potwierdzenie)</label>
                     <div class="account-controls">
                         <input asp-for="ConfirmPassword" type="password" id="ConfirmPassword" placeholder="" class="input-xlarge">
                         <p class="help-block">@ViewData["PasswordConfirmHelpBlock"]</p>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="email">E-mail</label>
+                    <label class="control-label edit-account-description" for="email">E-mail</label>
                     <div class="account-controls">
                         <input asp-for="User.Email" type="email" id="Email" placeholder="" class="input-xlarge">
-                        <p class="help-block">Proszę wprowadzić swój adres E-mail</p>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="account-controls">
-                        <button id="change-account-data" class="btn btn-success" type="submit">Zapisz dane!</button>
+                        <button id="change-account-data" class="btn btn-success" type="submit"><h4>Zapisz dane!</h4></button>
                     </div>
                 </div>
             </fieldset>

@@ -7,9 +7,10 @@
 	width: 70%;
 }
 
-.save-article-button, 
-.clear-article-button{
-	margin-top: 10px;
-	margin-right: 10px;
-	font-size: 18px;
+.save-article-button,
+.clear-article-button,
+.update-article-button{
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 18px;
 }

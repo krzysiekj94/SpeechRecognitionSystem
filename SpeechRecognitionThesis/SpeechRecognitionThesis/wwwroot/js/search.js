@@ -331,8 +331,6 @@ function LoadArticleView(filterValue)
     if(articleArray != null 
         && articleArray.length > 0)
     {
-
-
         articleArray.forEach(function( article ) 
         {
             if( IsProperCategory( article.articleCategory.name ) 
