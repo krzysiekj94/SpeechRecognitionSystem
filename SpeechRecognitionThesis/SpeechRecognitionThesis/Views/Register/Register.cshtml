@@ -1,8 +1,8 @@
 ﻿@model SpeechRecognitionThesis.Models.ViewModels.RegisterUserModel
 
 @{
-    ViewData["Title"] = "Strona rejestracji użytkownika";
-    ViewData["LoginHelpBlock"] = "Nazwa użytkownika może się składać z dowolnych znaków (do 15). Znaki niedozwolone to spacje, tabulatory i znaki specjalne, np. %, $";
+    ViewData["Title"] = "Rejestracja użytkownika";
+    ViewData["LoginHelpBlock"] = "Nazwa użytkownika może się składać z dowolnych znaków (do 20 znaków).";
     ViewData["PasswordHelpBlock"] = "Hasło powinno zawierać co najmniej 6 znaków";
     ViewData["PasswordConfirmHelpBlock"] = "Proszę wpisać hasło ponownie.";
 }
@@ -13,28 +13,28 @@
     <form id="register-form" class="form-horizontal">
         <fieldset>
             <div class="control-group">
-                <label class="control-label" for="username">Nazwa użytkownika</label>
+                <label class="control-label register-account-description" for="username">Nazwa użytkownika</label>
                 <div class="register-controls">
                     <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge">
                     <p class="help-block">@ViewData["LoginHelpBlock"]</p>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="password">Hasło</label>
+                <label class="control-label register-account-description" for="password">Hasło</label>
                 <div class="register-controls">
                     <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
                     <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="password_confirm">Hasło (potwierdzenie)</label>
+                <label class="control-label register-account-description" for="password_confirm">Hasło (potwierdzenie)</label>
                 <div class="register-controls">
                     <input asp-for="ConfirmPassword" type="password" id="ConfirmPassword" placeholder="" class="input-xlarge">
                     <p class="help-block">@ViewData["PasswordConfirmHelpBlock"]</p>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="email">E-mail</label>
+                <label class="control-label register-account-description" for="email">E-mail</label>
                 <div class="register-controls">
                     <input asp-for="User.Email" type="email" id="Email" placeholder="" class="input-xlarge">
                     <p class="help-block">Proszę wprowadzić swój adres E-mail</p>
@@ -42,7 +42,7 @@
             </div>
             <div class="control-group">
                 <div class="register-controls">
-                    <button class="register-button btn btn-success" type="submit">Zarejestruj się!</button>
+                    <button class="register-button btn btn-success" type="submit"><h4>Zarejestruj się!</h4></button>
                 </div>
             </div>
         </fieldset>

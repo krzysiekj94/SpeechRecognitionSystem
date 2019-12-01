@@ -35,7 +35,7 @@ $(document).ready(function() {
         var htmlString = GetUserIconHtmlString();
 
         Swal.fire({
-            title: '<strong>Wybierz awatar</strong>',
+            title: '<strong>Wybierz avatar</strong>',
             type: 'info',
             width: 600,
             html: htmlString,
@@ -43,13 +43,13 @@ $(document).ready(function() {
             showCancelButton: true,
             focusConfirm: false,
             confirmButtonText:
-              '<b>Zapisz obrazek!</b>',
+              '<b>Zapisz avatar!</b>',
             cancelButtonText:
               '<b>Anuluj</b>',
           }).then(result => {
             if( result.value ) 
             {
-              console.log("Zapis informacji dot. awatara użytkownika!");
+              console.log("Zapis informacji dot. avatara użytkownika!");
               if( firstIndexIcon != indexSelectedIcon )
               {
                   SaveAvatarInfoIntoDB( indexSelectedIcon );
@@ -59,7 +59,7 @@ $(document).ready(function() {
             } 
             else 
             {
-              console.log("Anulowanie zapisu info dot. awatara użytkownika!");
+              console.log("Anulowanie zapisu info dot. avatara użytkownika!");
               indexSelectedIcon = firstIndexIcon;
             }
         });
@@ -312,15 +312,15 @@ $.getScript("/js/speech_engine.js", function(){
             }
         },
         {
-            indexes: ["zmień obrazek"],
+            indexes: ["zmień avatar"],
             action: function(){
                 ChangeAccountIcon();
             }
         },
         {
-            indexes: ["zapisz obrazek"],
+            indexes: ["zapisz avatar"],
             action: function(){
-                console.log("Zapis informacji dot. awatara użytkownika!");
+                console.log("Zapis informacji dot. avatara użytkownika!");
                 Swal.close();
                 if( firstIndexIcon != indexSelectedIcon )
                 {
@@ -333,7 +333,7 @@ $.getScript("/js/speech_engine.js", function(){
         {
             indexes: ["anuluj"],
             action: function(){
-                console.log("Zamykam dialog wyboru awatara!");
+                console.log("Zamykam dialog wyboru avatara!");
                 Swal.close();
                 indexSelectedIcon = firstIndexIcon;
             }

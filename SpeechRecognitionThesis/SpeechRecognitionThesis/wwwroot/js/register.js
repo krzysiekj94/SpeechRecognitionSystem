@@ -52,7 +52,7 @@ $(document).ready(function() {
 
         artyom.addCommands([
             {
-                indexes: ["nazwa użytkownika", "nick", "nik", "ustaw nick", "ustaw nazwę",
+                indexes: ["nick", "nik", "ustaw nick", "ustaw nazwę",
                           "login", "ustaw login", "ustaw nazwę użytkownika", "nazwa"],
                 action: function(){
                     $("#NickName").focus();
@@ -77,7 +77,7 @@ $(document).ready(function() {
                 }
             },
             {
-                indexes: ["Zarejestruj", "Zarejestruj się"],
+                indexes: ["Zarejestruj"],
                 action: function(){
                     $(".register-button").submit();
                 }
