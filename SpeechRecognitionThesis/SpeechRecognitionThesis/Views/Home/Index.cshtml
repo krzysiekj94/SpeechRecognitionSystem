@@ -15,20 +15,25 @@
     <div class="row news-header">
         <h1>Polecane</h1>
     </div>
-    <div class="row most-popular-articles">
-        @foreach ( var mostViewedArticle in Model.MostViewedUserArticlePairList )
+    <div class="row most-recommend-articles">
+        @foreach (var mostViewedArticle in Model.MostViewedUserArticlePairList)
         {
             articleUserCategoryPathString = SpeechRecognitionThesis.Models.Scripts.UserTools
-                                            .GetCategoryImagePath( mostViewedArticle.Article.ArticleCategory.Id );
+                                            .GetCategoryImagePath(mostViewedArticle.Article.ArticleCategory.Id);
 
-        <div class="col-md-4 col-sm-3 most-popular-article">
+        <div class="col-md-4 col-sm-3 most-recommend-article">
             <h2><b>@mostViewedArticle.Article.Subject</b></h2>
-            <img class="most-popular-article-image" src="@articleUserCategoryPathString" alt="Avatar">
-            <div class="most-popular-article-content"><h5>@mostViewedArticle.Article.Content</h5></div>
-            <h4><b>Komenda:</b> Polecany @mostViewedArticleCounter</h4>
-            <button class="btn-success text-center" type="submit" value="@mostViewedArticle.Article.Id.ToString()"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
+            <img class="most-recommend-article-image" src="@articleUserCategoryPathString" alt="Avatar">
+            <div class="most-recommend-article-content"><h5>@mostViewedArticle.Article.Content</h5></div>
+            <h4><b>Komenda:</b> Poleca @mostViewedArticleCounter</h4>
+            <form class="recommend-article-form" action="/articles/@mostViewedArticle.Article.Id" method="get">
+                <h3>
+                    <button class="recommend-article-button btn-success text-center" type="submit"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
+                </h3>
+            </form>
         </div>
-            mostViewedArticleCounter++;
+        
+        mostViewedArticleCounter++;
         }
     </div>
     <div class="row news-header">

@@ -7,7 +7,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
 {
     public class ScriptManager
     {
-        const string SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING              = "/js/speech_engine.js";
+        const string SPEECH_COMMON_FUNCTIONALITY_RELATIVE_PATH_STRING   = "/js/speech_engine.js";
+        const string SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING              = "/js/index.js";
+        const string MAIN_PAGE_RELATIVE_PATH_STRING                     = "/";
         const string SPEECH_ARTICLES_PAGE_RELATIVE_PATH_STRING          = "/js/articles_speech.js";
         const string SPEECH_ACCOUNT_PAGE_RELATIVE_PATH_STRING           = "/js/account.js";
         const string ADD_ARTICLES_RELATIVE_PATH_STRING                  = "/articles/add";
@@ -31,7 +33,7 @@ namespace SpeechRecognitionThesis.Models.Scripts
 
         public static string getArtyomScriptPathString( string urlRelativePathString )
         {
-            string urlPathString = SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING;
+            string urlPathString = SPEECH_COMMON_FUNCTIONALITY_RELATIVE_PATH_STRING;
 
             if( urlRelativePathString.Any( char.IsDigit ) 
                 && urlRelativePathString.ToLower().Contains("articles")
@@ -56,6 +58,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
 
             switch( urlRelativePathString.ToLower() )
             {
+                case MAIN_PAGE_RELATIVE_PATH_STRING:
+                    urlPathString = SPEECH_MAIN_PAGE_RELATIVE_PATH_STRING;
+                    break;
                 case ADD_ARTICLES_RELATIVE_PATH_STRING:
                     urlPathString = SPEECH_ARTICLES_PAGE_RELATIVE_PATH_STRING;
                     break;

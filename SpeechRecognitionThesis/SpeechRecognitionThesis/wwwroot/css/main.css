@@ -23,16 +23,16 @@
 	margin-right: 5%;
 }
 
-.most-popular-article-image{
-	width: 75%;
-	height: 75%;
+.most-recommend-article-image {
+    width: 75%;
+    height: 75%;
 }
 
-.most-popular-article{
-	text-align: center;
+.most-recommend-article {
+    text-align: center;
 }
 
-.most-popular-article-content{
+.most-recommend-article-content{
 	text-align: center;
 }
 
