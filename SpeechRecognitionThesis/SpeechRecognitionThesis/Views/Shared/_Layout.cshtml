@@ -3,13 +3,12 @@
                                            .CommandsManager.GetCommandsPartialViewPathString( 
                                                             Context.Request.Path.ToString() );
 }
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SpeechRecognitionSystem</title>
+    <title>@ViewData["Title"] - Przykładowy system informacyjny</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
@@ -43,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SpeechRecognitionSystem</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Przykładowy system informacyjny</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -61,18 +60,17 @@
                         </a>
                     </li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">O stronie</a></li>
+                    
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="Login" asp-action="Login">Logowanie</a></li>
                         <li><a asp-area="" asp-controller="Register" asp-action="Register">Rejestracja</a></li>
                     }
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+
                 </ul>
             </div>
         </div>
     </nav>
-
-    <partial name="_CookieConsentPartial" />
 
     <div class="main">
         <div class="sidebar col-md-3">
@@ -82,7 +80,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p class="text-center">&copy; 2019 - SpeechRecognitionSystem Developed by krzysiekj94</p>
+                <p class="text-center">&copy; 2019 - Przykładowy system informacyjny Developed by krzysiekj94</p>
             </footer>
         </div>
         <div class="show-speech-commands-preview text-center">

@@ -95,7 +95,6 @@ namespace SpeechRecognitionThesis
             app.UseHttpsRedirection();
             app.UseCors("CorsPolicy");
             app.UseStaticFiles();
-            app.UseCookiePolicy();
             app.UseSession();
             app.Use(async (context, next) =>
             {

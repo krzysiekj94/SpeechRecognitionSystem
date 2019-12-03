@@ -32,6 +32,12 @@ namespace SpeechRecognitionThesis.Controllers
             return View( indexArticlesModel );
         }
 
+        [AllowAnonymous]
+        public IActionResult About()
+        {
+            return View();
+        }
+
         private void FillIndexArticlesModel(IndexArticlesModel indexArticlesModel)
         {
             if( indexArticlesModel != null )
@@ -121,28 +127,6 @@ namespace SpeechRecognitionThesis.Controllers
             currentUser.Id = -1;
 
             return currentUser;
-        }
-
-        [AllowAnonymous]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Opis mojej aplikacji";
-
-            return View();
-        }
-
-        [AllowAnonymous]
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        [AllowAnonymous]
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [AllowAnonymous]
