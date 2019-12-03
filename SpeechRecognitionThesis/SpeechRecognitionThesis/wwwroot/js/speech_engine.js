@@ -174,6 +174,12 @@ function addComandsToArtyom()
                     $(".show-commands-button").click();
                 }
             },
+            {
+                indexes: ["informacja"],
+                action: function(){
+                    window.open("/Home/About","_self");
+                }
+            },
         ]);
     }
 }
