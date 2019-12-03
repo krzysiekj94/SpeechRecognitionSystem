@@ -21,99 +21,103 @@
             articleUserCategoryPathString = SpeechRecognitionThesis.Models.Scripts.UserTools
                                             .GetCategoryImagePath(mostViewedArticle.Article.ArticleCategory.Id);
 
-        <div class="col-md-4 col-sm-3 most-recommend-article">
-            <h2><b>@mostViewedArticle.Article.Subject</b></h2>
-            <img class="most-recommend-article-image" src="@articleUserCategoryPathString" alt="Avatar">
-            <div class="most-recommend-article-content"><h5>@mostViewedArticle.Article.Content</h5></div>
-            <h4><b>Komenda:</b> Poleca @mostViewedArticleCounter</h4>
-            <form class="recommend-article-form" action="/articles/@mostViewedArticle.Article.Id" method="get">
-                <h3>
-                    <button class="recommend-article-button btn-success text-center" type="submit"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
-                </h3>
-            </form>
-        </div>
-        
-        mostViewedArticleCounter++;
+            <div class="col-md-4 col-sm-3 most-recommend-article">
+                <h2><b>@mostViewedArticle.Article.Subject</b></h2>
+                <img class="most-recommend-article-image" src="@articleUserCategoryPathString" alt="Avatar">
+                <div class="most-recommend-article-content"><h5>@mostViewedArticle.Article.Content</h5></div>
+                <h4><b>Komenda:</b> Poleca @mostViewedArticleCounter</h4>
+                <form class="recommend-article-form" action="/articles/@mostViewedArticle.Article.Id" method="get">
+                    <h3>
+                        <button class="recommend-article-button btn-success text-center" type="submit"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
+                    </h3>
+                </form>
+            </div>
+
+            mostViewedArticleCounter++;
         }
     </div>
     <div class="row news-header">
         <h1>Najnowsze artykuły</h1>
     </div>
-
-    @foreach (var newestUserArticlePair in Model.NewestArticleUserPairList)
-    {
-        articleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools
-                                     .GetUserImagePath( newestUserArticlePair.User.AvatarId );
-
-        <div class="row newest-news-body">
-            <div class="col-sm-3">
-                <div class="text-center">
-                    <p><b><h3>@newestUserArticlePair.User.NickName</h3></b></p>
-                    <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
-                </div>
-            </div>
-            <div class="col-sm-9">
-                <h2><b>Temat: </b> @newestUserArticlePair.Article.Subject</h2>
-                <h3><b>Treść: </b> @newestUserArticlePair.Article.Content</h3>
-                <p><h4><b>Data ost. modyfikacji: </b>@newestUserArticlePair.Article.ArticleModificationDate</h4></p>
-                <p><h3>Komenda: <b>"Polecany @newestArticleCounter.ToString()"</b></h3></p>
-                <button class="news-see-more-button btn-danger" type="submit" value="@newestUserArticlePair.Article.Id.ToString()"><h4>Zobacz polecany ( @newestArticleCounter.ToString() )</h4></button>
-            </div>
-        </div>
-        newestArticleCounter++;
-    }
-
-    <div class="row news-header">
-        <h1>Najbardziej popularne</h1>
-    </div>
-
-    @foreach (var mostPopularArticle in Model.MostViewedUserArticlePairList)
-    {
-        articleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools
-                                     .GetUserImagePath(mostPopularArticle.User.AvatarId );
-
-        <div class="row newest-news-body">
-            <div class="col-sm-3">
-                <div class="text-center">
-                    <p><h3>@mostPopularArticle.User.NickName</h3></p>
-                    <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
-                </div>
-            </div>
-            <div class="col-sm-9">
-                <h2>@mostPopularArticle.Article.Subject</h2>
-                <h4>@mostPopularArticle.Article.Content</h4>
-                <button class="news-see-more-button btn-danger" type="submit" value="@mostPopularArticle.Article.Id.ToString()"><h4>Zobacz popularny ( @mostPopularCounter.ToString() )</h4></button>
-            </div>
-        </div>
-        mostPopularCounter++;
-    }
-
-    @if( User.Identity.IsAuthenticated 
-         && Model.MyArticleList.Count > 0 )
-    {
-
-        <div class="row news-header">
-            <h1>Twoje artykuły</h1>
-        </div>
-
-        @foreach( var myArticle in Model.MyArticleList )
+    <div class="row newest-articles">
+        @foreach (var newestUserArticlePair in Model.NewestArticleUserPairList)
         {
-            articleUserCategoryPathString = SpeechRecognitionThesis.Models.Scripts.UserTools
-                                            .GetCategoryImagePath( myArticle.ArticleCategory.Id );
+            articleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools
+                                         .GetUserImagePath(newestUserArticlePair.User.AvatarId);
 
             <div class="row newest-news-body">
                 <div class="col-sm-3">
                     <div class="text-center">
-                        <p><h3>@Model.CurrentUser.NickName</h3></p>
-                        <img src="@articleUserCategoryPathString" class="img-circle" height="120" width="120" alt="Avatar">
+                        <p><b><h3>@newestUserArticlePair.User.NickName</h3></b></p>
+                        <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
                     </div>
                 </div>
                 <div class="col-sm-9">
-                    <h2>@myArticle.Subject</h2>
-                    <h4>@myArticle.Content</h4>
-                    <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                    <h2><b>Temat: </b> @newestUserArticlePair.Article.Subject</h2>
+                    <h3><b>Treść: </b> @newestUserArticlePair.Article.Content</h3>
+                    <p><h4><b>Data ost. modyfikacji: </b>@newestUserArticlePair.Article.ArticleModificationDate</h4></p>
+                    <p><h3>Komenda: <b>"Nowy @newestArticleCounter.ToString()"</b></h3></p>
+                    <form class="newest-article-form" action="/articles/@newestUserArticlePair.Article.Id" method="get">
+                        <h3>
+                            <button class="newest-article-button news-see-more-button btn-danger" type="submit" value="@newestUserArticlePair.Article.Id.ToString()"><h4>Zobacz nowy ( @newestArticleCounter.ToString() )</h4></button>
+                        </h3>
+                    </form>
                 </div>
             </div>
+            newestArticleCounter++;
         }
-    }
-</div>
+        </div>
+        <div class="row news-header">
+            <h1>Najbardziej popularne</h1>
+        </div>
+
+        @foreach (var mostPopularArticle in Model.MostViewedUserArticlePairList)
+        {
+            articleUserImagePathString = SpeechRecognitionThesis.Models.Scripts.UserTools
+                                         .GetUserImagePath(mostPopularArticle.User.AvatarId);
+
+            <div class="row newest-news-body">
+                <div class="col-sm-3">
+                    <div class="text-center">
+                        <p><h3>@mostPopularArticle.User.NickName</h3></p>
+                        <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <h2>@mostPopularArticle.Article.Subject</h2>
+                    <h4>@mostPopularArticle.Article.Content</h4>
+                    <button class="news-see-more-button btn-danger" type="submit" value="@mostPopularArticle.Article.Id.ToString()"><h4>Zobacz popularny ( @mostPopularCounter.ToString() )</h4></button>
+                </div>
+            </div>
+            mostPopularCounter++;
+        }
+
+        @if (User.Identity.IsAuthenticated
+            && Model.MyArticleList.Count > 0)
+        {
+
+            <div class="row news-header">
+                <h1>Twoje artykuły</h1>
+            </div>
+
+            @foreach (var myArticle in Model.MyArticleList)
+            {
+                articleUserCategoryPathString = SpeechRecognitionThesis.Models.Scripts.UserTools
+                                                .GetCategoryImagePath(myArticle.ArticleCategory.Id);
+
+                <div class="row newest-news-body">
+                    <div class="col-sm-3">
+                        <div class="text-center">
+                            <p><h3>@Model.CurrentUser.NickName</h3></p>
+                            <img src="@articleUserCategoryPathString" class="img-circle" height="120" width="120" alt="Avatar">
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <h2>@myArticle.Subject</h2>
+                        <h4>@myArticle.Content</h4>
+                        <button class="news-see-more-button btn-danger"><h4>Zobacz więcej</h4></button>
+                    </div>
+                </div>
+            }
+        }
+    </div>

@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $.getScript("/js/speech_engine.js", function(){
-        //LoadArticleEditViewCommands();
         LoadRecommendedArticlesCommands();
         LoadNewestArticlesCommands();
         LoadMostPopularArticlesCommands();
@@ -36,7 +35,25 @@ $(document).ready(function() {
 
  function LoadNewestArticlesCommands()
  {
-    //TODO
+    var newestArticleCommandsArray = [];
+    var countOfArticles = GetNumberOfNewestArticles(); 
+
+    for( var iCounter = 1; iCounter <= countOfArticles; iCounter++ )
+    {
+        newestArticleCommandsArray.push( newestArticleCommandContent + iCounter.toString() );
+    }
+
+    if( artyom != null )
+    {
+        artyom.addCommands([
+        {
+            indexes: newestArticleCommandsArray,
+            action: function( indexOfArray ){
+                $( ".newest-articles .newest-news-body .newest-article-form" ).eq( indexOfArray ).submit();
+            }
+        },
+        ]);
+    }
  }
 
  function LoadMostPopularArticlesCommands()
@@ -47,5 +64,11 @@ $(document).ready(function() {
 function GetNumberOfRecommendedArticles()
 {
     var countNumbersOfArticles = $(".most-recommend-articles .most-recommend-article").children().length;
+    return countNumbersOfArticles;
+}
+
+function GetNumberOfNewestArticles()
+{
+    var countNumbersOfArticles = $(".newest-articles .newest-news-body").children().length;
     return countNumbersOfArticles;
 }
