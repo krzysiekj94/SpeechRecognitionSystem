@@ -66,10 +66,11 @@
             </div>
             newestArticleCounter++;
         }
-        </div>
-        <div class="row news-header">
-            <h1>Najbardziej popularne</h1>
-        </div>
+    </div>
+    <div class="row news-header">
+        <h1>Najbardziej popularne</h1>
+    </div>
+    <div class="row most-popular-articles">
 
         @foreach (var mostPopularArticle in Model.MostViewedUserArticlePairList)
         {
@@ -79,21 +80,28 @@
             <div class="row newest-news-body">
                 <div class="col-sm-3">
                     <div class="text-center">
-                        <p><h3>@mostPopularArticle.User.NickName</h3></p>
+                        <p><b><h3>@mostPopularArticle.User.NickName</h3></b></p>
                         <img src="@articleUserImagePathString" class="img-circle" height="120" width="120" alt="Avatar">
                     </div>
                 </div>
                 <div class="col-sm-9">
-                    <h2>@mostPopularArticle.Article.Subject</h2>
-                    <h4>@mostPopularArticle.Article.Content</h4>
-                    <button class="news-see-more-button btn-danger" type="submit" value="@mostPopularArticle.Article.Id.ToString()"><h4>Zobacz popularny ( @mostPopularCounter.ToString() )</h4></button>
+                    <h2><b>Temat: </b> @mostPopularArticle.Article.Subject</h2>
+                    <h4><b>Treść: </b> @mostPopularArticle.Article.Content</h4>
+                    <p><h4><b>Data ost. modyfikacji: </b>@mostPopularArticle.Article.ArticleModificationDate</h4></p>
+                    <p><h3>Komenda: <b>"Popularne @mostPopularCounter.ToString()"</b></h3></p>
+                    <form class="most-popular-article-form" action="/articles/@mostPopularArticle.Article.Id" method="get">
+                        <h3>
+                            <button class="most-popular-article-button news-see-more-button btn-danger" type="submit" value="@mostPopularArticle.Article.Id.ToString()"><h4>Zobacz popularne ( @mostPopularCounter.ToString() )</h4></button>
+                        </h3>
+                    </form>
                 </div>
             </div>
             mostPopularCounter++;
         }
+        </div>
 
         @if (User.Identity.IsAuthenticated
-            && Model.MyArticleList.Count > 0)
+          && Model.MyArticleList.Count > 0)
         {
 
             <div class="row news-header">

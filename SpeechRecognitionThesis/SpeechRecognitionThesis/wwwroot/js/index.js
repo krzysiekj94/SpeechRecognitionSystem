@@ -8,7 +8,7 @@ $(document).ready(function() {
 
  const recommendedArticleCommandContent = "Poleca ";
  const newestArticleCommandContent = "Nowy ";
- const mostPopularArticleCommandContent = "Popularny ";
+ const mostPopularArticleCommandContent = "Popularne ";
 
  function LoadRecommendedArticlesCommands()
  {
@@ -58,7 +58,25 @@ $(document).ready(function() {
 
  function LoadMostPopularArticlesCommands()
  {
-    //TODO
+    var mostPopularArticleCommandsArray = [];
+    var countOfArticles = GetNumberOfMostPopularArticles(); 
+
+    for( var iCounter = 1; iCounter <= countOfArticles; iCounter++ )
+    {
+        mostPopularArticleCommandsArray.push( mostPopularArticleCommandContent + iCounter.toString() );
+    }
+
+    if( artyom != null )
+    {
+        artyom.addCommands([
+        {
+            indexes: mostPopularArticleCommandsArray,
+            action: function( indexOfArray ){
+                $( ".most-popular-articles .newest-news-body .most-popular-article-form" ).eq( indexOfArray ).submit();
+            }
+        },
+        ]);
+    }
  }
 
 function GetNumberOfRecommendedArticles()
@@ -70,5 +88,11 @@ function GetNumberOfRecommendedArticles()
 function GetNumberOfNewestArticles()
 {
     var countNumbersOfArticles = $(".newest-articles .newest-news-body").children().length;
+    return countNumbersOfArticles;
+}
+
+function GetNumberOfMostPopularArticles()
+{
+    var countNumbersOfArticles = $(".most-popular-articles .newest-news-body").children().length;
     return countNumbersOfArticles;
 }
