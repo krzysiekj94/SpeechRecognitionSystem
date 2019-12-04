@@ -3,12 +3,14 @@ $(document).ready(function() {
         LoadRecommendedArticlesCommands();
         LoadNewestArticlesCommands();
         LoadMostPopularArticlesCommands();
+        LoadMyArticlesCommands();
     });
  });
 
  const recommendedArticleCommandContent = "Poleca ";
  const newestArticleCommandContent = "Nowy ";
  const mostPopularArticleCommandContent = "Popularne ";
+ const myArticleCommandContent = "Własne ";
 
  function LoadRecommendedArticlesCommands()
  {
@@ -78,6 +80,35 @@ $(document).ready(function() {
         ]);
     }
  }
+
+ function LoadMyArticlesCommands()
+ {
+    var myArticlesCommandsArray = [];
+    var countOfArticles = GetMyArticles(); 
+
+    for( var iCounter = 1; iCounter <= countOfArticles; iCounter++ )
+    {
+        myArticlesCommandsArray.push( myArticleCommandContent + iCounter.toString() );
+    }
+
+    if( artyom != null )
+    {
+        artyom.addCommands([
+        {
+            indexes: myArticlesCommandsArray,
+            action: function( indexOfArray ){
+                $( ".my-articles .newest-news-body .my-article-form" ).eq( indexOfArray ).submit();
+            }
+        },
+        ]);
+    }
+ }
+
+function GetMyArticles()
+{
+    var countNumbersOfArticles = $(".my-articles .my-article").children().length;
+    return countNumbersOfArticles;
+}
 
 function GetNumberOfRecommendedArticles()
 {

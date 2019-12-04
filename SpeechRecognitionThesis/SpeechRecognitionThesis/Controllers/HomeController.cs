@@ -45,7 +45,15 @@ namespace SpeechRecognitionThesis.Controllers
                 indexArticlesModel.CurrentUser = GetUserForIndex();
                 indexArticlesModel.NewestArticleUserPairList = GetNewestArticlesForIndex();
                 indexArticlesModel.MostViewedUserArticlePairList = GetMostViewedArticlesForIndex();
-                indexArticlesModel.MyArticleList = GetMyArticleArticlesForIndex( indexArticlesModel.CurrentUser );
+
+                if( User.Identity.IsAuthenticated )
+                {
+                    indexArticlesModel.MyArticleList = GetMyArticleArticlesForIndex(indexArticlesModel.CurrentUser);
+                }
+                else
+                {
+                    indexArticlesModel.MyArticleList = new List<Article>();
+                }
             }
         }
 
@@ -124,7 +132,6 @@ namespace SpeechRecognitionThesis.Controllers
             }
 
             currentUser.Password = string.Empty;
-            currentUser.Id = -1;
 
             return currentUser;
         }
