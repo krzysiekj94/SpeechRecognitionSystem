@@ -25,11 +25,11 @@
             <div class="col-md-4 col-sm-3 most-recommend-article">
                 <h2><b>@recommendedArticle.Article.Subject</b></h2>
                 <img class="most-recommend-article-image" src="@articleUserCategoryPathString" alt="Avatar">
-                <div class="most-recommend-article-content"><h5>@recommendedArticle.Article.Content</h5></div>
+                <div class="most-recommend-article-content"><h4><i>@recommendedArticle.Article.Content</i></h4></div>
                 <h4><b>Komenda:</b> Poleca @mostViewedArticleCounter</h4>
                 <form class="recommend-article-form" action="/articles/@recommendedArticle.Article.Id" method="get">
                     <h3>
-                        <button class="recommend-article-button btn-success text-center" type="submit"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
+                        <button class="recommend-article-button btn-success text-center" type="submit"><h4>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h4></button>
                     </h3>
                 </form>
             </div>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="col-sm-9">
                     <h2><b>Temat: </b> @mostPopularArticle.Article.Subject</h2>
-                    <h4><b>Treść: </b> @mostPopularArticle.Article.Content</h4>
+                    <h3><b>Treść: </b> @mostPopularArticle.Article.Content</h3>
                     <p><h4><b>Data ost. modyfikacji: </b>@mostPopularArticle.Article.ArticleModificationDate</h4></p>
                     <p><h3>Komenda: <b>"Popularne @mostPopularCounter.ToString()"</b></h3></p>
                     <form class="most-popular-article-form" action="/articles/@mostPopularArticle.Article.Id" method="get">
