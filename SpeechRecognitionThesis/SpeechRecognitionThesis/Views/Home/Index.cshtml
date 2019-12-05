@@ -17,17 +17,17 @@
         <h1>Polecane</h1>
     </div>
     <div class="row most-recommend-articles">
-        @foreach (var mostViewedArticle in Model.MostViewedUserArticlePairList)
+        @foreach (var recommendedArticle in Model.RecommendedArticle)
         {
             articleUserCategoryPathString = SpeechRecognitionThesis.Models.Scripts.UserTools
-                                            .GetCategoryImagePath(mostViewedArticle.Article.ArticleCategory.Id);
+                                            .GetCategoryImagePath(recommendedArticle.Article.ArticleCategory.Id);
 
             <div class="col-md-4 col-sm-3 most-recommend-article">
-                <h2><b>@mostViewedArticle.Article.Subject</b></h2>
+                <h2><b>@recommendedArticle.Article.Subject</b></h2>
                 <img class="most-recommend-article-image" src="@articleUserCategoryPathString" alt="Avatar">
-                <div class="most-recommend-article-content"><h5>@mostViewedArticle.Article.Content</h5></div>
+                <div class="most-recommend-article-content"><h5>@recommendedArticle.Article.Content</h5></div>
                 <h4><b>Komenda:</b> Poleca @mostViewedArticleCounter</h4>
-                <form class="recommend-article-form" action="/articles/@mostViewedArticle.Article.Id" method="get">
+                <form class="recommend-article-form" action="/articles/@recommendedArticle.Article.Id" method="get">
                     <h3>
                         <button class="recommend-article-button btn-success text-center" type="submit"><h5>Zobacz polecany ( @mostViewedArticleCounter.ToString() )</h5></button>
                     </h3>
