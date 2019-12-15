@@ -379,7 +379,7 @@ function SaveArticleContentToDatabase(stateString)
     data: JSON.stringify(articleObject),
     statusCode: {
       200: 
-          function(){
+          function(responseObject){
               Swal.fire({
                   position: 'center',
                   type: 'success',
@@ -387,7 +387,7 @@ function SaveArticleContentToDatabase(stateString)
                   showConfirmButton: true,
                   timer: 3000
                 }).then(function(){
-                  //do nothing
+                  window.open( "/articles/" + responseObject.toString(), "_self" );
                 });
           },
       400: 

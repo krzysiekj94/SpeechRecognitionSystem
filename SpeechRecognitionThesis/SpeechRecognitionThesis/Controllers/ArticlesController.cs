@@ -129,7 +129,7 @@ namespace SpeechRecognitionThesis.Controllers
                 SaveNewGuestArticle( article );
             }
 
-            return Ok();
+            return Ok( article.Id );
         }
 
         [HttpGet]
