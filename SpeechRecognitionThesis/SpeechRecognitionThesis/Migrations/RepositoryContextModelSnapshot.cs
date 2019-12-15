@@ -48,7 +48,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 1L,
                             ArticleCategoryRefId = 1L,
-                            ArticleModificationDate = "30.11.2019 22:50:35",
+                            ArticleModificationDate = "15.12.2019 22:08:45",
                             Content = "To jest treść artykułu 1",
                             NumberOfViews = 10L,
                             Subject = "Artykuł 1"
@@ -57,7 +57,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 2L,
                             ArticleCategoryRefId = 4L,
-                            ArticleModificationDate = "30.11.2019 22:50:35",
+                            ArticleModificationDate = "15.12.2019 22:08:45",
                             Content = "To jest artykuł 2",
                             NumberOfViews = 20L,
                             Subject = "Artykuł 2"

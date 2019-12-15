@@ -100,7 +100,7 @@ namespace SpeechRecognitionThesis
             {
                 string JWToken = context.Session.GetString( TokenProvider.GetTokenSessionKeyString() );
                 if( !string.IsNullOrEmpty(JWToken))
-                {
+                { 
                     context.Request.Headers.Add("Authorization", "Bearer " + JWToken);
                 }
                 await next();

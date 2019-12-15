@@ -221,12 +221,17 @@ namespace SpeechRecognitionThesis.Controllers
             List<ArticleUserPair> recommendedUserArticles = null;
 
             int iArticleCounter = 0;
-
+            int iArticlesFromDbCount = articlesFromDb.Count;
             do
             {
-                if( recommendedArticleIndexesHashSet.Add( new Random().Next(articlesFromDb.Count-1 ) ) )
+                if( recommendedArticleIndexesHashSet.Add( new Random().Next(articlesFromDb.Count ) ) )
                 {
                     iArticleCounter++;
+                }
+
+                if( iArticlesFromDbCount == iArticleCounter )
+                {
+                    break;
                 }
             }
             while( iArticleCounter < iNumberOfArticlesResult);
