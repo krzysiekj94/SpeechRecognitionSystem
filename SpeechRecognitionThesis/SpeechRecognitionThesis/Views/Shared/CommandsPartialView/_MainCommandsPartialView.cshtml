@@ -1,7 +1,27 @@
-﻿
-@{
-    ViewData["Title"] = "_MainCommandsPartialView";
+﻿<a href="#"><b>"Strona główna"</b>                      - <i>strona główna</i></a>
+<a href="#"><b>"Najnowsze"</b>                          - <i>najnowsze artykuły</i></a>
+<a href="#"><b>"Polecane", "Top", "Rekomendowane"</b>   - <i>polecane artykuły</i></a>
+<a href="#"><b>"Dodaj nowy artykuł"</b>                 - <i>dodawanie nowego artykułu</i></a>
+<a href="#"><b>"Wyszukiwarka"</b>                       - <i>wyszukiwanie artykułów</i></a>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="#"><b>"Moje artykuły"</b>                  - <i>podgląd Twoich artykułów</i></a>
+    <a href="#"><b>"Moje konto"</b>                     - <i>podgląd Twojego konta</i></a>
+    <a href="#"><b>"Wyloguj", "Wylogowanie"</b>         - <i>wylogowanie z konta</i></a>
+}
+else
+{
+    <a href="#"><b>"Zaloguj", "Logowanie"</b>           - <i>logowanie do konta</i></a>
+    <a href="#"><b>"Rejestracja"</b>                    - <i>rejestracja do konta</i></a>
 }
 
-<h2>_MainCommandsPartialView</h2>
-
+<a href="#"><b>"Przybliż", "Powiększ"</b>               - <i>przybliżanie widoku</i></a>
+<a href="#"><b>"Oddal", "Zmniejsz"</b>                  - <i>oddalanie widoku</i></a>
+<a href="#"><b>"Normalny widok"</b>                     - <i>ustawia normalny widok</i></a>
+<a href="#"><b>"Powrót", "Poprzednia strona"</b>        - <i>przekierowanie do poprzedniej strony</i></a>
+<a href="#"><b>"Powtórz", "Następna strona"</b>         - <i>przekierowanie do następnej strony</i></a>
+<a href="#"><b>"Odśwież", "Przeładuj stronę"</b>        - <i>odświeżanie strony</i></a>
+<a href="#"><b>"Informacja"</b>                         - <i>info o stronie</i></a>
+<a href="#"><b>"Pokaż komendy"</b>                      - <i>wyświetla dostępne komendy głosowe</i></a>
+<a href="#"><b>"Ukryj komendy", "Schowaj komendy"</b>   - <i>ukrywa dostępne komendy głosowe</i></a>
