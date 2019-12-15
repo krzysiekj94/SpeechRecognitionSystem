@@ -12,13 +12,14 @@ namespace SpeechRecognitionThesis.Models.Scripts
         const string LOGIN_PAGE_PATH = "/login";
         const string REGISTER_PAGE_PATH = "/register";
         const string ARTICLE_PAGE_PATH = "/articles/add";
-
+        const string MY_ACCOUNT_PAGE_PATH = "/account";
 
         const string SEARCH_COMMANDS_PARTIAL_VIEW_PATH = "_SearchEngineCommandsPartialView";
         const string MAIN_COMMANDS_PARTIAL_VIEW_PATH = "_MainCommandsPartialView";
         const string REGISTER_COMMANDS_PARTIAL_VIEW_PATH = "_RegisterCommandsPartialView";
         const string LOGIN_COMMANDS_PARTIAL_VIEW_PATH = "_LoginCommandsPartialView";
         const string ARTICLE_COMMANDS_PARTIAL_VIEW_PATH = "_ArticleCommandsPartialView";
+        const string MY_ACCOUNT_COMMANDS_PARTIAL_VIEW_PATH = "_AccountCommandsPartialView";
 
         public static string GetCommandsPartialViewPathString( string oPagePathString)
         {
@@ -37,6 +38,9 @@ namespace SpeechRecognitionThesis.Models.Scripts
                     break;
                 case ARTICLE_PAGE_PATH:
                     commandsPartialViewNameString = ARTICLE_COMMANDS_PARTIAL_VIEW_PATH;
+                    break;
+                case MY_ACCOUNT_PAGE_PATH:
+                    commandsPartialViewNameString = MY_ACCOUNT_COMMANDS_PARTIAL_VIEW_PATH;
                     break;
                 default:
                     break;

@@ -218,33 +218,31 @@ $.getScript("/js/speech_engine.js", function(){
     LoadSpecialCharactersCommands();
     artyom.addCommands([
         {
-            indexes: ["zmień nazwę użytkownika", "zmień nick", "zmień nik", 
-            "nazwa użytkownika", "nick", "nik", "ustaw nick", "ustaw nazwę",
-            "login", "ustaw login", "ustaw nazwę użytkownika", "nazwa"],
+            indexes: ["ustaw nick", "ustaw nazwę", "login", "ustaw login"],
             action: function(){
                 $("#NickName").focus();
             }
         },
         {
-            indexes: ["zmień hasło", "hasło", "ustaw hasło"],
+            indexes: ["hasło", "ustaw hasło"],
             action: function(){
                 $("#Password").focus();
             }
         },
         {
-            indexes: ["potwierdź hasło", "potwierdzenie", "potwierdź", "zatwierdź"],
+            indexes: ["potwierdź", "potwierdzenie", "zatwierdź"],
             action: function(){
                 $("#ConfirmPassword").focus();
             }
         },
         {
-            indexes: ["zmień e-mail", "zmień email"],
+            indexes: ["e-mail", "email"],
             action: function(){
                 $("#Email").focus();
             }
         },
         {
-            indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę", "wyczyść nazwę użytkownika"],
+            indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę"],
             action: function(){
                 $("#NickName").val("");
                 $("#NickName").focus();
@@ -258,7 +256,7 @@ $.getScript("/js/speech_engine.js", function(){
             }
         },
         {
-            indexes: ["wyczyść potwierdzenie", "wyczyść potwierdzenie"],
+            indexes: ["wyczyść potwierdzenie"],
             action: function(){
                 $("#ConfirmPassword").val("");
                 $("#ConfirmPassword").focus();
@@ -306,7 +304,7 @@ $.getScript("/js/speech_engine.js", function(){
             }
         },
         {
-            indexes: ["usuń konto", "usuń swoje konto"],
+            indexes: ["usuń konto"],
             action: function(){
                 $("#delete-account").click();
             }
@@ -363,7 +361,7 @@ $.getScript("/js/speech_engine.js", function(){
             },
         },
         {
-            indexes: ["wybierz pięć", "wybierz 5", "wybierz pięć"],
+            indexes: ["wybierz piąty", "wybierz 5", "wybierz pięć"],
             action: function(){
                 ChooseImgIcon(5);
             },
@@ -375,13 +373,13 @@ $.getScript("/js/speech_engine.js", function(){
             },
         },
         {
-            indexes: ["wybierz siedem", "wybierz 7", "wybierz siedem"],
+            indexes: ["wybierz siódmy", "wybierz 7", "wybierz siedem"],
             action: function(){
                 ChooseImgIcon(7);
             },
         },
         {
-            indexes: ["wybierz osiem", "wybierz 8", "wybierz osiem"],
+            indexes: ["wybierz ósmy", "wybierz 8", "wybierz osiem"],
             action: function(){
                 ChooseImgIcon(8);
             },
