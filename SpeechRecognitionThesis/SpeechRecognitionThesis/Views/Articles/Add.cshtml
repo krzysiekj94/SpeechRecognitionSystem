@@ -8,18 +8,18 @@
 
 <div class="row menu-news-content">
     <div class="form-group">
-        <label for="article-subject">Temat artykułu</label>
+        <label for="article-subject"><h4><b>Temat artykułu</b></h4></label>
         <input type="text" class="form-control" id="article-subject" placeholder="Wpisz temat artykułu tutaj" autofocus>
     </div>
     <div class="form-group">
-        <label for="article-category">Wybierz kategorię artykułu:</label>
+        <label for="article-category"><h4><b>Wybierz kategorię artykułu:</b></h4></label>
         <br/>
-        <select id="article-category" size="6"
+        <select id="article-category" size="6" style="font-size: 16px;"
                 asp-items="@(new SelectList(Model.ArticleCategoryList,"Id","Name"))">
         </select>
     </div>
     <div class="form-group">
-        <label for="comment">Treść artykułu:</label>
+        <label for="comment"><h4><b>Treść artykułu:</h4></b></label>
         @Html.AntiForgeryToken()
         <textarea class="article-content form-control" rows="5" id="article-content" placeholder="Wpisz treść artykułu tutaj"></textarea>
         <button name="save-article-button" class="save-article-button btn-success" type="submit">Zapisz artykuł</button>
