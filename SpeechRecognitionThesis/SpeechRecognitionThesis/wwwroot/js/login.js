@@ -70,7 +70,7 @@ $(document).ready(function() {
                 }
             },
             {
-                indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę", "wyczyść nazwę użytkownika"],
+                indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę"],
                 action: function(){
                     $("#NickName").val("");
                     $("#NickName").focus();
