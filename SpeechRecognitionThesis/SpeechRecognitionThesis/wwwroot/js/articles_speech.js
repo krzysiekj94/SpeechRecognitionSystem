@@ -387,7 +387,10 @@ function SaveArticleContentToDatabase(stateString)
                   showConfirmButton: true,
                   timer: 3000
                 }).then(function(){
-                  window.open( "/articles/" + responseObject.toString(), "_self" );
+                  if( stateString == "save" )
+                  {
+                    window.open( "/articles/" + responseObject.toString(), "_self" );
+                  }
                 });
           },
       400: 

@@ -214,13 +214,13 @@ function LoadSpecialCharactersCommands()
     {
         artyom.addCommands([
             {
-                indexes: ["małpa"],
+                indexes: ["małpa", "@"],
                 action: function(){
                     InsertCharsIntoFocusCtrl("@");
                 }
             },
             {
-                indexes: ["kropka"],
+                indexes: ["kropka", "."],
                 action: function(){
                     InsertCharsIntoFocusCtrl(".");
                 }

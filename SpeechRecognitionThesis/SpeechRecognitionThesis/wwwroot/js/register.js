@@ -52,8 +52,7 @@ $(document).ready(function() {
 
         artyom.addCommands([
             {
-                indexes: ["nick", "nik", "ustaw nick", "ustaw nazwę",
-                          "login", "ustaw login", "ustaw nazwę użytkownika", "nazwa"],
+                indexes: ["ustaw nazwę", "ustaw nick", "login", "ustaw login"],
                 action: function(){
                     $("#NickName").focus();
                 }
@@ -71,7 +70,7 @@ $(document).ready(function() {
                 }
             },
             {
-                indexes: ["email", "e-mail", "zmień e-mail", "zmień email"],
+                indexes: ["email", "e-mail"],
                 action: function(){
                     $("#Email").focus();
                 }
@@ -83,7 +82,7 @@ $(document).ready(function() {
                 }
             },
             {
-                indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę", "wyczyść nazwę użytkownika"],
+                indexes: ["wyczyść login", "wyczyść nazwa", "wyczyść nazwę"],
                 action: function(){
                     $("#NickName").val("");
                     $("#NickName").focus();
@@ -97,7 +96,7 @@ $(document).ready(function() {
                 }
             },
             {
-                indexes: ["wyczyść potwierdzenie", "wyczyść potwierdzenie"],
+                indexes: ["wyczyść potwierdzenie"],
                 action: function(){
                     $("#ConfirmPassword").val("");
                     $("#ConfirmPassword").focus();

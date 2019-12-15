@@ -234,8 +234,6 @@ namespace SpeechRecognitionThesis.Controllers
                 concreteUserArticle.User = _repositoryWrapper.Account.GetUser(concreteUserArticle.UserRefId);
             }
 
-            concreteUserArticle.User.Password = "";
-
             concreteArticleModel.Article = conreteArticle;
             concreteArticleModel.UserArticle = concreteUserArticle;
         }

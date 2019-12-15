@@ -56,6 +56,12 @@ function LoadArticleEditViewCommands()
                 $( ".my-articles .my-article .delete-article-button" ).eq( indexOfArray ).click();
             }
         },
+        {
+            indexes: ["usuń pierwszy", "usuń jeden"],
+            action: function(){
+                $( ".my-articles .my-article .delete-article-button" ).eq( 0 ).click();
+            }
+        },
         ]);
     }
 }
