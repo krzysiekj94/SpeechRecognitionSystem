@@ -98,9 +98,9 @@
 	  padding-top: 70px;
   }
 
-  .register-account-description{
-	  font-size: 16px;
-  }
+.register-account-description, .login-account-description {
+    font-size: 16px;
+}
 
 .navbar-speech-recognition-system{
 	font-size: 18px;

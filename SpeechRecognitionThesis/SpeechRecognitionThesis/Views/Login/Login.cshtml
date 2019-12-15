@@ -14,14 +14,14 @@
     @Html.AntiForgeryToken()
     <fieldset>
         <div class="control-group">
-            <label class="control-label" for="username">Nazwa użytkownika</label>
+            <label class="control-label login-account-description" for="username">Nazwa użytkownika</label>
             <div class="login-controls">
                 <input asp-for="User.NickName" type="text" id="NickName" placeholder="" class="input-xlarge" autofocus>
                 <p class="help-block">@ViewData["LoginHelpBlock"]</p>
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="password">Hasło</label>
+            <label class="control-label login-account-description" for="password">Hasło</label>
             <div class="login-controls">
                 <input asp-for="User.Password" type="password" id="Password" placeholder="" class="input-xlarge">
                 <p class="help-block">@ViewData["PasswordHelpBlock"]</p>
@@ -29,7 +29,7 @@
         </div>
         <div class="control-group">
             <div class="login-controls">
-                <button class="login-button btn btn-success" type="submit">Zaloguj się!</button>
+                <button class="login-button btn btn-success" type="submit"><h4>Zaloguj się!</h4></button>
             </div>
         </div>
     </fieldset>
