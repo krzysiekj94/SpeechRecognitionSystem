@@ -24,7 +24,7 @@ namespace SpeechRecognitionThesis.Models.Scripts
         {
             string commandsPartialViewNameString = MAIN_COMMANDS_PARTIAL_VIEW_PATH;
 
-            switch( oPagePathString )
+            switch( oPagePathString.ToLower() )
             {
                 case SEARCH_PAGE_PATH:
                     commandsPartialViewNameString = SEARCH_COMMANDS_PARTIAL_VIEW_PATH;

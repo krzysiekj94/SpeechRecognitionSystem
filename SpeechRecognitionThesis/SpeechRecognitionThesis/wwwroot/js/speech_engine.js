@@ -389,7 +389,7 @@ function AddCategorySidebarCommands()
                     }
                 },
             ]);
-        },250);
+        },500);
     }
 }
 
