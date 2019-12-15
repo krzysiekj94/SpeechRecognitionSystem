@@ -43,9 +43,9 @@ $(document).ready(function() {
             showCancelButton: true,
             focusConfirm: false,
             confirmButtonText:
-              '<b>Zapisz avatar!</b>',
+              '<h4><b>Zapisz avatar!</b></h4>',
             cancelButtonText:
-              '<b>Anuluj</b>',
+              '<h4><b>Anuluj</b></h4>',
           }).then(result => {
             if( result.value ) 
             {
