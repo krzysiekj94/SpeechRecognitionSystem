@@ -121,7 +121,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 "Stałocieplność umożliwia aktywny tryb życia w różnych środowiskach. Od mroźnych obszarów podbiegunowych " +
                 "do gorących tropików. Futro i tłuszcz pomagają uchronić się przed zimnem, a wydzielanie potu i szybki oddech " +
                 "pomagają pozbyć się nadmiernego ciepła.",
-                ArticleModificationDate = new DateTime(2019, 6, 28).ToString(),
+                ArticleModificationDate = new DateTime(2019, 6, 28, 11, 20, 58 ).ToString(),
                 NumberOfViews = 12,
             },
             new Article
@@ -131,7 +131,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Subject = "Dawid Kubacki zajął 3 miejsce w konkursie!",
                 Content = "Polak na podium. Po dwóch kapitalnych skokach polskiego skoczka, zajął 3 miejsce w turnieju czterech skoczni." +
                 "Zawody wygrał Japończyk Ryoyu Kobayashi. Możemy być dumni z naszego rodaka.",
-                ArticleModificationDate = new DateTime(2019, 9, 15).ToString(),
+                ArticleModificationDate = new DateTime(2019, 9, 15, 14, 32, 21).ToString(),
                 NumberOfViews = 41,
             },
             new Article
@@ -144,7 +144,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 "że Polska literatura zaczęła być uznawana na całym świecie? Czy rzeczywiście jesteśmy w ścisłej czołówce na świecie? " +
                 "Ostatni raz nagroda Nobla została przyznana innej polskiej pisarce, Wisławie Szymborskiej w 1996 roku. To naprawdę wielki sukces " +
                 "z którego powinniśmy być dumni",
-                ArticleModificationDate = new DateTime(2019, 10, 30).ToString(),
+                ArticleModificationDate = new DateTime(2019, 10, 30, 12, 24, 44).ToString(),
                 NumberOfViews = 108,
             },
             new Article
@@ -157,7 +157,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 "naturalny, będąc końcowym efektem ewolucji największych gwiazd. Posiadają masę co najmniej kilku naszych Słońc. Gdy gwiazda " +
                 "zaczyna umierać, procesy termojądrowe z jego wnętrza przestają równoważyć nacisk z zewnątrz. Grawitacja zwycięża. Wkrótce więcej " +
                 "informacji.",
-                ArticleModificationDate = new DateTime(2019, 5, 15).ToString(),
+                ArticleModificationDate = new DateTime(2019, 5, 15, 10, 21, 9).ToString(),
                 NumberOfViews = 101,
             },
             new Article
@@ -167,7 +167,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Subject = "Norwegia wydobywa coraz wiecęj ropy.",
                 Content = "Całkowita sprzedaż norweskiego gazu wyniosła ok 11 mld euro. Czarne złoto stanowi większość przychodów państwa " +
                 "położonego na Półwyspie Skandynawskim. Są też pomówienia, że tej ropy może kiedyś zabraknąć nowerskiemu przemysłowi.",
-                ArticleModificationDate = new DateTime(2019, 2, 28).ToString(),
+                ArticleModificationDate = new DateTime(2019, 2, 28, 21, 59, 38).ToString(),
                 NumberOfViews = 38,
             },
             new Article
@@ -178,7 +178,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Content = "Mózg jest uznawany za najważniejszy z ludzkich organów. Pełni wiele skomplikowanych funkcji. " +
                 "Wyróżnia się trzy części mózgowia. Jest to mózg właściwy, międzymózgowie oraz pień mózgu. Każda z tych części odróżnia " +
                 "się budową i pełnioną funkcją.",
-                ArticleModificationDate = new DateTime(2019, 12, 28).ToString(),
+                ArticleModificationDate = new DateTime(2019, 12, 28, 9, 55, 27).ToString(),
                 NumberOfViews = 94,
             },
             new Article
@@ -210,7 +210,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Content = "Dzisiaj ludzie nie mogą sobie wyobrazić życia bez elektryczności. Wszystko co nas otacza, komputery, radio, " +
                 "sprzęty domowego użytku. To wszystko opiera się o energię pochodzącą z elektryczności. W 1600 roku naukowiec William Gilbert " +
                 "jako pierwszy wytworzył iskrę elektryczną poprzez pocieranie bursztynu.",
-                ArticleModificationDate = new DateTime( 2019, 12, 10 ).ToString(),
+                ArticleModificationDate = new DateTime( 2019, 12, 10, 7, 43, 22 ).ToString(),
                 NumberOfViews = 34,
             },
             new Article
@@ -220,7 +220,7 @@ namespace SpeechRecognitionThesis.Models.Database
                 Subject = "Chińczycy budują nowy lotniskowiec",
                 Content = "Chińczycy zbudowali w rekordowym tempie kolejny lotniskowiec. Zajęło im to dosłownie dwa miesiące, podczas gdy " +
                 "amerykanie budują go w przeciągu dwóch lat. Taka sytuacja powoduje, że USA nie jest już największą potęgą militarną na świecie.",
-                ArticleModificationDate = new DateTime(2019, 11, 10).ToString(),
+                ArticleModificationDate = new DateTime(2019, 11, 10, 15, 22, 26).ToString(),
                 NumberOfViews = 85,
             });
         }

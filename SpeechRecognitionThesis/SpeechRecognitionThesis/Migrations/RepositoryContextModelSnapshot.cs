@@ -48,7 +48,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 1L,
                             ArticleCategoryRefId = 2L,
-                            ArticleModificationDate = "28.06.2019 00:00:00",
+                            ArticleModificationDate = "28.06.2019 11:20:58",
                             Content = "zwierzęta należące do kręgowców, charakteryzujące się głównie występowaniem gruczołów mlekowych u samic, zazwyczaj obecnością owłosienia oraz stałocieplnością. Około 60% ssaków utrzymuje temperaturę w granicach 34 a 39 stopni Celcjusza. Stałocieplność umożliwia aktywny tryb życia w różnych środowiskach. Od mroźnych obszarów podbiegunowych do gorących tropików. Futro i tłuszcz pomagają uchronić się przed zimnem, a wydzielanie potu i szybki oddech pomagają pozbyć się nadmiernego ciepła.",
                             NumberOfViews = 12L,
                             Subject = "Ssaki"
@@ -57,7 +57,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 2L,
                             ArticleCategoryRefId = 1L,
-                            ArticleModificationDate = "15.09.2019 00:00:00",
+                            ArticleModificationDate = "15.09.2019 14:32:21",
                             Content = "Polak na podium. Po dwóch kapitalnych skokach polskiego skoczka, zajął 3 miejsce w turnieju czterech skoczni.Zawody wygrał Japończyk Ryoyu Kobayashi. Możemy być dumni z naszego rodaka.",
                             NumberOfViews = 41L,
                             Subject = "Dawid Kubacki zajął 3 miejsce w konkursie!"
@@ -66,7 +66,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 3L,
                             ArticleCategoryRefId = 4L,
-                            ArticleModificationDate = "30.10.2019 00:00:00",
+                            ArticleModificationDate = "30.10.2019 12:24:44",
                             Content = "Olga Tokarczuk została tegoroczną laureatką Literackiej Nagrody Nobla za 2018 rok. W żadnej z innych kategorii nie odnosimy tak spektakularnych sukcesów. W jaki sposób przekonała opinię publiczną do swojego sukcesu. Co spowodowało, że Polska literatura zaczęła być uznawana na całym świecie? Czy rzeczywiście jesteśmy w ścisłej czołówce na świecie? Ostatni raz nagroda Nobla została przyznana innej polskiej pisarce, Wisławie Szymborskiej w 1996 roku. To naprawdę wielki sukces z którego powinniśmy być dumni",
                             NumberOfViews = 108L,
                             Subject = "Nobel dla Polki"
@@ -75,7 +75,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 4L,
                             ArticleCategoryRefId = 5L,
-                            ArticleModificationDate = "15.05.2019 00:00:00",
+                            ArticleModificationDate = "15.05.2019 10:21:09",
                             Content = "Co sądzą ludzie o czarnych dziurach? Czy istnieją naprawdę? Czy powinniśmy się ich obawiać? To pytanie nurtuje nas od wielu lat. Czarne dziury kojarzą się głównie ze śmiercią gwiazd. Jest to bardzo oczywiste stwierdzenie. Powstają w sposób naturalny, będąc końcowym efektem ewolucji największych gwiazd. Posiadają masę co najmniej kilku naszych Słońc. Gdy gwiazda zaczyna umierać, procesy termojądrowe z jego wnętrza przestają równoważyć nacisk z zewnątrz. Grawitacja zwycięża. Wkrótce więcej informacji.",
                             NumberOfViews = 101L,
                             Subject = "Czarne dziury istnieją naprawdę!"
@@ -84,7 +84,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 5L,
                             ArticleCategoryRefId = 3L,
-                            ArticleModificationDate = "28.02.2019 00:00:00",
+                            ArticleModificationDate = "28.02.2019 21:59:38",
                             Content = "Całkowita sprzedaż norweskiego gazu wyniosła ok 11 mld euro. Czarne złoto stanowi większość przychodów państwa położonego na Półwyspie Skandynawskim. Są też pomówienia, że tej ropy może kiedyś zabraknąć nowerskiemu przemysłowi.",
                             NumberOfViews = 38L,
                             Subject = "Norwegia wydobywa coraz wiecęj ropy."
@@ -93,7 +93,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 6L,
                             ArticleCategoryRefId = 2L,
-                            ArticleModificationDate = "28.12.2019 00:00:00",
+                            ArticleModificationDate = "28.12.2019 09:55:27",
                             Content = "Mózg jest uznawany za najważniejszy z ludzkich organów. Pełni wiele skomplikowanych funkcji. Wyróżnia się trzy części mózgowia. Jest to mózg właściwy, międzymózgowie oraz pień mózgu. Każda z tych części odróżnia się budową i pełnioną funkcją.",
                             NumberOfViews = 94L,
                             Subject = "Mózg człowieka"
@@ -102,7 +102,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 7L,
                             ArticleCategoryRefId = 1L,
-                            ArticleModificationDate = "29.12.2019 22:14:20",
+                            ArticleModificationDate = "29.12.2019 22:27:01",
                             Content = "Robert Lewandowski po raz czwarty w karierze został królem strzelców Bundesligi! Więcej razy po tą nagrodę sięgał tylko Gerd Muller. To bardzo niezwykłe. Wcześniej tego nie dokonał żaden z polskich napastników.",
                             NumberOfViews = 41L,
                             Subject = "Robert Lewandowski królem strzelców Bundesligi!"
@@ -111,7 +111,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 8L,
                             ArticleCategoryRefId = 4L,
-                            ArticleModificationDate = "29.12.2019 22:14:20",
+                            ArticleModificationDate = "29.12.2019 22:27:01",
                             Content = "Od kilku tygodni możemy cieszyć się pięknym latem w Kołobrzegu. Nie może dziwić fakt, że wiele osób wybrało w tym roku Bałtyk i piękny krajobraz miasta Kołobrzeg. Panują temperatury od 28 stopni Celsjusza. Taka temperatura powinna się utrzymać przez długie tygodnie tego pięknego lata.",
                             NumberOfViews = 76L,
                             Subject = "W Kołobrzegu piękna pogoda od soboty"
@@ -120,7 +120,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 9L,
                             ArticleCategoryRefId = 5L,
-                            ArticleModificationDate = "10.12.2019 00:00:00",
+                            ArticleModificationDate = "10.12.2019 07:43:22",
                             Content = "Dzisiaj ludzie nie mogą sobie wyobrazić życia bez elektryczności. Wszystko co nas otacza, komputery, radio, sprzęty domowego użytku. To wszystko opiera się o energię pochodzącą z elektryczności. W 1600 roku naukowiec William Gilbert jako pierwszy wytworzył iskrę elektryczną poprzez pocieranie bursztynu.",
                             NumberOfViews = 34L,
                             Subject = "Kto wynalazł elektryczność?"
@@ -129,7 +129,7 @@ namespace SpeechRecognitionThesis.Migrations
                         {
                             Id = 10L,
                             ArticleCategoryRefId = 3L,
-                            ArticleModificationDate = "10.11.2019 00:00:00",
+                            ArticleModificationDate = "10.11.2019 15:22:26",
                             Content = "Chińczycy zbudowali w rekordowym tempie kolejny lotniskowiec. Zajęło im to dosłownie dwa miesiące, podczas gdy amerykanie budują go w przeciągu dwóch lat. Taka sytuacja powoduje, że USA nie jest już największą potęgą militarną na świecie.",
                             NumberOfViews = 85L,
                             Subject = "Chińczycy budują nowy lotniskowiec"
