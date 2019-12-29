@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20191130213444_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
     <Compile Remove="Migrations\20191130213721_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
     <Compile Remove="Migrations\20191130213721_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20191229210600_SpeechRecognitionThesis.Models.Database.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20191229210600_SpeechRecognitionThesis.Models.Database.RepositoryContext.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Models\Database\" />
   </ItemGroup>
 
